@@ -1,7 +1,7 @@
 {
   "name": "rephp/framework",
   "description": "rephp is a easy php framework",
-  "keywords": ["php framework", "framework", "xyphp"],
+  "keywords": ["php framework", "framework", "rephp"],
   "license": "MIT",
   "minimum-stability": "stable",
   "license": "proprietary",
