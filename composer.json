@@ -1,0 +1,17 @@
+{
+  "name": "rephp/framework",
+  "description": "rephp is a easy php framework",
+  "keywords": ["php framework", "framework", "xyphp"],
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "sam.shi",
+      "email": "8464005@qq.com"
+    }
+  ],
+  "require": {
+    "psr/container": "^1.0"
+  }
+}
