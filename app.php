@@ -2,7 +2,7 @@
 /**
  * app核心模块
  */
-namespace xy\framework;
+namespace rephp\framework;
 /**
  * app核心类
  * @package framework

@@ -1,20 +1,20 @@
 <?php
 
-namespace xy\framework\components\container;
+namespace rephp\framework\components\container;
 
-use Psr\Container\ContainerInterface;
-use \ReflectionClass;
-use \Exception;
 use \Error;
-use xy\framework\components\container\interfaces\xyContainerInterface;
-use xy\framework\components\container\exceptions\containerException;
-use xy\framework\components\container\exceptions\notFoundException;
+use \Exception;
+use \ReflectionClass;
+use Psr\Container\ContainerInterface;
+use rephp\framework\components\container\exceptions\notFoundException;
+use rephp\framework\components\container\exceptions\containerException;
+use rephp\framework\components\container\interfaces\rephpContainerInterface;
 
 /**
  * 容器
  * @package xy\framework\component\container
  */
-class container implements ContainerInterface, xyContainerInterface
+class container implements ContainerInterface, rephpContainerInterface
 {
     public static $instance = [];
 
@@ -57,15 +57,15 @@ class container implements ContainerInterface, xyContainerInterface
      */
     public static function bind($name, $className, $userParams = [], $rebind = false)
     {
-        try{
+        try {
             $has = self::has($name);
             if ($rebind || !$has) {
                 $paramArr              = self::getMethodParams($className, '__construct', $userParams);
                 self::$instance[$name] = (new ReflectionClass($className))->newInstanceArgs($paramArr);
             }
-        }catch (Error $e){
+        } catch (Error $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
-        }catch(Exception $e){
+        } catch (Exception $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 
@@ -86,18 +86,18 @@ class container implements ContainerInterface, xyContainerInterface
         // 获取类的实例
         $constructParams = ($methodName == '__construct') ? $params : [];
         $instance        = self::bind($className, $className, $constructParams);
-        try{
+        try {
             if ($instance->hasMethod($methodName)) {
                 // 获取该方法所需要依赖注入的参数
                 $paramArr = self::getMethodParams($className, $methodName, $params);
 
                 return $instance->{$methodName}(...$paramArr);
-            }else{
+            } else {
                 throw new notFoundException($className . '中不存在方法' . $methodName);
             }
-        }catch (Error $e){
+        } catch (Error $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
-        }catch(Exception $e){
+        } catch (Exception $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 

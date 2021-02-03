@@ -1,11 +1,11 @@
 <?php
 
-namespace xy\framework\components\container\interfaces;
+namespace rephp\framework\components\container\interfaces;
 /**
  * Interface xyContainerInterface
  * @package xy\framework\component\container
  */
-interface xyContainerInterface
+interface rephpContainerInterface
 {
     /**
      * 获得类的对象实例
