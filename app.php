@@ -5,7 +5,9 @@
 namespace rephp\framework;
 
 use rephp\framework\helper\common;
-use rephp\framework\components\bootstrap\appBootstrap;
+use rephp\framework\core\appCore;
+use rephp\framework\components\container\container;
+use rephp\helper;
 
 /**
  * app核心类
@@ -13,9 +15,16 @@ use rephp\framework\components\bootstrap\appBootstrap;
  */
 class app
 {
+
     public function __construct($appPath='')
     {
-        appBootstrap::start($appPath);
+        $core = container::bind('appBootstrap', appCore::class);
+        $core->start($appPath);
+    }
+
+    public function bind()
+    {
+
     }
 
     public function run()

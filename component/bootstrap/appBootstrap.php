@@ -5,43 +5,26 @@ namespace rephp\framework\components\bootstrap;
  * app驱动类
  * @package rephp\framework\components\bootstrap
  */
-class appBootstrap
+interface appBootstrap
 {
     /**
-     * app路径
-     */
-    public static $appPath;
-
-    /**
-     * 开始驱动
+     * 开始加载环境所需资源
      * @param  string  $appPath 系统默认app路径
      * @return boolean
      */
-    public static function start($appPath='')
-    {
-        self::setAppPath($appPath);
-        //todo: all of app bootstrap etc.
-        return true;
-    }
+    public function start($appPath='');
 
     /**
      * 设置app路径
      * @param string $appPath  系统默认app路径
      * @return boolean
      */
-    private static function setAppPath($appPath)
-    {
-        self::$appPath = empty($envAppPath) ? $appPath : env('APP_PATH');
-        return true;
-    }
+    public function setAppPath($appPath);
 
     /**
      * 获取app路径
      * @return string
      */
-    public static function getAppPath()
-    {
-        return self::$appPath;
-    }
+    public function getAppPath();
 
 }
