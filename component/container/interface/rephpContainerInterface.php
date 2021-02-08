@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\framework\components\container\interfaces;
+namespace rephp\framework\component\container\interfaces;
 /**
  * Interface xyContainerInterface
  * @package xy\framework\component\container

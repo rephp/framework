@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\components\bootstrap;
+namespace rephp\framework\component\bootstrap;
 
 /**
  * app驱动类

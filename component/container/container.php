@@ -1,14 +1,14 @@
 <?php
 
-namespace rephp\framework\components\container;
+namespace rephp\framework\component\container;
 
 use \Error;
 use \Exception;
 use \ReflectionClass;
 use Psr\Container\ContainerInterface;
-use rephp\framework\components\container\exceptions\notFoundException;
-use rephp\framework\components\container\exceptions\containerException;
-use rephp\framework\components\container\interfaces\rephpContainerInterface;
+use rephp\framework\component\container\exceptions\notFoundException;
+use rephp\framework\component\container\exceptions\containerException;
+use rephp\framework\component\container\interfaces\rephpContainerInterface;
 
 /**
  * 容器
