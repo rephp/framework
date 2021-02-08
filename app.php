@@ -7,6 +7,8 @@ namespace rephp\framework;
 use rephp\framework\helper\common;
 use rephp\framework\core\appCore;
 use rephp\framework\component\container\container;
+
+
 //use rephp\helper;
 
 /**
@@ -26,7 +28,7 @@ class app
 
     public function bind()
     {
-
+dump('xx');
     }
 
     public function run()
