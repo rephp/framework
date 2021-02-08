@@ -4,12 +4,8 @@
  */
 namespace rephp\framework;
 
-use rephp\framework\helper\common;
 use rephp\framework\core\appCore;
 use rephp\framework\component\container\container;
-
-
-//use rephp\helper;
 
 /**
  * app核心类

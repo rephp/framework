@@ -19,7 +19,7 @@
       "rephp\\framework\\": "./"
     },
     "files": [
-
+      "helper/common.php"
     ]
   }
 }

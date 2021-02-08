@@ -1,5 +1,4 @@
 <?php
-namespace rephp\helper;
 
 function dump(...$params)
 {
