@@ -15,10 +15,12 @@ use rephp\framework\component\container\container;
  */
 class app
 {
+    public $container;
 
     public function __construct($appPath='')
     {
-        $core = container::bind('appBootstrap', appCore::class);
+        $this->container = new container();
+        $core = $this->container->bind('appBootstrap', appCore::class);
         $core->init($appPath);
     }
 
