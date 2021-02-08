@@ -15,7 +15,7 @@ interface rephpContainerInterface
      * @param boolean $rebind     是否强制绑定
      * @return mixed
      */
-    public static function bind($name, $className, $userParams , $rebind );
+    public function bind($name, $className, $userParams , $rebind );
 
     /**
      * 执行类的方法
@@ -24,6 +24,6 @@ interface rephpContainerInterface
      * @param  [type] $params     [额外的参数]
      * @return [type]             [description]
      */
-    public static function call($className, $methodName, $params);
+    public function call($className, $methodName, $params);
 
 }

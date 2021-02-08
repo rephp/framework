@@ -26,7 +26,7 @@ class container implements ContainerInterface, rephpContainerInterface
     public function get($name)
     {
         try {
-            $has = self::has($name);
+            $has = $this->has($name);
             if ($has) {
                 return self::$instance[$name];
             }
@@ -55,12 +55,12 @@ class container implements ContainerInterface, rephpContainerInterface
      * @param boolean $rebind     是否强制绑定
      * @return ReflectionClass|boolean
      */
-    public static function bind($name, $className, $userParams = [], $rebind = false)
+    public function bind($name, $className, $userParams = [], $rebind = false)
     {
         try {
-            $has = self::has($name);
+            $has = $this->has($name);
             if ($rebind || !$has) {
-                $paramArr              = self::getMethodParams($className, '__construct', $userParams);
+                $paramArr              = $this->getMethodParams($className, '__construct', $userParams);
                 self::$instance[$name] = (new ReflectionClass($className))->newInstanceArgs($paramArr);
             }
         } catch (Error $e) {
@@ -79,17 +79,17 @@ class container implements ContainerInterface, rephpContainerInterface
      * @param  [type] $params     [额外的参数]
      * @return [type]             [description]
      */
-    public static function call($className, $methodName, $params = [])
+    public function call($className, $methodName, $params = [])
     {
         // 获取类的实例
         empty($methodName) && $methodName = '__construct';
         // 获取类的实例
         $constructParams = ($methodName == '__construct') ? $params : [];
-        $instance        = self::bind($className, $className, $constructParams);
+        $instance        = $this->bind($className, $className, $constructParams);
         try {
             if ($instance->hasMethod($methodName)) {
                 // 获取该方法所需要依赖注入的参数
-                $paramArr = self::getMethodParams($className, $methodName, $params);
+                $paramArr = $this->getMethodParams($className, $methodName, $params);
 
                 return $instance->{$methodName}(...$paramArr);
             } else {
@@ -109,7 +109,7 @@ class container implements ContainerInterface, rephpContainerInterface
      * @param  [type] $methodsName [description]
      * @return [type]              [description]
      */
-    protected static function getMethodParams($className, $methodsName = '__construct', $userParams = [])
+    protected function getMethodParams($className, $methodsName = '__construct', $userParams = [])
     {
         // 通过反射获得该类
         $class    = new ReflectionClass($className);
@@ -127,7 +127,7 @@ class container implements ContainerInterface, rephpContainerInterface
                 //如果参数是类对象，则可以获取
                 if ($paramClass = $param->getClass()) {
                     $paramClassName = $paramClass->getName();
-                    $paramArr[]     = self::bind($paramClassName, $paramClassName);
+                    $paramArr[]     = $this->bind($paramClassName, $paramClassName);
                 } else {
                     $paramArr[] = array_shift($userParams);
                 }
