@@ -19,7 +19,7 @@ class appCore implements appBootstrap
      * @param  string  $appPath 系统默认app路径
      * @return boolean
      */
-    public function start($appPath='')
+    public function init($appPath='')
     {
         //todo: all of app bootstrap etc.
         self::setAppPath($appPath);

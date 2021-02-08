@@ -12,7 +12,7 @@ interface appBootstrap
      * @param  string  $appPath 系统默认app路径
      * @return boolean
      */
-    public function start($appPath='');
+    public function init($appPath='');
 
     /**
      * 设置app路径
