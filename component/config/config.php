@@ -1,13 +1,15 @@
 <?php
 namespace rephp\framework\component\config;
 
+use rephp\framework\component\config\bootstrap\configBootstrap;
+
 /**
  * 配置管理类
  * config分为两种： 常驻内存的配置和动态加载的配置
  * 常驻内存的配置的本质是预动态加载核心配置文件
  * @package rephp\framework\component\config
  */
-class config
+class config implements configBootstrap
 {
     /**
      * 加载一个配置文件到config对象中

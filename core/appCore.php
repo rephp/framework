@@ -19,23 +19,15 @@ class appCore implements appBootstrap
     public static $appPath;
 
     /**
-     * 注入对象
-     * 空降不定职位的后勤人员，内驻插入到团队内接管所有后勤工作
-     * appCore constructor.
-     */
-    public function __construct(configBootstrap $config)
-    {
-        empty($config) || $this->config = $config;
-    }
-
-    /**
      * 开始驱动
      * 核心工作承包团队队长，职责：本团队任务调度
+     * 空降不定职位的后勤人员，内驻插入到团队内接管所有后勤工作
      * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath = '')
+    public function init($appPath = '', configBootstrap $config)
     {
+        empty($config) || $this->config = $config;
         //todo: all of app bootstrap etc.
         //配置app路径
         $newAppPath = $this->setAppPath($appPath);

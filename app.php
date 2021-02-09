@@ -14,10 +14,10 @@ class app
 {
     public  $container;
     private $rephpConfig = [
-        'appCore' => core\appCore::class,
-        'reponse' => component\response\response::class,
-        'request' => component\request\request::class,
-        'config'  => component\config\config::class,
+        'appCore' => rephp\framework\core\appCore::class,
+        'reponse' => rephp\framework\component\response\response::class,
+        'request' => rephp\framework\component\request\request::class,
+        'config'  => rephp\framework\component\config\config::class,
     ];
 
     /**
