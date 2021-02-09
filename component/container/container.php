@@ -74,9 +74,9 @@ class container implements ContainerInterface, rephpContainerBootstrap
 
     /**
      * 执行类的方法
-     * @param  [type] $className  [类名]
-     * @param  [type] $methodName [方法名称]
-     * @param  [type] $params     [额外的参数]
+     * @param string $className  [类名]
+     * @param string $methodName [方法名称]
+     * @param array  $params     [额外的参数]
      * @return [type]             [description]
      */
     public function call($className, $methodName, $params = [])
@@ -90,7 +90,6 @@ class container implements ContainerInterface, rephpContainerBootstrap
             if ($instance->hasMethod($methodName)) {
                 // 获取该方法所需要依赖注入的参数
                 $paramArr = $this->getMethodParams($className, $methodName, $params);
-
                 return $instance->{$methodName}(...$paramArr);
             } else {
                 throw new notFoundException($className . '中不存在方法' . $methodName);

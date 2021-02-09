@@ -9,6 +9,6 @@ namespace rephp\framework\component\config\bootstrap;
 interface configBootstrap
 {
     public function load($fileName);
-    public static function get($name, $default = '')
+    public static function get($name, $default = '');
 
 }

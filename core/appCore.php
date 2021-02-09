@@ -46,8 +46,6 @@ class appCore implements appBootstrap
         //初始化时区
         $this->setTimeZone();
 
-        //self::handleSystemLog();
-
         return true;
     }
 
