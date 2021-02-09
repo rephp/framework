@@ -4,7 +4,6 @@
  */
 namespace rephp\framework;
 
-use rephp\framework\core\appCore;
 use rephp\framework\component\container\container;
 
 /**
@@ -13,23 +12,34 @@ use rephp\framework\component\container\container;
  */
 class app
 {
-    public $container;
+    public  $container;
+    private $rephpConfig = [
+        'appCore' => core\appCore::class,
+        'reponse' => component\response\response::class,
+        'request' => component\request\request::class,
+    ];
 
-    public function __construct($appPath='')
+    /**
+     * 初始化预备环境
+     * @param string $appPath
+     */
+    public function __construct()
     {
         $this->container = new container();
-        $core = $this->container->bind('appBootstrap', appCore::class);
-        $core->init($appPath);
     }
 
-    public function bind()
+    /**
+     * 运行
+     * @param string $appPath  app路径
+     * @return string
+     */
+    public function run($appPath='')
     {
-dump('xx');
-    }
-
-    public function run()
-    {
-
+        //初始化系统运行环境
+        $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath);
+        //输入输出
+        //执行
+        $this->container->bind('reponse', $this->rephpConfig['reponse'])->output();
     }
 
 }

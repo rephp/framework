@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\component\bootstrap;
+namespace rephp\framework\core\bootstrap;
 
 /**
  * app驱动类
@@ -7,12 +7,13 @@ namespace rephp\framework\component\bootstrap;
  */
 interface appBootstrap
 {
+
     /**
      * 开始加载环境所需资源
      * @param  string  $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath='');
+    public function init();
 
     /**
      * 设置app路径

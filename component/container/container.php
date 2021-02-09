@@ -8,13 +8,13 @@ use \ReflectionClass;
 use Psr\Container\ContainerInterface;
 use rephp\framework\component\container\exceptions\notFoundException;
 use rephp\framework\component\container\exceptions\containerException;
-use rephp\framework\component\container\interfaces\rephpContainerInterface;
+use rephp\framework\component\container\bootstrap\rephpContainerBootstrap;
 
 /**
  * 容器
  * @package xy\framework\component\container
  */
-class container implements ContainerInterface, rephpContainerInterface
+class container implements ContainerInterface, rephpContainerBootstrap
 {
     public static $instance = [];
 

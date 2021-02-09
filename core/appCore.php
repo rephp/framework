@@ -1,10 +1,11 @@
 <?php
+
 namespace rephp\framework\core;
 
-use rephp\framework\components\bootstrap\appBootstrap;
+use rephp\framework\core\bootstrap\appBootstrap;
 
 /**
- * app驱动类
+ * app核心驱动类，负责调度系统所需基本资源
  * @package rephp\framework\components\bootstrap
  */
 class appCore implements appBootstrap
@@ -16,14 +17,15 @@ class appCore implements appBootstrap
 
     /**
      * 开始驱动
-     * @param  string  $appPath 系统默认app路径
+     * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath='')
+    public function init($appPath = '')
     {
+
         //todo: all of app bootstrap etc.
-        self::setAppPath($appPath);
-        //self::loadConfig();
+        $this->setAppPath($appPath);
+        $this->loadConfig();
         //self::initDebug();
         //self::handleSystemLog();
 
@@ -32,16 +34,17 @@ class appCore implements appBootstrap
 
     /**
      * 设置app路径
-     * @param string $appPath  系统默认app路径
+     * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function setAppPath($appPath)
+    public function setAppPath($appPath = '')
     {
-        //$appPath = empty($envAppPath) ? $appPath : env('APP_PATH');
+        $envAppPath    = env('APP_PATH');
+        $appPath       = empty($envAppPath) ? $appPath : $envAppPath;
         defined('APP_PATH')  || define('APP_PATH', $appPath);
-        defined('ROOT_PATH') || define('ROOT_PATH', dirname($appPath).'/');
-echo APP_PATH;
-var_dump(ROOT_PATH);
+        defined('ROOT_PATH') || define('ROOT_PATH', dirname($appPath) . '/');
+        self::$appPath = $appPath;
+
         return true;
     }
 

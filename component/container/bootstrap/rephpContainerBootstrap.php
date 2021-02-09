@@ -1,11 +1,11 @@
 <?php
 
-namespace rephp\framework\component\container\interfaces;
+namespace rephp\framework\component\container\bootstrap;
 /**
  * Interface xyContainerInterface
  * @package xy\framework\component\container
  */
-interface rephpContainerInterface
+interface rephpContainerBootstrap
 {
     /**
      * 获得类的对象实例
