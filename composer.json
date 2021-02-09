@@ -12,7 +12,8 @@
     }
   ],
   "require": {
-    "psr/container": "^1.0"
+    "psr/container": "^1.0",
+    "millionmile/get_env": "^1.0"
   },
   "autoload": {
     "psr-4": {
