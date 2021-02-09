@@ -14,10 +14,10 @@ class app
 {
     public  $container;
     private $rephpConfig = [
-        'appCore' => rephp\framework\core\appCore::class,
-        'reponse' => rephp\framework\component\response\response::class,
-        'request' => rephp\framework\component\request\request::class,
-        'config'  => rephp\framework\component\config\config::class,
+        'appCore' => core\appCore::class,
+        'reponse' => component\response\response::class,
+        'request' => component\request\request::class,
+        'config'  => component\config\config::class,
     ];
 
     /**
@@ -38,7 +38,7 @@ class app
     {
         //初始化系统运行环境
         $config = $this->container->bind('config', $this->rephpConfig['config']);
-        $this->container->bind('appCore', $this->rephpConfig['appCore'], [$config])->init($appPath);
+        $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath, $config);
         //输入输出
         //执行
         $this->container->bind('reponse', $this->rephpConfig['reponse'])->output();
