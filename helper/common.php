@@ -12,6 +12,6 @@ function env($name, $default='')
 
 function config(...$params)
 {
-    return true;
+    return '';
 }
 
