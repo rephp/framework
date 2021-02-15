@@ -56,7 +56,7 @@ class appCore implements appBootstrap
      */
     public function setTimeZone()
     {
-        $timeZone = $this->config->get('time_zone', 'PRC');
+        $timeZone = $this->config->get('config.time_zone', 'PRC');
         date_default_timezone_set($timeZone);
     }
 
