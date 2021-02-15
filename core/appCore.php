@@ -33,8 +33,8 @@ class appCore implements appBootstrap
         $newAppPath = $this->setAppPath($appPath);
         //定义路径常量
         $this->definePath($newAppPath);
-        //加载核心配置项
-        $this->config->load($newAppPath . 'config/config.php');
+        //设置配置项所在目录
+        $this->config->setConfigPath($newAppPath . 'config/');
         //初始化时区
         $this->setTimeZone();
 

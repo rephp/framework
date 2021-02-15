@@ -8,6 +8,12 @@ namespace rephp\framework\component\container\bootstrap;
 interface rephpContainerBootstrap
 {
     /**
+     * 获取容器本身实例
+     * @return mixed
+     */
+    public static function getContainer();
+
+    /**
      * 获得类的对象实例
      * @param string  $name       要注册的实例名字
      * @param string  $className  类名

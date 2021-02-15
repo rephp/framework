@@ -16,7 +16,24 @@ use rephp\framework\component\container\bootstrap\rephpContainerBootstrap;
  */
 class container implements ContainerInterface, rephpContainerBootstrap
 {
+    /**
+     * @var 容器实例化本身
+     */
+    private static $container;
+    /**
+     * @var array 容器内管理的对象
+     */
     public static $instance = [];
+
+    /**
+     * 获取容器本身实例
+     * @return mixed
+     */
+    public static function getContainer()
+    {
+        is_object(self::$container) || self::$container =  new self();
+        return self::$container;
+    }
 
     /**
      * 获取容器中的对象实例

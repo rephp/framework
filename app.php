@@ -2,6 +2,7 @@
 /**
  * app核心模块
  */
+
 namespace rephp\framework;
 
 use rephp\framework\component\container\container;
@@ -12,13 +13,21 @@ use rephp\framework\component\container\container;
  */
 class app
 {
-    public  $container;
+    /**
+     * 初始化默认绑定的对象
+     * @var string[]
+     */
     private $rephpConfig = [
         'appCore' => core\appCore::class,
         'reponse' => component\response\response::class,
         'request' => component\request\request::class,
         'config'  => component\config\config::class,
     ];
+    /**
+     * @var 容器对象
+     * 可以简易理解为：本app类为总工程负责人,调度所有工作。容器是一个包工头。
+     */
+    private $container;
 
     /**
      * 初始化预备环境
@@ -26,15 +35,15 @@ class app
      */
     public function __construct()
     {
-        $this->container = new container();
+        $this->container = container::getContainer();
     }
 
     /**
      * 运行
-     * @param string $appPath  app路径
+     * @param string $appPath app路径
      * @return string
      */
-    public function run($appPath='')
+    public function run($appPath = '')
     {
         //初始化系统运行环境
         $config = $this->container->bind('config', $this->rephpConfig['config']);
