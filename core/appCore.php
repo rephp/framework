@@ -30,11 +30,11 @@ class appCore implements appBootstrap
         empty($config) || $this->config = $config;
         //todo: all of app bootstrap etc.
         //配置app路径
-        $newAppPath = $this->setAppPath($appPath);
+        $this->setAppPath($appPath);
         //定义路径常量
-        $this->definePath($newAppPath);
+        $this->definePath();
         //设置配置项所在目录
-        $this->config->setConfigPath($newAppPath . 'config/');
+        $this->setConfigPath();
         //初始化时区
         $this->setTimeZone();
 
@@ -63,12 +63,12 @@ class appCore implements appBootstrap
     /**
      * 定义路径常量
      * 系统常量责任人就绪
-     * @param string $appPath app运行目录
      * @return void
      */
-    public function definePath($appPath)
+    public function definePath()
     {
-        defined('APP_PATH') || define('APP_PATH', $appPath);
+        $appPath = $this->getAppPath();
+        defined('APP_PATH')  || define('APP_PATH', $appPath);
         defined('ROOT_PATH') || define('ROOT_PATH', dirname($appPath) . '/');
     }
 
@@ -92,6 +92,23 @@ class appCore implements appBootstrap
     public function getAppPath()
     {
         return self::$appPath;
+    }
+
+    /**
+     * 设置config目录
+     * @return boolean
+     */
+    public function setConfigPath()
+    {
+        //读取ini配置，如果ini没配置则设置为默认路径
+        $iniConfigPath  = env('CONFIG_PATH');
+        $configPath  = empty($iniConfigPath) ? ($this->getAppPath().'config/') : $iniConfigPath;
+        //判断末尾是否含有/
+        $checkStr = substr($configPath, -1);
+        in_array($checkStr, ['/', '\\']) || $configPath .= '/';
+
+        //设置config所在目录
+        return $this->config->setConfigPath($configPath);
     }
 
 }
