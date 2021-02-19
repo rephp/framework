@@ -66,8 +66,8 @@ class container implements ContainerInterface, rephpContainerBootstrap
 
     /**
      * 注册别名
-     * @param string  $name       要注册的实例名字
-     * @param string  $className  类名
+     * @param string  $name       别名
+     * @param string  $className  类完整名如\a\b\c\test::class
      * @return boolean
      */
     public function alias($name, $className)
