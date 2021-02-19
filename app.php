@@ -45,14 +45,10 @@ class app
      */
     public function run($appPath = '')
     {
-        $whoops = new \Whoops\Run();
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-        $whoops->register();
-        require dirname($appPath) .'/route/route.php';
-        require dirname($appPath) .'/route/api.php';
         //初始化系统运行环境
         $config = $this->container->bind('config', $this->rephpConfig['config']);
         $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath, $config);
+
 
         //输入输出
         //执行

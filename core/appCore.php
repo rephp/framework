@@ -37,17 +37,60 @@ class appCore implements appBootstrap
         $this->setConfigPath();
         //初始化时区
         $this->setTimeZone();
+        //debug
+        $this->initDebug();
+        //加载路由
+        $this->loadRoute();
 
         return true;
     }
 
     /**
+     * 扫描加载所有路由文件
+     * @return bool
+     */
+    public function loadRoute()
+    {
+        //加载路由
+        $routePath = $this->getAppPath().'route/';
+        $dirArr = scandir($routePath);
+        foreach($dirArr as $file){
+            $info = pathinfo($file);
+            $fix  = strtolower($info['extension']);
+            if($fix == 'php'){
+                require $routePath.$file;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 初始化bug设置
-     * bug工作责任人就绪
+     * @return boolean
      */
     public function initDebug()
     {
+        $isDebug = $this->config->get('config.debug.is_debug', false);
+        if($isDebug){
+            error_reporting(E_ALL & ~E_NOTICE);
+            ini_set('display_errors', 'On');
+            $whoops = new \Whoops\Run();
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+            $whoops->register();
+        }else{
+            error_reporting(0);
+            ini_set('display_errors', 'Off');
+            ini_set('log_errors', 'On');
+            ini_set('log_errors_max_len', 1024);
+            //日志位置
+            $logPath     = $this->config->get('config.debug.log_path', $this->getAppPath().'runtime/log/');
+            in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
+            $logFileName = $logPath.date('Y/m/d', time()).'.log';
+            mkdir($logPath.date('Y/m/', time()), 0777, true);
+            ini_set('error_log', $logFileName);
+        }
 
+        return true;
     }
 
     /**
