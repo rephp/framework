@@ -31,7 +31,7 @@ class container implements ContainerInterface, rephpContainerBootstrap
      */
     public static function getContainer()
     {
-        is_object(self::$container) || self::$container =  new self();
+        is_object(self::$container) || self::$container = new self();
         return self::$container;
     }
 
@@ -65,6 +65,17 @@ class container implements ContainerInterface, rephpContainerBootstrap
     }
 
     /**
+     * 注册别名
+     * @param string  $name       要注册的实例名字
+     * @param string  $className  类名
+     * @return boolean
+     */
+    public function alias($name, $className)
+    {
+        return self::$instance[$name] = &self::$instance[$className];
+    }
+
+    /**
      * 获得类的对象实例
      * @param string  $name       要注册的实例名字
      * @param string  $className  类名
@@ -75,10 +86,13 @@ class container implements ContainerInterface, rephpContainerBootstrap
     public function bind($name, $className, $userParams = [], $rebind = false)
     {
         try {
-            $has = $this->has($name);
+            $has = $this->has($className);
             if ($rebind || !$has) {
-                $paramArr              = $this->getMethodParams($className, '__construct', $userParams);
-                self::$instance[$name] = (new ReflectionClass($className))->newInstanceArgs($paramArr);
+                $paramArr        = [];
+                $isHaveConstruct = method_exists($className, '__construct');
+                $isHaveConstruct && $paramArr = $this->getMethodParams($className, '__construct', $userParams);
+                self::$instance[$className] = (new ReflectionClass($className))->newInstanceArgs($paramArr);
+                ($name != $className) && $this->alias($name, $className);
             }
         } catch (Error $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
@@ -104,7 +118,7 @@ class container implements ContainerInterface, rephpContainerBootstrap
         $constructParams = ($methodName == '__construct') ? $params : [];
         $instance        = $this->bind($className, $className, $constructParams);
         try {
-            if ($instance->hasMethod($methodName)) {
+            if (method_exists($instance, $methodName)) {
                 // 获取该方法所需要依赖注入的参数
                 $paramArr = $this->getMethodParams($className, $methodName, $params);
                 return $instance->{$methodName}(...$paramArr);
@@ -131,25 +145,27 @@ class container implements ContainerInterface, rephpContainerBootstrap
         $class    = new ReflectionClass($className);
         $paramArr = []; // 记录参数，和参数类型
 
-        // 判断该类是否有构造函数
-        if ($class->hasMethod($methodsName)) {
-            // 获得构造函数
-            $construct = $class->getMethod($methodsName);
-            // 判断构造函数是否有参数
-            $params = $construct->getParameters();
-            $params = (array)$params;
-            // 判断参数类型
-            foreach ($params as $key => $param) {
-                //如果参数是类对象，则可以获取
-                if ($paramClass = $param->getClass()) {
-                    $paramClassName = $paramClass->getName();
-                    $paramArr[]     = $this->bind($paramClassName, $paramClassName);
-                } else {
-                    $paramArr[] = array_shift($userParams);
-                }
-            }
-
+        // 判断该类是否有该函数
+        if (!$class->hasMethod($methodsName)) {
+            return $paramArr;
         }
+        // 获得构造函数
+        $construct = $class->getMethod($methodsName);
+        // 判断构造函数是否有参数
+        $params = $construct->getParameters();
+        $params = (array)$params;
+        // 判断参数类型
+        foreach ($params as $key => $param) {
+            //如果参数是类对象，则可以获取
+            if ($paramClass = $param->getClass()) {
+                $paramClassName = $paramClass->getName();
+                //如果容器中已经绑定此对象则复用，如果不存在则重新绑定
+                $paramArr[] = $this->bind($paramClassName, $paramClassName);
+            } else {
+                $paramArr[] = array_shift($userParams);
+            }
+        }
+
 
         return $paramArr;
     }
