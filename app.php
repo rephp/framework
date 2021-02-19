@@ -52,7 +52,7 @@ class app
 
         //输入输出
         //执行
-        $this->container->bind('reponse', $this->rephpConfig['reponse'])->output();
+        //$this->container->bind('reponse', $this->rephpConfig['reponse'])->output();
     }
 
 }

@@ -52,8 +52,8 @@ class appCore implements appBootstrap
     public function loadRoute()
     {
         //加载路由
-        $routePath = $this->getAppPath().'route/';
-        $dirArr = scandir($routePath);
+        $routePath = dirname($this->getAppPath()).'/route/';
+        $dirArr    = scandir($routePath);
         foreach($dirArr as $file){
             $info = pathinfo($file);
             $fix  = strtolower($info['extension']);
