@@ -47,10 +47,14 @@ class appCore implements appBootstrap
         return true;
     }
 
+    /**
+     * 加载配置对象
+     * @param configInterface $config  具体配置对象
+     */
     public function loadConfig(configInterface $config)
     {
-
-        $this->config = container::getContainer()->bind('config', config::class, [$config]);
+        $this->config = container::getContainer()->bind('config', config::class);
+        $this->config->init($config);
     }
 
     /**

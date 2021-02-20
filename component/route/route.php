@@ -48,7 +48,7 @@ class route
         in_array($method, $this->allowMethod) || $method = 'get';
 
         //4.挂载路由
-        return $bootstrap->run();
+        $bootstrap->run($baseUri, $module, $controller, $action, $method);
     }
 
     /**

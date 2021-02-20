@@ -15,7 +15,7 @@ class config implements configInterface
     /**
      * 初始化运行环境
      */
-    public function __construct(configInterface $configer)
+    public function init(configInterface $configer)
     {
         $this->configer = $configer;
     }
@@ -56,7 +56,19 @@ class config implements configInterface
      */
     public function get($name, $default = '')
     {
-        return $this->configer->get($name, $default = '');
+        return $this->configer->get($name, $default);
+    }
+
+    /**
+     * 动态将一个配置信息加载到config对象中
+     * @param string $baseName 基本文件名
+     * @param string $name     配置项key
+     * @param string $value    配置项对应值
+     * @return boolean
+     */
+    public function set($baseName, $name, $value = '')
+    {
+        return $this->configer->set($baseName, $name, $value);
     }
 
 
