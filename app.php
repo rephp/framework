@@ -47,12 +47,14 @@ class app
     {
         //初始化系统运行环境
         $config = $this->container->bind('config', $this->rephpConfig['config']);
+        //运行
         $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath, $config);
-
-
-        //输入输出
-        //执行
-        //$this->container->bind('reponse', $this->rephpConfig['reponse'])->output();
+        //绑定接受参数对象
+        $this->container->bind('request', $this->rephpConfig['request']);
+        //绑定输出对象
+        $this->container->bind('reponse', $this->rephpConfig['reponse']);
+        //运行
+        $this->container->get('appCore')->run();
     }
 
 }

@@ -39,10 +39,17 @@ class appCore implements appBootstrap
         $this->setTimeZone();
         //debug
         $this->initDebug();
-        //加载路由
-        $this->loadRoute();
 
         return true;
+    }
+
+    /**
+     * 执行
+     */
+    public function run()
+    {
+        //加载路由
+        $this->loadRoute();
     }
 
     /**
@@ -72,23 +79,45 @@ class appCore implements appBootstrap
     {
         $isDebug = $this->config->get('config.debug.is_debug', false);
         if($isDebug){
-            error_reporting(E_ALL & ~E_NOTICE);
-            ini_set('display_errors', 'On');
-            $whoops = new \Whoops\Run();
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-            $whoops->register();
+            $res = $this->setOpenDebug();
         }else{
-            error_reporting(0);
-            ini_set('display_errors', 'Off');
-            ini_set('log_errors', 'On');
-            ini_set('log_errors_max_len', 1024);
-            //日志位置
-            $logPath     = $this->config->get('config.debug.log_path', $this->getAppPath().'runtime/log/');
-            in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
-            $logFileName = $logPath.date('Y/m/d', time()).'.log';
-            mkdir($logPath.date('Y/m/', time()), 0777, true);
-            ini_set('error_log', $logFileName);
+            $res = $this->setCloseDebug();
         }
+
+        return $res;
+    }
+
+    /**
+     * 开启debug模式配置
+     * @return bool
+     */
+    private function setOpenDebug()
+    {
+        error_reporting(E_ALL & ~E_NOTICE);
+        ini_set('display_errors', 'On');
+        $whoops = new \Whoops\Run();
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+        $whoops->register();
+
+        return true;
+    }
+
+    /**
+     * 关闭debug模式配置
+     * @return bool
+     */
+    private function setCloseDebug()
+    {
+        error_reporting(0);
+        ini_set('display_errors', 'Off');
+        ini_set('log_errors', 'On');
+        ini_set('log_errors_max_len', 1024);
+        //日志位置
+        $logPath     = $this->config->get('config.debug.log_path', $this->getAppPath().'runtime/log/');
+        in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
+        $logFileName = $logPath.date('Y/m/d', time()).'.log';
+        mkdir($logPath.date('Y/m/', time()), 0777, true);
+        ini_set('error_log', $logFileName);
 
         return true;
     }

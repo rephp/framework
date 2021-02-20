@@ -10,7 +10,6 @@ use rephp\framework\component\config\bootstrap\configBootstrap;
  */
 interface appBootstrap
 {
-
     /**
      * 开始加载环境所需资源
      * @param string          $appPath 系统默认app路径
@@ -18,6 +17,11 @@ interface appBootstrap
      * @return boolean
      */
     public function init($appPath, configBootstrap $config);
+
+    /**
+     * 执行
+     */
+    public function run();
 
     /**
      * 设置app路径
