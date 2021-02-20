@@ -2,20 +2,20 @@
 
 namespace rephp\framework\component\config;
 
-use rephp\framework\component\config\bootstrap\configBootstrap;
+use rephp\framework\component\config\interfaces\configInterface;
 
 /**
  * 配置管理类
  * @package rephp\framework\component\config
  */
-class config implements configBootstrap
+class config implements configInterface
 {
     public $configer;
 
     /**
      * 初始化运行环境
      */
-    public function __construct(configBootstrap $configer)
+    public function __construct(configInterface $configer)
     {
         $this->configer = $configer;
     }
