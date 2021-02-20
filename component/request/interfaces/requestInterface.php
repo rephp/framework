@@ -1,0 +1,12 @@
+<?php
+
+namespace rephp\framework\component\request\interfaces;
+
+/**
+ * 请求对象驱动类
+ */
+interface requestInterface
+{
+
+
+}

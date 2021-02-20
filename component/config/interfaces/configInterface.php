@@ -1,12 +1,12 @@
 <?php
 
-namespace rephp\framework\component\config\bootstrap;
+namespace rephp\framework\component\config\interfaces;
 
 /**
- * 配置驱动类
- * @package rephp\framework\component\config\bootstrap
+ * 配置接口
+ * @package rephp\framework\component\config\interfaces
  */
-interface configBootstrap
+interface configInterface
 {
     /**
      * 设置配置目录

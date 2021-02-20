@@ -2,13 +2,13 @@
 
 namespace rephp\framework\component\request;
 
-use rephp\framework\component\request\bootstrap\requestBootstrap;
+use rephp\framework\component\request\interfaces\requestInterface;
 
 /**
  * 请求类
  * @package rephp\framework\component\request
  */
-class request implements requestBootstrap
+class request implements requestInterface
 {
     /**
      * @var array 头信息
@@ -119,7 +119,7 @@ class request implements requestBootstrap
 
     public function parseUrl()
     {
-
+        $uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
 
 }

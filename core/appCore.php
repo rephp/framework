@@ -2,13 +2,17 @@
 
 namespace rephp\framework\core;
 
+use rephp\framework\component\config\config;
+use rephp\framework\component\config\interfaces\configInterface;
+use rephp\framework\component\container\container;
+use rephp\framework\component\route\interfaces\routeInterface;
+use rephp\framework\component\route\route;
 use rephp\framework\core\bootstrap\appBootstrap;
-use rephp\framework\component\config\bootstrap\configBootstrap;
 
 /**
  * app核心驱动类，负责调度系统所需基本资源
  * 核心环境初始化任务承包团队
- * @package rephp\framework\components\bootstrap
+ * @package rephp\framework\components\interfaces
  */
 class appCore implements appBootstrap
 {
@@ -25,10 +29,10 @@ class appCore implements appBootstrap
      * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath = '', configBootstrap $config)
+    public function init($appPath = '', configInterface $config)
     {
-        empty($config) || $this->config = $config;
-        //todo: all of app bootstrap etc.
+        $this->loadConfig($config);
+        //todo: all of app interfaces etc.
         //配置app路径
         $this->setAppPath($appPath);
         //定义路径常量
@@ -43,32 +47,21 @@ class appCore implements appBootstrap
         return true;
     }
 
-    /**
-     * 执行
-     */
-    public function run()
+    public function loadConfig(configInterface $config)
     {
-        //加载路由
-        $this->loadRoute();
+
+        $this->config = container::getContainer()->bind('config', config::class, [$config]);
     }
 
     /**
-     * 扫描加载所有路由文件
-     * @return bool
+     * 执行
      */
-    public function loadRoute()
+    public function run(routeInterface $route)
     {
         //加载路由
-        $routePath = dirname($this->getAppPath()).'/route/';
-        $dirArr    = scandir($routePath);
-        foreach($dirArr as $file){
-            $info = pathinfo($file);
-            $fix  = strtolower($info['extension']);
-            if($fix == 'php'){
-                require $routePath.$file;
-            }
-        }
-        return true;
+        $routePath = $this->getAppPath().'route/';
+        $coreRoute = container::getContainer()->bind('coreRoute', route::class);
+        $coreRoute->run($routePath, $route);
     }
 
     /**

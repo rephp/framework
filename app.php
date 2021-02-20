@@ -21,7 +21,8 @@ class app
         'appCore' => core\appCore::class,
         'reponse' => component\response\response::class,
         'request' => component\request\request::class,
-        'config'  => component\config\config::class,
+        'config'  => component\config\bootstrap\configV1::class,
+        'route'   => component\route\bootstrap\macawRoute::class,
     ];
     /**
      * @var 容器对象
@@ -53,8 +54,10 @@ class app
         $this->container->bind('request', $this->rephpConfig['request']);
         //绑定输出对象
         $this->container->bind('reponse', $this->rephpConfig['reponse']);
+        //绑定路由对象
+        $route = $this->container->bind('route', $this->rephpConfig['route']);
         //运行
-        $this->container->get('appCore')->run();
+        $this->container->get('appCore')->run($route);
     }
 
 }
