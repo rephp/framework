@@ -29,9 +29,9 @@ class appCore implements appBootstrap
      * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath = '', configInterface $config)
+    public function init($appPath = '')
     {
-        $this->loadConfig($config);
+        $this->loadConfig();
         //todo: all of app interfaces etc.
         //配置app路径
         $this->setAppPath($appPath);
@@ -49,12 +49,12 @@ class appCore implements appBootstrap
 
     /**
      * 加载配置对象
-     * @param configInterface $config  具体配置对象
+     * @param configInterface $config 具体配置对象
      */
-    public function loadConfig(configInterface $config)
+    public function loadConfig()
     {
         $this->config = container::getContainer()->bind('config', config::class);
-        $this->config->init($config);
+        $this->config->init(container::getContainer()->get('coreConfig'));
     }
 
     /**
@@ -63,9 +63,9 @@ class appCore implements appBootstrap
     public function run(routeInterface $route)
     {
         //加载路由
-        $routePath = $this->getAppPath().'route/';
-        $coreRoute = container::getContainer()->bind('coreRoute', route::class);
-        $coreRoute->run($routePath, $route);
+        $routePath = $this->getAppPath() . 'route/';
+        $coreRoute = container::getContainer()->bind('route', route::class);
+        $coreRoute->run($routePath, container::getContainer()->get('coreRoute'));
     }
 
     /**
@@ -75,9 +75,9 @@ class appCore implements appBootstrap
     public function initDebug()
     {
         $isDebug = $this->config->get('config.debug.is_debug', false);
-        if($isDebug){
+        if ($isDebug) {
             $res = $this->setOpenDebug();
-        }else{
+        } else {
             $res = $this->setCloseDebug();
         }
 
@@ -110,10 +110,10 @@ class appCore implements appBootstrap
         ini_set('log_errors', 'On');
         ini_set('log_errors_max_len', 1024);
         //日志位置
-        $logPath     = $this->config->get('config.debug.log_path', $this->getAppPath().'runtime/log/');
+        $logPath = $this->config->get('config.debug.log_path', $this->getAppPath() . 'runtime/log/');
         in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
-        $logFileName = $logPath.date('Y/m/d', time()).'.log';
-        mkdir($logPath.date('Y/m/', time()), 0777, true);
+        $logFileName = $logPath . date('Y/m/d', time()) . '.log';
+        mkdir($logPath . date('Y/m/', time()), 0777, true);
         ini_set('error_log', $logFileName);
 
         return true;
@@ -137,7 +137,7 @@ class appCore implements appBootstrap
     public function definePath()
     {
         $appPath = $this->getAppPath();
-        defined('APP_PATH')  || define('APP_PATH', $appPath);
+        defined('APP_PATH') || define('APP_PATH', $appPath);
         defined('ROOT_PATH') || define('ROOT_PATH', dirname($appPath) . '/');
     }
 
@@ -170,8 +170,8 @@ class appCore implements appBootstrap
     public function setConfigPath()
     {
         //读取ini配置，如果ini没配置则设置为默认路径
-        $iniConfigPath  = env('CONFIG.CONFIG_PATH');
-        $configPath  = empty($iniConfigPath) ? ($this->getAppPath().'config/') : $iniConfigPath;
+        $iniConfigPath = env('CONFIG.CONFIG_PATH');
+        $configPath    = empty($iniConfigPath) ? ($this->getAppPath() . 'config/') : $iniConfigPath;
         //判断末尾是否含有/
         $checkStr = substr($configPath, -1);
         in_array($checkStr, ['/', '\\']) || $configPath .= '/';

@@ -21,8 +21,8 @@ class app
         'appCore' => core\appCore::class,
         'reponse' => component\response\response::class,
         'request' => component\request\request::class,
-        'config'  => component\config\bootstrap\configV1::class,
-        'route'   => component\route\bootstrap\macawRoute::class,
+        'coreConfig'  => component\config\bootstrap\configV1::class,
+        'coreRoute'   => component\route\bootstrap\macawRoute::class,
     ];
     /**
      * @var 容器对象
@@ -47,15 +47,15 @@ class app
     public function run($appPath = '')
     {
         //初始化系统运行环境
-        $config = $this->container->bind('config', $this->rephpConfig['config']);
+        $config = $this->container->bind('coreConfig', $this->rephpConfig['coreConfig']);
         //运行
-        $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath, $config);
+        $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath);
         //绑定接受参数对象
         $this->container->bind('request', $this->rephpConfig['request']);
         //绑定输出对象
         $this->container->bind('reponse', $this->rephpConfig['reponse']);
         //绑定路由对象
-        $route = $this->container->bind('route', $this->rephpConfig['route']);
+        $route = $this->container->bind('coreRoute', $this->rephpConfig['coreRoute']);
         //运行
         $this->container->get('appCore')->run($route);
     }

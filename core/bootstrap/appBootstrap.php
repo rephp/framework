@@ -17,7 +17,7 @@ interface appBootstrap
      * @param configInterface $config  配置对象
      * @return boolean
      */
-    public function init($appPath, configInterface $config);
+    public function init($appPath);
 
     /**
      * 执行

@@ -71,5 +71,4 @@ class config implements configInterface
         return $this->configer->set($baseName, $name, $value);
     }
 
-
 }

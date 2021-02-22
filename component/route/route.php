@@ -52,13 +52,16 @@ class route
     }
 
     /**
-     * 安全过滤
+     * 过滤路由地址,只保留数字、字母、下划线
      * @param string $name 节点名字
      * @return string
      */
     public function filter($name)
     {
-        $res = str_replace(' ', '', $name);
+        $pattern = '/[a-zA-Z0-9_]/u';
+        preg_match_all($pattern, $name, $result);
+        $res = implode('', $result[0]);
+
         return $res;
     }
 
@@ -68,7 +71,13 @@ class route
      */
     public function parseUrlParams()
     {
-        $uri        = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        //判断basename
+        $baseName   = basename($uri);
+        $staticFix  = config('web.page_fix', '.html');
+        $currentFix = strtolower(strrchr($baseName, '.'));
+        $isStaticMode = ($currentFix == $staticFix) ? true : false;
+        $isStaticMode && $uri = dirname($uri);
         $arr        = explode('/', $uri);
         $module     = empty($arr[1]) ? 'index' : $this->filter($arr[1]);
         $controller = empty($arr[2]) ? 'index' : $this->filter($arr[2]);
@@ -78,6 +87,7 @@ class route
         $config->set('route', 'module', $module);
         $config->set('route', 'controller', $controller);
         $config->set('route', 'action', $action);
+        $isStaticMode && container::getContainer()->get('request')->parseStaticParams($baseName);
 
         $res = [
             'module'     => $module,

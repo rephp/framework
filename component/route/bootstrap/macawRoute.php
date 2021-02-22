@@ -34,7 +34,7 @@ class macawRoute implements routeInterface
         Macaw::$method($ruleStr, $objectStr);
         //5.兼容404
         Macaw::$error_callback = function () {
-            throw new Exception("路由无匹配项 404 Not Found");
+            throw new \Exception("路由无匹配项 404 Not Found");
         };
         //6.适配路由
         Macaw::dispatch();

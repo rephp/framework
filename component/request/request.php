@@ -117,9 +117,26 @@ class request implements requestInterface
         return isset($this->post[$name]) ? $this->post[$name] : $default;
     }
 
-    public function parseUrl()
+    /**
+     * 从请求的uri中解析静态参数
+     * @param  string  $baseName  请求uri中的文件名
+     * @return boolean
+     */
+    public function parseStaticParams($baseName)
     {
-        $uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $arr  = pathinfo($baseName);
+        $str  = $arr['filename'];
+        $arr2 = explode('-', $str);
+        $key  = true;
+        while ( isset($key) ) {
+            $key = array_shift($arr2);
+            $val = array_shift($arr2);
+            if(!empty($key)){
+                $this->get[$key] = $val;
+            }
+        }
+
+        return true;
     }
 
 }
