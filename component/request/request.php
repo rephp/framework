@@ -134,6 +134,19 @@ class request implements requestInterface
     }
 
     /**
+     * 过滤路由地址,只保留数字、字母、下划线
+     * @param string $name 节点名字
+     * @return string
+     */
+    public function filterRoute($name)
+    {
+        $pattern = '/[a-zA-Z0-9_]/u';
+        preg_match_all($pattern, $name, $result);
+        $res = implode('', $result[0]);
+        return $res;
+    }
+
+    /**
      * 解析url参数及信息
      * @throws \ErrorException
      * @return boolean
@@ -148,9 +161,9 @@ class request implements requestInterface
         $isStaticMode = ($currentFix == $staticFix) ? true : false;
         $isStaticMode && $uri = dirname($uri);
         $arr        = explode('/', $uri);
-        $module     = empty($arr[1]) ? 'index' : $this->filter($arr[1]);
-        $controller = empty($arr[2]) ? 'index' : $this->filter($arr[2]);
-        $action     = empty($arr[3]) ? 'index' : $this->filter($arr[3]);
+        $module     = empty($arr[1]) ? 'index' : $this->filterRoute($arr[1]);
+        $controller = empty($arr[2]) ? 'index' : $this->filterRoute($arr[2]);
+        $action     = empty($arr[3]) ? 'index' : $this->filterRoute($arr[3]);
         //设置路由信息
         $this->setRouteInfo($module, $controller, $action);
         //解析静态参数

@@ -52,19 +52,6 @@ class route
     }
 
     /**
-     * 过滤路由地址,只保留数字、字母、下划线
-     * @param string $name 节点名字
-     * @return string
-     */
-    public function filter($name)
-    {
-        $pattern = '/[a-zA-Z0-9_]/u';
-        preg_match_all($pattern, $name, $result);
-        $res = implode('', $result[0]);
-        return $res;
-    }
-
-    /**
      * 解析uri
      * @return string[]
      */
