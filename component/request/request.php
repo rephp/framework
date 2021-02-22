@@ -66,7 +66,8 @@ class request implements requestInterface
         $this->file = (array)$_FILES;
         //解析路由参数
         $this->parseUrl();
-        //todo:合并请求参数到param
+
+        return true;
     }
 
     /**
@@ -104,7 +105,10 @@ class request implements requestInterface
      */
     public function param($name = '', $default = null)
     {
-        return isset($this->param[$name]) ? $this->param[$name] : $default;
+        $tempRes = '_null_';
+        $postRes = $this->post($name, $tempRes);
+
+        return ($postRes == $tempRes) ? $this->get($name, $default) : $postRes;
     }
 
     /**

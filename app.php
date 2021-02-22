@@ -51,7 +51,7 @@ class app
         //运行
         $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath);
         //绑定接受参数对象
-        $this->container->bind('request', $this->rephpConfig['request']);
+        $this->container->bind('request', $this->rephpConfig['request'])->init();
         //绑定输出对象
         $this->container->bind('reponse', $this->rephpConfig['reponse']);
         //绑定路由对象
