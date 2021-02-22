@@ -17,27 +17,39 @@ class request implements requestInterface
     /**
      * @var array get参数
      */
-    public $get     = [];
+    public $get = [];
     /**
      * @var array post参数
      */
-    public $post    = [];
+    public $post = [];
     /**
      * @var array 合并参数
      */
-    public $param   = [];
+    public $param = [];
     /**
      * @var array server信息
      */
-    public $server  = [];
+    public $server = [];
     /**
      * @var array 用户put方式输入
      */
-    public $input   = [];
+    public $input = [];
     /**
      * @var array 文件
      */
-    public $file    = [];
+    public $file = [];
+    /**
+     * @var string 模块名字
+     */
+    public $module = '';
+    /**
+     * @var string 控制器名字
+     */
+    public $controller = '';
+    /**
+     * @var string 方法名
+     */
+    public $action = '';
 
     /**
      * 初始化reqeust
@@ -51,9 +63,9 @@ class request implements requestInterface
         $this->post    = $_POST;
         $this->input   = file_get_contents('php://input');
         //$this->cookie  = $_COOKIE;
-        $this->file    = (array)$_FILES;
-        //todo:解析路由参数
-
+        $this->file = (array)$_FILES;
+        //解析路由参数
+        $this->parseUrl();
         //todo:合并请求参数到param
     }
 
@@ -118,8 +130,34 @@ class request implements requestInterface
     }
 
     /**
+     * 解析url参数及信息
+     * @throws \ErrorException
+     * @return boolean
+     */
+    public function parseUrl()
+    {
+        $uri        = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        //判断basename
+        $baseName   = basename($uri);
+        $staticFix  = config('web.page_fix', '.html');
+        $currentFix = strtolower(strrchr($baseName, '.'));
+        $isStaticMode = ($currentFix == $staticFix) ? true : false;
+        $isStaticMode && $uri = dirname($uri);
+        $arr        = explode('/', $uri);
+        $module     = empty($arr[1]) ? 'index' : $this->filter($arr[1]);
+        $controller = empty($arr[2]) ? 'index' : $this->filter($arr[2]);
+        $action     = empty($arr[3]) ? 'index' : $this->filter($arr[3]);
+        //设置路由信息
+        $this->setRouteInfo($module, $controller, $action);
+        //解析静态参数
+        $isStaticMode && $this->parseStaticParams($baseName);
+
+        return true;
+    }
+
+    /**
      * 从请求的uri中解析静态参数
-     * @param  string  $baseName  请求uri中的文件名
+     * @param string $baseName 请求uri中的文件名
      * @return boolean
      */
     public function parseStaticParams($baseName)
@@ -128,15 +166,41 @@ class request implements requestInterface
         $str  = $arr['filename'];
         $arr2 = explode('-', $str);
         $key  = true;
-        while ( isset($key) ) {
+        while (isset($key)) {
             $key = array_shift($arr2);
             $val = array_shift($arr2);
-            if(!empty($key)){
+            if (!empty($key)) {
                 $this->get[$key] = $val;
             }
         }
 
         return true;
+    }
+
+    /**
+     * 设置路由参数
+     * @param string $module     模块名
+     * @param string $controller 控制器名
+     * @param string $action     方法名
+     */
+    public function setRouteInfo($module = 'index', $controller = 'index', $action = 'index')
+    {
+        $this->module     = $module;
+        $this->controller = $controller;
+        $this->action     = $action;
+    }
+
+    /**
+     * 获取路由信息
+     * @return array
+     */
+    public function getRouteInfo()
+    {
+        return [
+            'module'     => $this->module,
+            'controller' => $this->controller,
+            'action'     => $this->action,
+        ];
     }
 
 }

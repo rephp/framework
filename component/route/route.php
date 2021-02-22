@@ -29,7 +29,7 @@ class route
     public function run($routePath, routeInterface $bootstrap)
     {
         //1.分析url
-        $params     = $this->parseUrlParams();
+        $params     = $this->getUrlRouteInfo();
         $module     = $params['module'];
         $controller = $params['controller'];
         $action     = $params['action'];
@@ -48,7 +48,7 @@ class route
         in_array($method, $this->allowMethod) || $method = 'get';
 
         //4.挂载路由
-        $bootstrap->run($baseUri, $module, $controller, $action, $method);
+        return $bootstrap->run($baseUri, $module, $controller, $action, $method);
     }
 
     /**
@@ -61,7 +61,6 @@ class route
         $pattern = '/[a-zA-Z0-9_]/u';
         preg_match_all($pattern, $name, $result);
         $res = implode('', $result[0]);
-
         return $res;
     }
 
@@ -69,32 +68,9 @@ class route
      * 解析uri
      * @return string[]
      */
-    public function parseUrlParams()
+    public function getUrlRouteInfo()
     {
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        //判断basename
-        $baseName   = basename($uri);
-        $staticFix  = config('web.page_fix', '.html');
-        $currentFix = strtolower(strrchr($baseName, '.'));
-        $isStaticMode = ($currentFix == $staticFix) ? true : false;
-        $isStaticMode && $uri = dirname($uri);
-        $arr        = explode('/', $uri);
-        $module     = empty($arr[1]) ? 'index' : $this->filter($arr[1]);
-        $controller = empty($arr[2]) ? 'index' : $this->filter($arr[2]);
-        $action     = empty($arr[3]) ? 'index' : $this->filter($arr[3]);
-        //加载配置项
-        $config = container::getContainer()->get('config');
-        $config->set('route', 'module', $module);
-        $config->set('route', 'controller', $controller);
-        $config->set('route', 'action', $action);
-        $isStaticMode && container::getContainer()->get('request')->parseStaticParams($baseName);
-
-        $res = [
-            'module'     => $module,
-            'controller' => $controller,
-            'action'     => $action,
-        ];
-
-        return $res;
+        $request = container::getContainer()->get('request');
+        return $request->getRouteInfo();
     }
 }
