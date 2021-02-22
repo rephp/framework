@@ -171,7 +171,7 @@ class appCore implements appBootstrap
     {
         //读取ini配置，如果ini没配置则设置为默认路径
         $iniConfigPath = env('CONFIG.CONFIG_PATH');
-        $configPath    = empty($iniConfigPath) ? ($this->getAppPath() . 'config/') : $iniConfigPath;
+        $configPath    = empty($iniConfigPath) ? (ROOT_PATH . '/config/') : $iniConfigPath;
         //判断末尾是否含有/
         $checkStr = substr($configPath, -1);
         in_array($checkStr, ['/', '\\']) || $configPath .= '/';
