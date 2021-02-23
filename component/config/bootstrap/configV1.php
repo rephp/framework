@@ -97,6 +97,11 @@ class configV1 implements configInterface
                 break;
             }
         }
+        //处理兼容0却default替换空
+        if (empty($config)) {
+            $length = strlen($config);
+            $length > 0 || $config = $default;
+        }
 
         return $config;
     }
