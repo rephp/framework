@@ -47,8 +47,21 @@ class route
         $method = strtolower($method);
         in_array($method, $this->allowMethod) || $method = 'get';
 
-        //4.挂载路由
-        return $bootstrap->run($baseUri, $module, $controller, $action, $method);
+        //4.计算路由地址
+        $module2     = strtolower($module);
+        $controller2 = strtolower($controller);
+        $action2     = strtolower($action);
+        $routeUri = '/';
+        if( !($module2 == 'index' && ($controller2 == 'index' && $action2 == 'index')) ){
+            $routeUri = $module.'/';
+            if(!($controller2 == 'index' && $action2 == 'index')){
+                $routeUri .= $controller.'/';
+                $action2 == 'index' || $routeUri .= $action.'/';
+            }
+        }
+
+        //5.挂载路由
+        return $bootstrap->run($routeUri, $module, $controller, $action, $method);
     }
 
     /**

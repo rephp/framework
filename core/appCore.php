@@ -92,6 +92,10 @@ class appCore implements appBootstrap
     {
         error_reporting(E_ALL & ~E_NOTICE);
         ini_set('display_errors', 'Off');
+        $isCli = defined('CLI_URI');
+        if($isCli){
+            return true;
+        }
         $whoops = new \Whoops\Run();
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
         $whoops->register();
