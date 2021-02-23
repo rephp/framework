@@ -153,7 +153,9 @@ class request implements requestInterface
      */
     public function parseUrl()
     {
-        $uri        = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri        = defined('CLI_URI') ? CLI_URI : parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $checkStr   = substr($uri,0,1);
+        in_array($checkStr, ['/', '\\']) || $uri = '/'.$uri;
         //判断basename
         $baseName   = basename($uri);
         $staticFix  = config('web.page_fix', '.html');
