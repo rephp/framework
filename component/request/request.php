@@ -58,7 +58,7 @@ class request implements requestInterface
     {
         //设置头信息
         $this->headers = $this->getHeader();
-        $this->get     = $_GET;
+        $this->get     = $this->parseDynamicParams();
         $this->server  = $_SERVER;
         $this->post    = $_POST;
         $this->input   = file_get_contents('php://input');
@@ -194,6 +194,19 @@ class request implements requestInterface
         }
 
         return true;
+    }
+
+    /**
+     * 解析动态url参数
+     * @return mixed
+     */
+    public function parseDynamicParams()
+    {
+        $uri = defined('CLI_URI') ? CLI_URI : $_SERVER['REQUEST_URI'];
+        $str = parse_url($uri, PHP_URL_QUERY);
+        parse_str($str, $params);
+
+        return $params;
     }
 
     /**

@@ -58,6 +58,7 @@ class route
                 $routeUri .= $controller.'/';
                 $action2 == 'index' || $routeUri .= $action.'/';
             }
+            in_array(substr($routeUri, -1), ['/', '\\'] ) && $routeUri = substr($routeUri, 0, strlen($routeUri)-1);
         }
 
         //5.挂载路由
