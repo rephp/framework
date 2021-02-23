@@ -91,7 +91,7 @@ class appCore implements appBootstrap
     private function setOpenDebug()
     {
         error_reporting(E_ALL & ~E_NOTICE);
-        ini_set('display_errors', 'On');
+        ini_set('display_errors', 'Off');
         $whoops = new \Whoops\Run();
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
         $whoops->register();
