@@ -2,6 +2,7 @@
 
 namespace rephp\framework\component\database;
 
+use rephp\framework\component\container\container;
 use rephp\framework\component\database\interfaces\databaseInterface;
 
 /**
@@ -59,7 +60,7 @@ class database extends dbBase implements databaseInterface
      */
     public function getOne($where, $column = '*', $orderBy = '', $groupBy = '', $leftJoinArr = [], $table = '')
     {
-
+        return container::getContainer()->get('coreDatabase')->getOne($where, $column, $orderBy, $groupBy, $leftJoinArr, $table);
     }
 
     /**
@@ -76,7 +77,7 @@ class database extends dbBase implements databaseInterface
      */
     public function fetch($where, $column = '*', $page = 0, $limit = 10, $orderBy = '', $groupBy = '', $leftJoinArr = [], $table = '')
     {
-
+        return container::getContainer()->fetch($where, $column, $page, $limit, $orderBy, $groupBy, $leftJoinArr, $table);
     }
 
     /**
@@ -88,7 +89,7 @@ class database extends dbBase implements databaseInterface
      */
     public function count($where, $leftJoinArr = [], $table = '')
     {
-
+        return container::getContainer()->count($where, $leftJoinArr, $table);
     }
 
     /**
@@ -105,7 +106,7 @@ class database extends dbBase implements databaseInterface
      */
     public function getList($where, $column = '*', $page = 0, $limit = 10, $orderBy = '', $groupBy = '', $leftJoinArr = [], $table = '')
     {
-
+        return container::getContainer()->getList($where, $column, $page, $limit, $orderBy, $groupBy, $leftJoinArr, $table);
     }
 
     /**
@@ -116,7 +117,7 @@ class database extends dbBase implements databaseInterface
      */
     public function insert($insertData, $table = '')
     {
-
+        return container::getContainer()->insert($insertData, $table);
     }
 
     /**
@@ -126,7 +127,7 @@ class database extends dbBase implements databaseInterface
      */
     public function batchInsert($batchInsertData, $table = '')
     {
-
+        return container::getContainer()->batchInsert($batchInsertData, $table);
     }
 
     /**
@@ -138,7 +139,7 @@ class database extends dbBase implements databaseInterface
      */
     public function update($where, $updateData, $table = '')
     {
-
+        return container::getContainer()->update($where, $updateData, $table);
     }
 
     /**
@@ -150,7 +151,7 @@ class database extends dbBase implements databaseInterface
      */
     public function inc($where, $column, $step = 1, $table = '')
     {
-
+        return container::getContainer()->inc($where, $column, $step, $table);
     }
 
     /**
@@ -162,7 +163,7 @@ class database extends dbBase implements databaseInterface
      */
     public function dec($where, $column, $step = 1, $table = '')
     {
-
+        return container::getContainer()->dec($where, $column, $step, $table);
     }
 
     /**
@@ -173,7 +174,7 @@ class database extends dbBase implements databaseInterface
      */
     public function delete($where, $table = '')
     {
-
+        return container::getContainer()->delete($where, $table);
     }
 
     /**
@@ -182,7 +183,7 @@ class database extends dbBase implements databaseInterface
      */
     public function startTrans()
     {
-
+        return container::getContainer()->startTrans();
     }
 
     /**
@@ -191,7 +192,7 @@ class database extends dbBase implements databaseInterface
      */
     public function rollback(Transaction $trans)
     {
-
+        return container::getContainer()->rollback($trans);
     }
 
     /**
@@ -200,7 +201,7 @@ class database extends dbBase implements databaseInterface
      */
     public function commit(Transaction $trans)
     {
-
+        return container::getContainer()->commit($trans);
     }
 
 }
