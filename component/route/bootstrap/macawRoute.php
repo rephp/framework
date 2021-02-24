@@ -7,7 +7,12 @@ use rephp\framework\component\route\interfaces\routeInterface;
 
 /**
  * macaw基础上衍生的中间路由层
- * @package rephp\framework\component\route\com
+ * @method static get(string $route, Callable $callback)
+ * @method static post(string $route, Callable $callback)
+ * @method static put(string $route, Callable $callback)
+ * @method static delete(string $route, Callable $callback)
+ * @method static options(string $route, Callable $callback)
+ * @method static head(string $route, Callable $callback)
  */
 class macawRoute implements routeInterface
 {

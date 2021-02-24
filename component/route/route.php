@@ -5,8 +5,13 @@ namespace rephp\framework\component\route;
 use rephp\framework\component\container\container;
 
 /**
- * 路由中间层
- * @package rephp\framework\component\route
+ * 路由层
+ * @method static get(string $route, Callable $callback)
+ * @method static post(string $route, Callable $callback)
+ * @method static put(string $route, Callable $callback)
+ * @method static delete(string $route, Callable $callback)
+ * @method static options(string $route, Callable $callback)
+ * @method static head(string $route, Callable $callback)
  */
 class route
 {
