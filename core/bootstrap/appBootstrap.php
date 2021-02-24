@@ -11,14 +11,6 @@ use rephp\framework\component\config\interfaces\configInterface;
 interface appBootstrap
 {
     /**
-     * 开始加载环境所需资源
-     * @param string          $appPath 系统默认app路径
-     * @param configInterface $config  配置对象
-     * @return boolean
-     */
-    public function init($appPath);
-
-    /**
      * 执行
      * @return boolean
      */
