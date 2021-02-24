@@ -100,7 +100,7 @@ class container implements ContainerInterface, rephpContainerInterfaces
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 
-        return isset(self::$instance[$name]) ? self::$instance[$name] : false;
+        return $this->get($name);
     }
 
     /**
