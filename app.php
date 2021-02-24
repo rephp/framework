@@ -46,18 +46,19 @@ class app
      */
     public function run($appPath = '')
     {
+        //todo:核心模块注册提取出去
         //初始化系统运行环境
-        $config = $this->container->bind('coreConfig', $this->rephpConfig['coreConfig']);
+        $this->container->bind('coreConfig', $this->rephpConfig['coreConfig']);
         //运行
-        $this->container->bind('appCore', $this->rephpConfig['appCore'])->init($appPath);
+        $this->container->bind('appCore', $this->rephpConfig['appCore'], [$appPath]);
         //绑定接受参数对象
-        $this->container->bind('request', $this->rephpConfig['request'])->init();
+        $this->container->bind('request', $this->rephpConfig['request']);
         //绑定输出对象
         $this->container->bind('reponse', $this->rephpConfig['reponse']);
         //绑定路由对象
-        $route = $this->container->bind('coreRoute', $this->rephpConfig['coreRoute']);
+        $this->container->bind('coreRoute', $this->rephpConfig['coreRoute']);
         //运行
-        $this->container->get('appCore')->run($route);
+        $this->container->get('appCore')->run();
     }
 
 }

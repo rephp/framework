@@ -54,7 +54,7 @@ class request implements requestInterface
     /**
      * 初始化reqeust
      */
-    public function init()
+    public function __construct()
     {
         //设置头信息
         $this->headers = $this->getHeader();
@@ -63,7 +63,7 @@ class request implements requestInterface
         $this->post    = $_POST;
         $this->input   = file_get_contents('php://input');
         //$this->cookie  = $_COOKIE;
-        $this->file = (array)$_FILES;
+        //$this->file = (array)$_FILES;
         //解析路由参数
         $this->parseUrl();
 

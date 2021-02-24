@@ -5,7 +5,6 @@ namespace rephp\framework\core;
 use rephp\framework\component\config\config;
 use rephp\framework\component\config\interfaces\configInterface;
 use rephp\framework\component\container\container;
-use rephp\framework\component\route\interfaces\routeInterface;
 use rephp\framework\component\route\route;
 use rephp\framework\core\bootstrap\appBootstrap;
 
@@ -29,10 +28,10 @@ class appCore implements appBootstrap
      * @param string $appPath 系统默认app路径
      * @return boolean
      */
-    public function init($appPath = '')
+    public function __construct($appPath = '')
     {
+        //加载配置
         $this->loadConfig();
-        //todo: all of app interfaces etc.
         //配置app路径
         $this->setAppPath($appPath);
         //定义路径常量
@@ -48,6 +47,17 @@ class appCore implements appBootstrap
     }
 
     /**
+     * 执行
+     */
+    public function run()
+    {
+        //加载路由
+        $routePath = $this->getAppPath() . 'route/';
+        $coreRoute = container::getContainer()->bind('route', route::class);
+        $coreRoute->run($routePath, container::getContainer()->get('coreRoute'));
+    }
+
+    /**
      * 加载配置对象
      * @param configInterface $config 具体配置对象
      */
@@ -55,17 +65,6 @@ class appCore implements appBootstrap
     {
         $this->config = container::getContainer()->bind('config', config::class);
         $this->config->init(container::getContainer()->get('coreConfig'));
-    }
-
-    /**
-     * 执行
-     */
-    public function run(routeInterface $route)
-    {
-        //加载路由
-        $routePath = $this->getAppPath() . 'route/';
-        $coreRoute = container::getContainer()->bind('route', route::class);
-        $coreRoute->run($routePath, container::getContainer()->get('coreRoute'));
     }
 
     /**

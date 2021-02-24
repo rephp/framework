@@ -2,8 +2,7 @@
 
 namespace rephp\framework\core\bootstrap;
 
-use rephp\framework\component\config\interfaces\configInterface;;
-use rephp\framework\component\route\interfaces\routeInterface;
+use rephp\framework\component\config\interfaces\configInterface;
 
 /**
  * app驱动类
@@ -21,10 +20,9 @@ interface appBootstrap
 
     /**
      * 执行
-     * @param routeInterface $route  路由
      * @return boolean
      */
-    public function run(routeInterface $route);
+    public function run();
 
     /**
      * 设置app路径
