@@ -64,7 +64,6 @@ class appCore implements appBootstrap
     public function loadConfig()
     {
         $this->config = container::getContainer()->bind('config', config::class);
-        $this->config->init(container::getContainer()->get('coreConfig'));
     }
 
     /**

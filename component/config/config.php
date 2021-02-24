@@ -3,6 +3,7 @@
 namespace rephp\framework\component\config;
 
 use rephp\framework\component\config\interfaces\configInterface;
+use rephp\framework\component\container\container;
 
 /**
  * 配置管理类
@@ -15,9 +16,9 @@ class config implements configInterface
     /**
      * 初始化运行环境
      */
-    public function init(configInterface $configer)
+    public function __construct()
     {
-        $this->configer = $configer;
+        $this->configer = container::getContainer()->get('coreConfig');
     }
 
     /**

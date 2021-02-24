@@ -14,7 +14,8 @@
   "require": {
     "psr/container": "^1.0",
     "millionmile/get_env": "^1.0",
-    "filp/whoops": "^2.9"
+    "filp/whoops": "^2.9",
+    "catfan/medoo": "^1.7"
   },
   "autoload": {
     "psr-4": {
