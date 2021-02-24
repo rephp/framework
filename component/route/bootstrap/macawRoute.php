@@ -23,6 +23,9 @@ class macawRoute implements routeInterface
      */
     public function run($baseUri, $module, $controller, $action, $method = 'get')
     {
+        //开启halt匹配模式
+        Macaw::haltOnMatch(true);
+        //判断参数
         if(empty($module) || empty($controller) || empty($action)){
             throw new \Exception('系统错误，请联系管理员');
         }
@@ -41,4 +44,29 @@ class macawRoute implements routeInterface
 
         return true;
     }
+
+    /**
+     * 调用未定义的方法
+     * @param string $name    方法名
+     * @param array  $params 参数
+     * @return mixed
+     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     */
+    public function __call($name, $params)
+    {
+        return Macaw::__callstatic($name, $params);
+    }
+
+    /**
+     * 调用未定义的静态方法
+     * @param string $name    方法名
+     * @param array  $params 参数
+     * @return mixed
+     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     */
+    public static function __callStatic($name, $params)
+    {
+        return Macaw::__callstatic($name, $params);
+    }
+
 }

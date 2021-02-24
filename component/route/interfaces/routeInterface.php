@@ -19,4 +19,22 @@ interface routeInterface
      */
     public function run($baseUri, $module, $controller, $action, $method='get');
 
+    /**
+     * 调用未定义的方法
+     * @param string $name    方法名
+     * @param array  $params 参数
+     * @return mixed
+     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     */
+    //public function __call($name, $params);
+
+    /**
+     * 调用未定义的静态方法
+     * @param string $name    方法名
+     * @param array  $params 参数
+     * @return mixed
+     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     */
+    //public static function __callStatic($name, $params);
+
 }

@@ -52,9 +52,9 @@ class appCore implements appBootstrap
     public function run()
     {
         //加载路由
-        $routePath = $this->getAppPath() . 'route/';
-        $coreRoute = container::getContainer()->bind('route', route::class);
-        $coreRoute->run($routePath, container::getContainer()->get('coreRoute'));
+        $routePath = ROOT_PATH . 'route/';
+        $route = container::getContainer()->bind('route', route::class);
+        $route->run($routePath);
     }
 
     /**
