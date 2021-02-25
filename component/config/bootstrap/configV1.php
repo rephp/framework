@@ -8,7 +8,7 @@ use rephp\framework\component\config\interfaces\configInterface;
  * 配置管理类
  * @package rephp\framework\component\config
  */
-class configV1 implements configInterface
+final class configV1 implements configInterface
 {
     /**
      * @var array 配置项

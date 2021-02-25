@@ -14,7 +14,7 @@ use rephp\framework\component\route\interfaces\routeInterface;
  * @method static options(string $route, Callable $callback)
  * @method static head(string $route, Callable $callback)
  */
-class macawRoute implements routeInterface
+final class macawRoute implements routeInterface
 {
 
     /**

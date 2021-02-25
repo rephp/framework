@@ -8,7 +8,7 @@ use rephp\framework\component\database\interfaces\databaseInterface;
  * medoo数据库操作类
  * @package rephp\framework\component\database\bootstrap
  */
-class medoo implements databaseInterface
+final class medoo implements databaseInterface
 {
 
 
