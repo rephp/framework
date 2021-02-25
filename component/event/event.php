@@ -46,7 +46,7 @@ class event implements eventInterface
     public static function trigger(...$params)
     {
         $class = container::getContainer()->get('coreEvent');
-        return $class::trigger($params);
+        return $class::trigger(...$params);
     }
 
 }
