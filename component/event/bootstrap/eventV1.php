@@ -44,7 +44,7 @@ use rephp\framework\component\event\interfaces\eventInterface;
  * event::trigger('foo', 4, 5);
  *
  */
-final class event implements eventInterface
+final class eventV1 implements eventInterface
 {
     /**
      * @var array 已注册的事件

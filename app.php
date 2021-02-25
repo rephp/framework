@@ -23,6 +23,7 @@ class app
         'request' => component\request\request::class,
         'coreConfig'  => component\config\bootstrap\configV1::class,
         'coreRoute'   => component\route\bootstrap\macawRoute::class,
+        'coreEvent'   => component\event\bootstrap\eventV1::class,
     ];
     /**
      * @var 容器对象
@@ -57,6 +58,8 @@ class app
         $this->container->bind('reponse', $this->rephpConfig['reponse']);
         //绑定路由对象
         $this->container->bind('coreRoute', $this->rephpConfig['coreRoute']);
+        //绑定事件
+        $this->container->bind('coreEvent', $this->rephpConfig['coreEvent']);
         //运行
         $this->container->get('appCore')->run();
     }
