@@ -3,6 +3,7 @@
 namespace rephp\framework\component\config\bootstrap;
 
 use rephp\framework\component\config\interfaces\configInterface;
+use rephp\framework\component\container\container;
 
 /**
  * 配置管理类
@@ -14,27 +15,11 @@ final class configV1 implements configInterface
      * @var array 配置项
      */
     private $config = [];
-    /**
-     * @var string  配置文件所在目录
-     */
-    private $configPath;
+
     /**
      * @var string 配置文件后缀名(带.)
      */
     private $fix = '.php';
-
-    /**
-     * 设置配置目录
-     * @param string $configPath 配置目录
-     * @return mixed
-     */
-    public function setConfigPath($configPath)
-    {
-        if (empty($this->configPath)) {
-            return $this->configPath = $configPath;
-        }
-        return true;
-    }
 
     /**
      * 获取配置目录
@@ -43,10 +28,7 @@ final class configV1 implements configInterface
      */
     public function getConfigPath()
     {
-        if (empty($this->configPath)) {
-            throw new \Exception('配置所在目录未设定');
-        }
-        return $this->configPath;
+        return container::getContainer()->get('config')->getConfigPath();;
     }
 
     /**

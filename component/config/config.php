@@ -11,14 +11,19 @@ use rephp\framework\component\container\container;
  */
 class config implements configInterface
 {
-    public $configer;
+    /**
+     * @var 配置目录
+     */
+    public $configPath;
 
     /**
-     * 初始化运行环境
+     * 获取核心配置对象
+     * @return object
+     * @throws \rephp\framework\component\container\exceptions\notFoundException
      */
-    public function __construct()
+    public function getCoreConfig()
     {
-        $this->configer = container::getContainer()->get('coreConfig');
+        return container::getContainer()->get('coreConfig');
     }
 
     /**
@@ -28,7 +33,7 @@ class config implements configInterface
      */
     public function setConfigPath($configPath)
     {
-        return $this->configer->setConfigPath($configPath);
+        return $this->configPath = $configPath;
     }
     /**
      * 获取配置目录
@@ -36,7 +41,7 @@ class config implements configInterface
      */
     public function getConfigPath()
     {
-        return $this->configer->getConfigPath();
+        return $this->configPath;
     }
 
     /**
@@ -46,7 +51,7 @@ class config implements configInterface
      */
     public function load($baseName)
     {
-        return $this->configer->load($baseName);
+        return $this->getCoreConfig()->load($baseName);
     }
 
     /**
@@ -57,7 +62,7 @@ class config implements configInterface
      */
     public function get($name, $default = '')
     {
-        return $this->configer->get($name, $default);
+        return $this->getCoreConfig()->get($name, $default);
     }
 
     /**
@@ -69,7 +74,7 @@ class config implements configInterface
      */
     public function set($baseName, $name, $value = '')
     {
-        return $this->configer->set($baseName, $name, $value);
+        return $this->getCoreConfig()->set($baseName, $name, $value);
     }
 
 }

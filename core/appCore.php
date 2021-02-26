@@ -30,14 +30,10 @@ class appCore implements appBootstrap
      */
     public function __construct($appPath = '')
     {
-        //加载配置
-        $this->loadConfig();
         //配置app路径
         $this->setAppPath($appPath);
-        //定义路径常量
+        //define
         $this->definePath();
-        //设置配置项所在目录
-        $this->setConfigPath();
         //初始化时区
         $this->setTimeZone();
         //debug
@@ -53,17 +49,8 @@ class appCore implements appBootstrap
     {
         //加载路由
         $routePath = ROOT_PATH . 'route/';
-        $route = container::getContainer()->bind('route', route::class);
+        $route     = container::getContainer()->bind('route', route::class);
         $route->run($routePath);
-    }
-
-    /**
-     * 加载配置对象
-     * @param configInterface $config 具体配置对象
-     */
-    public function loadConfig()
-    {
-        $this->config = container::getContainer()->bind('config', config::class);
     }
 
     /**
@@ -72,7 +59,7 @@ class appCore implements appBootstrap
      */
     public function initDebug()
     {
-        $isDebug = $this->config->get('config.debug.is_debug', false);
+        $isDebug = config('config.debug.is_debug', false);
         if ($isDebug) {
             $res = $this->setOpenDebug();
         } else {
@@ -127,7 +114,7 @@ class appCore implements appBootstrap
      */
     public function setTimeZone()
     {
-        $timeZone = $this->config->get('config.time_zone', 'PRC');
+        $timeZone = config('config.time_zone', 'PRC');
         date_default_timezone_set($timeZone);
     }
 
@@ -163,23 +150,6 @@ class appCore implements appBootstrap
     public function getAppPath()
     {
         return self::$appPath;
-    }
-
-    /**
-     * 设置config目录
-     * @return boolean
-     */
-    public function setConfigPath()
-    {
-        //读取ini配置，如果ini没配置则设置为默认路径
-        $iniConfigPath = env('CONFIG.CONFIG_PATH');
-        $configPath    = empty($iniConfigPath) ? (ROOT_PATH . '/config/') : $iniConfigPath;
-        //判断末尾是否含有/
-        $checkStr = substr($configPath, -1);
-        in_array($checkStr, ['/', '\\']) || $configPath .= '/';
-
-        //设置config所在目录
-        return $this->config->setConfigPath($configPath);
     }
 
 }

@@ -9,12 +9,6 @@ namespace rephp\framework\component\config\interfaces;
 interface configInterface
 {
     /**
-     * 设置配置目录
-     * @param  string  $configPath  配置目录
-     * @return mixed
-     */
-    public function setConfigPath($configPath);
-    /**
      * 获取配置目录
      * @return string
      */

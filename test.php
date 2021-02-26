@@ -1,2 +1,0 @@
-<?php
-$str = 'test.php';

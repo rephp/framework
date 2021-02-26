@@ -18,10 +18,10 @@ class app
      * @var string[]
      */
     private $rephpConfig = [
-        'appCore' => core\appCore::class,
-        'reponse' => component\response\response::class,
-        'request' => component\request\request::class,
         'coreConfig'  => component\config\bootstrap\configV1::class,
+        'appCore'     => core\appCore::class,
+        'reponse'     => component\response\response::class,
+        'request'     => component\request\request::class,
         'coreRoute'   => component\route\bootstrap\macawRoute::class,
         'coreEvent'   => component\event\bootstrap\eventV1::class,
     ];
@@ -32,36 +32,52 @@ class app
     private $container;
 
     /**
-     * 初始化预备环境
-     * @param string $appPath
-     */
-    public function __construct()
-    {
-        $this->container = container::getContainer();
-    }
-
-    /**
      * 运行
      * @param string $appPath app路径
      * @return string
      */
     public function run($appPath = '')
     {
-        //todo:核心模块注册提取出去
         //初始化系统运行环境
-        $this->container->bind('coreConfig', $this->rephpConfig['coreConfig']);
-        //运行
-        $this->container->bind('appCore', $this->rephpConfig['appCore'], [$appPath]);
-        //绑定接受参数对象
-        $this->container->bind('request', $this->rephpConfig['request']);
-        //绑定输出对象
-        $this->container->bind('reponse', $this->rephpConfig['reponse']);
-        //绑定路由对象
-        $this->container->bind('coreRoute', $this->rephpConfig['coreRoute']);
-        //绑定事件
-        $this->container->bind('coreEvent', $this->rephpConfig['coreEvent']);
+        $this->container = container::getContainer();
+        //设置配置路径
+        $this->setConfigPath(dirname($appPath));
+        //预先绑定组件
+        $this->preBindCoreComponent();
         //运行
         $this->container->get('appCore')->run();
     }
+
+    /**
+     * 设置config目录
+     * @return boolean
+     */
+    public function setConfigPath($rootPath)
+    {
+        //读取ini配置，如果ini没配置则设置为默认路径
+        $iniConfigPath = env('CONFIG.CONFIG_PATH');
+        $configPath    = empty($iniConfigPath) ? ($rootPath . '/config/') : $iniConfigPath;
+        //判断末尾是否含有/
+        $checkStr = substr($configPath, -1);
+        in_array($checkStr, ['/', '\\']) || $configPath .= '/';
+
+        //设置config所在目录
+        return  $this->container->bind('config', component\config\config::class)->setConfigPath($configPath);
+    }
+
+    /**
+     * 预先注册组件
+     * 优先级依赖按照从上往下顺序来加载
+     * @return bool
+     */
+    public function preBindCoreComponent()
+    {
+        foreach($this->rephpConfig as $bindName=>$class){
+            $this->container->bind($bindName, $class);
+        }
+
+        return true;
+    }
+
 
 }
