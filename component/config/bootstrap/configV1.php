@@ -2,14 +2,14 @@
 
 namespace rephp\framework\component\config\bootstrap;
 
+use rephp\framework\component\config\abstracts\configAbstract;
 use rephp\framework\component\config\interfaces\configInterface;
-use rephp\framework\component\container\container;
 
 /**
  * 配置管理类
  * @package rephp\framework\component\config
  */
-final class configV1 implements configInterface
+final class configV1 extends configAbstract implements configInterface
 {
     /**
      * @var array 配置项
@@ -22,14 +22,9 @@ final class configV1 implements configInterface
     private $fix = '.php';
 
     /**
-     * 获取配置目录
-     * @return string
-     * @throws \Exception
+     * @var string  配置文件所在路径
      */
-    public function getConfigPath()
-    {
-        return container::getContainer()->get('config')->getConfigPath();;
-    }
+    private $configPath;
 
     /**
      * 加载一个配置文件到config对象中
@@ -40,7 +35,7 @@ final class configV1 implements configInterface
     {
         try {
             $baseName       = basename($baseName, $this->fix);
-            $configFullName = $this->getConfigPath() . $baseName . $this->fix;
+            $configFullName = $this->configPath . $baseName . $this->fix;
             $config         = include $configFullName;
 
             return $this->batchSet($baseName, (array)$config);

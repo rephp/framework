@@ -8,11 +8,6 @@ namespace rephp\framework\component\config\interfaces;
  */
 interface configInterface
 {
-    /**
-     * 获取配置目录
-     * @return string
-     */
-    public function getConfigPath();
 
     /**
      * 加载一个配置文件到config对象中

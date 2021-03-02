@@ -1,14 +1,14 @@
 <?php
 
-namespace rephp\framework\core\bootstrap;
+namespace rephp\framework\core\interfaces;
 
 use rephp\framework\component\config\interfaces\configInterface;
 
 /**
- * app驱动类
+ * appCore接口
  * @package rephp\framework\components\interfaces
  */
-interface appBootstrap
+interface appCoreInterface
 {
     /**
      * 执行

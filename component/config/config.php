@@ -2,6 +2,7 @@
 
 namespace rephp\framework\component\config;
 
+use rephp\framework\component\config\abstracts\configAbstract;
 use rephp\framework\component\config\interfaces\configInterface;
 use rephp\framework\component\container\container;
 
@@ -9,7 +10,7 @@ use rephp\framework\component\container\container;
  * 配置管理类
  * @package rephp\framework\component\config
  */
-class config implements configInterface
+class config extends configAbstract implements configInterface
 {
     /**
      * @var 配置目录
@@ -24,24 +25,6 @@ class config implements configInterface
     public function getCoreConfig()
     {
         return container::getContainer()->get('coreConfig');
-    }
-
-    /**
-     * 设置配置目录
-     * @param  string  $configPath  配置目录
-     * @return mixed
-     */
-    public function setConfigPath($configPath)
-    {
-        return $this->configPath = $configPath;
-    }
-    /**
-     * 获取配置目录
-     * @return string
-     */
-    public function getConfigPath()
-    {
-        return $this->configPath;
     }
 
     /**
