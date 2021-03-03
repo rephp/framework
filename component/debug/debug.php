@@ -86,9 +86,9 @@ class debug implements debugInterface
             //2.输出sql信息
             print_r($this->getSql());
             //3.计算执行总时间
-            echo '运行时间:' . (microtime(TRUE) - $this->startTime) . 's<br>'."\n";
+            echo '运行时间:' . round(microtime(TRUE) - $this->startTime, 6) . 's<br>' . "\n";
             //4.计算执行消耗内存
-            echo '内存开销:' . round((memory_get_usage()-$this->startMemory) / 1024 / 1024, 6) . 'MB<br>'."\n";
+            echo '内存开销:' . round((memory_get_usage() - $this->startMemory) / 1024 / 1024, 6) . 'MB<br>' . "\n";
             echo '</pre>';
         }
         return true;
