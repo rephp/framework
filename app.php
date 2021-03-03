@@ -46,9 +46,10 @@ class app
         container::getContainer()->bind('appCore', core\appCore::class, [$appPath])->run();
     }
 
-    public function loadEnv()
+    public function loadEnv($envPath)
     {
-
+        container::getContainer()->bind('coreEnv', $this->envBootstrap);
+        container::getContainer()->bind('env', component\env\env::class, [$envPath]);
     }
 
     /**

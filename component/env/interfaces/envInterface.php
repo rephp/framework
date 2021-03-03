@@ -16,4 +16,12 @@ interface envInterface
      */
     public function get($name, $default='');
 
+    /**
+     * 加载配置文件
+     * @param  string $filePath 配置文件路径
+     * @return boolean
+     * @throws \Exception
+     */
+    public function loadFile($filePath);
+
 }

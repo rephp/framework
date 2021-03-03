@@ -12,6 +12,41 @@ use rephp\framework\component\env\interfaces\envInterface;
 class env implements envInterface
 {
     /**
+     * 自动加载env资源
+     * @param string $envPath  env所在路径
+     * @throws \Exception
+     */
+    public function __construct($envPath)
+    {
+        //判断末尾是否含有/
+        $checkStr = substr($envPath, -1);
+        in_array($checkStr, ['/', '\\']) || $envPath .= '/';
+        $this->setPath($envPath);
+        $this->loadFile($envPath.'.env');
+    }
+
+    /**
+     * 设置env所在路径
+     * @param string $envPath env所在目录
+     * @return boolean
+     */
+    public function setPath($envPath)
+    {
+        $this->envPath = $envPath;
+    }
+
+    /**
+     * 加载配置文件
+     * @param  string $filePath 配置文件路径
+     * @return boolean
+     * @throws \Exception
+     */
+    public function loadFile($filePath)
+    {
+        return container::getContainer()->get('coreEnv')->loadFile($filePath);
+    }
+
+    /**
      * 获取env配置信息
      * @param string $name    env配置项名字
      * @param string $default 默认值
