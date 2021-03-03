@@ -3,9 +3,9 @@
  * app核心模块
  */
 
-namespace rephp\framework;
+namespace rephp;
 
-use rephp\framework\component\container\container;
+use rephp\component\container\container;
 
 /**
  * app核心类

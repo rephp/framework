@@ -1,8 +1,8 @@
 <?php
 
-namespace rephp\framework\component\route;
+namespace rephp\component\route;
 
-use rephp\framework\component\container\container;
+use rephp\component\container\container;
 
 /**
  * 路由层

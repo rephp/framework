@@ -1,8 +1,8 @@
 <?php
-namespace rephp\framework\component\debug;
+namespace rephp\component\debug;
 
-use rephp\framework\component\container\container;
-use rephp\framework\component\debug\interfaces\debugInterface;
+use rephp\component\container\container;
+use rephp\component\debug\interfaces\debugInterface;
 
 /**
  * debug类

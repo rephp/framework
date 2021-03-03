@@ -1,18 +1,18 @@
 <?php
 
-namespace rephp\framework\component\container;
+namespace rephp\component\container;
 
 use \Error;
 use \Exception;
 use \ReflectionClass;
 use Psr\Container\ContainerInterface;
-use rephp\framework\component\container\exceptions\notFoundException;
-use rephp\framework\component\container\exceptions\containerException;
-use rephp\framework\component\container\interfaces\rephpContainerInterfaces;
+use rephp\component\container\exceptions\notFoundException;
+use rephp\component\container\exceptions\containerException;
+use rephp\component\container\interfaces\rephpContainerInterfaces;
 
 /**
  * 容器
- * @package xy\framework\component\container
+ * @package rephp\component\container
  */
 class container implements ContainerInterface, rephpContainerInterfaces
 {

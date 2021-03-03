@@ -1,8 +1,8 @@
 <?php
 
-namespace rephp\framework\component\request;
+namespace rephp\component\request;
 
-use rephp\framework\component\request\interfaces\requestInterface;
+use rephp\component\request\interfaces\requestInterface;
 
 /**
  * 请求类

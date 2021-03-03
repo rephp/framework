@@ -1,9 +1,9 @@
 <?php
 
-namespace rephp\framework\component\route\bootstrap;
+namespace rephp\component\route\bootstrap;
 
 use \NoahBuscher\Macaw\Macaw;
-use rephp\framework\component\route\interfaces\routeInterface;
+use rephp\component\route\interfaces\routeInterface;
 
 /**
  * macaw基础上衍生的中间路由层

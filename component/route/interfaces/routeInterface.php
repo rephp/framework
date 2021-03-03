@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\framework\component\route\interfaces;
+namespace rephp\component\route\interfaces;
 
 /**
  * 路由接口类

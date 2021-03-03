@@ -1,9 +1,9 @@
 <?php
 
-namespace rephp\framework\component\container\interfaces;
+namespace rephp\component\container\interfaces;
 /**
- * Interface xyContainerInterface
- * @package xy\framework\component\container
+ * Interface rephpContainerInterfaces
+ * @package rephp\component\container
  */
 interface rephpContainerInterfaces
 {

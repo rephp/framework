@@ -1,9 +1,9 @@
 <?php
 
-namespace rephp\framework\component\env\bootstrap;
+namespace rephp\component\env\bootstrap;
 
 use MillionMile\GetEnv\Env;
-use rephp\framework\component\env\interfaces\envInterface;
+use rephp\component\env\interfaces\envInterface;
 
 /**
  *  millionMile的env类

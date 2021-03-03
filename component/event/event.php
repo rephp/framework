@@ -1,13 +1,48 @@
 <?php
 
-namespace rephp\framework\component\event;
+namespace rephp\component\event;
 
-use rephp\framework\component\event\interfaces\eventInterface;
-use rephp\framework\component\container\container;
+use rephp\component\event\interfaces\eventInterface;
+use rephp\component\container\container;
 
 /**
  * 配置管理类
  * @package rephp\framework\component\config
+ * //增加监听walk事件
+ * event::add('walk', function(){
+ *     echo "I am walking...n";
+ * });
+ * // 增加监听walk一次性事件
+ * event::add('walk', function(){
+ *     echo "I am listening...n";
+ * }, true);
+ * event::trigger('walk');
+ *
+ * // 增加回调参数
+ * event::add('test', function($a, $b){
+ *       echo "I am $a, $b ...n";
+ *   }, true);
+ * // 触发walk事件
+ *  event::trigger('test', 3, 4);
+ *
+ * class test
+ * {
+ *     public function bar($a,$b){
+ *         echo "$a and $b is : yyyyyyyy";
+ *     }
+ *
+ *     public static function foo($a, $b){
+ *         echo "$a and $b are : xxxxxxxx";
+ *     }
+ * }
+ *
+ * $test    = new test;
+ * //动态方法
+ * event::add('bar', array($test, 'bar'));
+ * event::trigger('bar', 1, 2);
+ * //静态方法
+ * event::add('foo', 'test::foo');
+ * event::trigger('foo', 4, 5);
  */
 class event implements eventInterface
 {

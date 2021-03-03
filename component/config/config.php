@@ -1,13 +1,13 @@
 <?php
 
-namespace rephp\framework\component\config;
+namespace rephp\component\config;
 
-use rephp\framework\component\config\interfaces\configInterface;
-use rephp\framework\component\container\container;
+use rephp\component\config\interfaces\configInterface;
+use rephp\component\container\container;
 
 /**
  * 配置管理类
- * @package rephp\framework\component\config
+ * @package rephp\component\config
  */
 class config implements configInterface
 {

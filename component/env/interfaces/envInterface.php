@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\framework\component\env\interfaces;
+namespace rephp\component\env\interfaces;
 
 /**
  * env接口类

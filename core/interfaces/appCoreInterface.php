@@ -1,8 +1,8 @@
 <?php
 
-namespace rephp\framework\core\interfaces;
+namespace rephp\core\interfaces;
 
-use rephp\framework\component\config\interfaces\configInterface;
+use rephp\component\config\interfaces\configInterface;
 
 /**
  * appCore接口

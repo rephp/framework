@@ -1,9 +1,9 @@
 <?php
 
-namespace rephp\framework\component\env\bootstrap;
+namespace rephp\component\env\bootstrap;
 
-use rephp\framework\component\container\container;
-use rephp\framework\component\env\interfaces\envInterface;
+use rephp\component\container\container;
+use rephp\component\env\interfaces\envInterface;
 
 /**
  *  v1的env封装类

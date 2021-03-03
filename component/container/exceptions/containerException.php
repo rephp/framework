@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\framework\component\container\exceptions;
+namespace rephp\component\container\exceptions;
 
 use Psr\Container\ContainerExceptionInterface;
 use \Error;

@@ -1,7 +1,7 @@
 <?php
-namespace rephp\framework\component\event\bootstrap;
+namespace rephp\component\event\bootstrap;
 
-use rephp\framework\component\event\interfaces\eventInterface;
+use rephp\component\event\interfaces\eventInterface;
 
 /**
  * 事件，支持一个事件多个回调，支持回调用完即焚

@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\component\database;
+namespace rephp\component\database;
 
 /**
  * 数据库操作抽象类

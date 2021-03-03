@@ -1,10 +1,10 @@
 <?php
 
-namespace rephp\framework\component\config\interfaces;
+namespace rephp\component\config\interfaces;
 
 /**
  * 配置接口
- * @package rephp\framework\component\config\interfaces
+ * @package rephp\component\config\interfaces
  */
 interface configInterface
 {

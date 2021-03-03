@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\framework\component\request\interfaces;
+namespace rephp\component\request\interfaces;
 
 /**
  * 请求对象驱动类

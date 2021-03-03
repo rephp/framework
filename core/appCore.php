@@ -1,15 +1,15 @@
 <?php
 
-namespace rephp\framework\core;
+namespace rephp\core;
 
-use rephp\framework\component\container\container;
-use rephp\framework\component\debug\debug;
-use rephp\framework\component\route\route;
-use rephp\framework\core\interfaces\appCoreInterface;
+use rephp\component\container\container;
+use rephp\component\debug\debug;
+use rephp\component\route\route;
+use rephp\core\interfaces\appCoreInterface;
 
 /**
  * app核心驱动类，负责调度系统所需基本资源
- * @package rephp\framework\components\interfaces
+ * @package rephp\components\interfaces
  */
 class appCore implements appCoreInterface
 {

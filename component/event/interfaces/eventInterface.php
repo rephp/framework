@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\component\event\interfaces;
+namespace rephp\component\event\interfaces;
 /**
  * 事件接口
  * @package rephp\framework\component\event\interfaces

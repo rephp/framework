@@ -1,13 +1,13 @@
 <?php
 
-namespace rephp\framework\component\database;
+namespace rephp\component\database;
 
-use rephp\framework\component\container\container;
-use rephp\framework\component\database\interfaces\databaseInterface;
+use rephp\component\container\container;
+use rephp\component\database\interfaces\databaseInterface;
 
 /**
  * 数据库操作类
- * @package rephp\framework\component\database
+ * @package rephp\component\database
  */
 class database extends dbBase implements databaseInterface
 {

@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\component\debug\interfaces;
+namespace rephp\component\debug\interfaces;
 
 /**
  * debug接口

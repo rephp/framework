@@ -1,5 +1,5 @@
 <?php
-namespace rephp\framework\component\response;
+namespace rephp\component\response;
 
 class response
 {

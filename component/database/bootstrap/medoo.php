@@ -1,12 +1,12 @@
 <?php
 
-namespace rephp\framework\component\database\bootstrap;
+namespace rephp\component\database\bootstrap;
 
-use rephp\framework\component\database\interfaces\databaseInterface;
+use rephp\component\database\interfaces\databaseInterface;
 
 /**
  * medoo数据库操作类
- * @package rephp\framework\component\database\bootstrap
+ * @package rephp\component\database\bootstrap
  */
 final class medoo implements databaseInterface
 {

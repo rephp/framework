@@ -1,9 +1,9 @@
 <?php
 
-namespace rephp\framework\component\env;
+namespace rephp\component\env;
 
-use rephp\framework\component\container\container;
-use rephp\framework\component\env\interfaces\envInterface;
+use rephp\component\container\container;
+use rephp\component\env\interfaces\envInterface;
 
 /**
  * env类
