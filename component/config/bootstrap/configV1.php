@@ -2,49 +2,19 @@
 
 namespace rephp\framework\component\config\bootstrap;
 
-use rephp\framework\component\config\abstracts\configAbstract;
 use rephp\framework\component\config\interfaces\configInterface;
 
 /**
  * 配置管理类
  * @package rephp\framework\component\config
  */
-final class configV1 extends configAbstract implements configInterface
+final class configV1 implements configInterface
 {
     /**
      * @var array 配置项
      */
     private $config = [];
 
-    /**
-     * @var string 配置文件后缀名(带.)
-     */
-    private $fix = '.php';
-
-    /**
-     * @var string  配置文件所在路径
-     */
-    private $configPath;
-
-    /**
-     * 加载一个配置文件到config对象中
-     * @param string $baseName 配置文件名字
-     * @return boolean
-     */
-    public function load($baseName)
-    {
-        try {
-            $baseName       = basename($baseName, $this->fix);
-            $configFullName = $this->configPath . $baseName . $this->fix;
-            $config         = include $configFullName;
-
-            return $this->batchSet($baseName, (array)$config);
-        } catch (\Error $e) {
-            throw new \ErrorException('加载配置文件:' . $configFullName . '错误,原因:' . $e->getMessage());
-        } catch (\Exception $e) {
-            throw new \Exception('加载配置文件:' . $configFullName . '失败,原因:' . $e->getMessage());
-        }
-    }
 
     /**
      * 获取一个配置项内容，可动态加载文件

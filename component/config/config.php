@@ -2,7 +2,6 @@
 
 namespace rephp\framework\component\config;
 
-use rephp\framework\component\config\abstracts\configAbstract;
 use rephp\framework\component\config\interfaces\configInterface;
 use rephp\framework\component\container\container;
 
@@ -10,12 +9,64 @@ use rephp\framework\component\container\container;
  * 配置管理类
  * @package rephp\framework\component\config
  */
-class config extends configAbstract implements configInterface
+class config implements configInterface
 {
     /**
      * @var 配置目录
      */
     public $configPath;
+
+    /**
+     * @var string 配置文件后缀名(带.)
+     */
+    private $fix = '.php';
+
+    /**
+     * 初始化
+     * @param $configPath
+     */
+    public function __construct($configPath)
+    {
+        $this->setConfigPath($configPath);
+    }
+
+    /**
+     * 设置config目录
+     * @return boolean
+     */
+    public function setConfigPath($configPath)
+    {
+        //读取ini配置，如果ini没配置则设置为默认路径
+        $iniConfigPath = env('CONFIG.CONFIG_PATH');
+        empty($iniConfigPath) || $configPath = $iniConfigPath;
+        //判断末尾是否含有/
+        $checkStr = substr($configPath, -1);
+        in_array($checkStr, ['/', '\\']) || $configPath .= '/';
+        //设置config所在目录
+        $this->configPath = $configPath;
+
+        return  true;
+    }
+
+    /**
+     * 加载一个配置文件到config对象中
+     * @param string $baseName 配置文件名字
+     * @return boolean
+     */
+    public function load($baseName)
+    {
+        try {
+            $baseName       = basename($baseName, $this->fix);
+            $configFullName = $this->configPath . $baseName . $this->fix;
+            $config         = include $configFullName;
+
+            return $this->getCoreConfig()->batchSet($baseName, (array)$config);
+        } catch (\Error $e) {
+            throw new \ErrorException('加载配置文件:' . $configFullName . '错误,原因:' . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception('加载配置文件:' . $configFullName . '失败,原因:' . $e->getMessage());
+        }
+    }
 
     /**
      * 获取核心配置对象
@@ -25,16 +76,6 @@ class config extends configAbstract implements configInterface
     public function getCoreConfig()
     {
         return container::getContainer()->get('coreConfig');
-    }
-
-    /**
-     * 加载一个配置文件到config对象中
-     * @param  string $baseName 配置文件基本名字(不含路径),如config.php或者config
-     * @return boolean
-     */
-    public function load($baseName)
-    {
-        return $this->getCoreConfig()->load($baseName);
     }
 
     /**

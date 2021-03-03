@@ -2,7 +2,6 @@
 
 namespace rephp\framework\core;
 
-use rephp\framework\component\config\config;
 use rephp\framework\component\container\container;
 use rephp\framework\component\debug\debug;
 use rephp\framework\component\route\route;
@@ -10,7 +9,6 @@ use rephp\framework\core\interfaces\appCoreInterface;
 
 /**
  * app核心驱动类，负责调度系统所需基本资源
- * 核心环境初始化任务承包团队
  * @package rephp\framework\components\interfaces
  */
 class appCore implements appCoreInterface
@@ -37,7 +35,12 @@ class appCore implements appCoreInterface
         $this->setConfigPath(dirname($appPath).'/config/');
         //配置app路径
         $this->setAppPath($appPath);
-
+        //define
+        $this->definePath();
+        //初始化时区
+        $this->setTimeZone();
+        //加载debug
+        container::getContainer()->bind('debug', debug::class);
 
         return true;
     }
@@ -47,12 +50,6 @@ class appCore implements appCoreInterface
      */
     public function run()
     {
-        //define
-        $this->definePath();
-        //初始化时区
-        $this->setTimeZone();
-        //加载debug
-        container::getContainer()->bind('debug', debug::class);
         //加载路由
         $routePath = ROOT_PATH . 'route/';
         container::getContainer()->bind('route', route::class)->run($routePath);
@@ -79,33 +76,6 @@ class appCore implements appCoreInterface
         $appPath = $this->getAppPath();
         defined('APP_PATH')  || define('APP_PATH', $appPath);
         defined('ROOT_PATH') || define('ROOT_PATH', dirname($appPath) . '/');
-    }
-
-    /**
-     * 设置config目录
-     * @return boolean
-     */
-    public function setConfigPath($configPath)
-    {
-        //读取ini配置，如果ini没配置则设置为默认路径
-        $iniConfigPath = env('CONFIG.CONFIG_PATH');
-        empty($iniConfigPath) || $configPath = $iniConfigPath;
-        //判断末尾是否含有/
-        $checkStr = substr($configPath, -1);
-        in_array($checkStr, ['/', '\\']) || $configPath .= '/';
-        //设置config所在目录
-        self::$configPath = $configPath;
-
-        return  true;
-    }
-
-    /**
-     * 获取config目录
-     * @return string
-     */
-    public function getConfigPath()
-    {
-        return self::$configPath;
     }
 
     /**

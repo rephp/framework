@@ -14,11 +14,15 @@ use rephp\framework\component\container\container;
 class app
 {
     /**
+     * @var string 配置驱动类
+     */
+    private $configBootstrap = component\config\bootstrap\configV1::class;
+
+    /**
      * 初始化默认绑定的对象
      * @var string[]
      */
     private $rephpConfig = [
-        'coreConfig'  => component\config\bootstrap\configV1::class,
         'reponse'     => component\response\response::class,
         'request'     => component\request\request::class,
         'coreRoute'   => component\route\bootstrap\macawRoute::class,
@@ -31,8 +35,10 @@ class app
      * @param string $appPath app路径
      * @return string
      */
-    public function run($appPath = '')
+    public function run($appPath)
     {
+        $this->loadEnv();
+        $this->loadConfig(dirname($appPath).'/config/');
         //加载核心类
         $core  = container::getContainer()->bind('appCore', core\appCore::class, [$appPath]);
         //预先绑定组件
@@ -41,7 +47,19 @@ class app
         return $core->run();
     }
 
+    public function loadEnv()
+    {
 
+    }
+
+    /**
+     * 首先需要加载的配置文件
+     */
+    public function loadConfig($configPath)
+    {
+        container::getContainer()->bind('coreConfig', $this->configBootstrap);
+        container::getContainer()->bind('config', component\config\config::class, [$configPath]);
+    }
 
     /**
      * 预先注册组件

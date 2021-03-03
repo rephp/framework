@@ -8,14 +8,6 @@ namespace rephp\framework\component\config\interfaces;
  */
 interface configInterface
 {
-
-    /**
-     * 加载一个配置文件到config对象中
-     * @param  string $baseName 配置文件基本名字(不含路径),如config.php或者config
-     * @return boolean
-     */
-    public function load($baseName);
-
     /**
      * 获取一个配置项内容，可动态加载文件
      * @param string $name    配置项名字
