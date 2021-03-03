@@ -3,7 +3,7 @@
 namespace rephp\framework\component\route\interfaces;
 
 /**
- * 路由驱动类
+ * 路由接口类
  */
 interface routeInterface
 {
@@ -26,7 +26,7 @@ interface routeInterface
      * @return mixed
      * @throws \rephp\framework\component\container\exceptions\notFoundException
      */
-    //public function __call($name, $params);
+    public function __call($name, $params);
 
     /**
      * 调用未定义的静态方法
@@ -35,6 +35,6 @@ interface routeInterface
      * @return mixed
      * @throws \rephp\framework\component\container\exceptions\notFoundException
      */
-    //public static function __callStatic($name, $params);
+    public static function __callStatic($name, $params);
 
 }

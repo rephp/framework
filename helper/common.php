@@ -20,7 +20,7 @@ function dump(...$params)
  */
 function env($name, $default='')
 {
-    return MillionMile\GetEnv\Env::get($name, $default);
+    return container::getContainer()->get('env')->get($name, $default);
 }
 
 /**
@@ -31,12 +31,6 @@ function env($name, $default='')
  */
 function config($params, $default=null)
 {
-    try{
-        return container::getContainer()->get('config')->get($params, $default);
-    }catch (\Error $e) {
-        throw  new \ErrorException('获取配置出错:'.$e->getMessage());
-    }catch (\Exception $e){
-        throw  new \Exception('获取配置失败:'.$e->getMessage());
-    }
+    return container::getContainer()->get('config')->get($params, $default);
 }
 

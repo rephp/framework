@@ -3,6 +3,7 @@
 namespace rephp\framework\component\config\bootstrap;
 
 use rephp\framework\component\config\interfaces\configInterface;
+use rephp\framework\component\container\container;
 
 /**
  * 配置管理类
@@ -33,7 +34,7 @@ final class configV1 implements configInterface
         //从未加载过的需要动态加载
         isset($this->config[$baseName]) || $reload = true;
         //强制重新加载
-        $reload && $this->load($baseName);
+        $reload && container::getContainer()->get('config')->load($baseName);
         //获取配置结果
         $config = (array)$this->config[$baseName];
         foreach ($params as $val) {

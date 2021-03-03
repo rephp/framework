@@ -1,6 +1,8 @@
 <?php
 namespace rephp\framework\component\debug\bootstrap;
 
+use rephp\framework\component\debug\interfaces\debugInterface;
+
 /**
  * debug  V1 版本
  * @package rephp\framework\component\debug\bootstrap

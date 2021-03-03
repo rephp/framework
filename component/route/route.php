@@ -6,12 +6,12 @@ use rephp\framework\component\container\container;
 
 /**
  * 路由层
- * @method static get(string $route, Callable $callback)
- * @method static post(string $route, Callable $callback)
- * @method static put(string $route, Callable $callback)
- * @method static delete(string $route, Callable $callback)
- * @method static options(string $route, Callable $callback)
- * @method static head(string $route, Callable $callback)
+ * @method static get(string $env, Callable $callback)
+ * @method static post(string $env, Callable $callback)
+ * @method static put(string $env, Callable $callback)
+ * @method static delete(string $env, Callable $callback)
+ * @method static options(string $env, Callable $callback)
+ * @method static head(string $env, Callable $callback)
  */
 class route
 {
@@ -39,7 +39,7 @@ class route
         //2.根据现有路由，获得路由配置表配置的方法。如没设置则默认为get方法才可以请求当前路由。
         //todo:路由表以后缓存到内存中
         //优先加载自定义路由
-        file_exists($routePath . 'route.php') && require $routePath . 'route.php';
+        file_exists($routePath . 'env.php') && require $routePath . 'env.php';
         //默认加载机制start
         //3.获取路由自定义类型
         $method = $this->getRouteMethod($module, $controller, $action, $routePath);

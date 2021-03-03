@@ -4,7 +4,7 @@ namespace rephp\framework\core;
 
 use rephp\framework\component\container\container;
 use rephp\framework\component\debug\debug;
-use rephp\framework\component\route\route;
+use rephp\framework\component\route\env;
 use rephp\framework\core\interfaces\appCoreInterface;
 
 /**
@@ -51,8 +51,8 @@ class appCore implements appCoreInterface
     public function run()
     {
         //加载路由
-        $routePath = ROOT_PATH . 'route/';
-        container::getContainer()->bind('route', route::class)->run($routePath);
+        $routePath = ROOT_PATH . 'env/';
+        container::getContainer()->bind('env', env::class)->run($routePath);
     }
 
 

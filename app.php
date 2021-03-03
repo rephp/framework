@@ -25,7 +25,7 @@ class app
     private $rephpConfig = [
         'reponse'     => component\response\response::class,
         'request'     => component\request\request::class,
-        'coreRoute'   => component\route\bootstrap\macawRoute::class,
+        'coreRoute'   => component\route\bootstrap\macawEnv::class,
         'coreEvent'   => component\event\bootstrap\eventV1::class,
         'coreDebug'   => component\debug\bootstrap\debugV1::class,
     ];
@@ -37,14 +37,13 @@ class app
      */
     public function run($appPath)
     {
+        //预加载资源环境
         $this->loadEnv();
         $this->loadConfig(dirname($appPath).'/config/');
-        //加载核心类
-        $core  = container::getContainer()->bind('appCore', core\appCore::class, [$appPath]);
-        //预先绑定组件
+        //预先绑定具体组件
         $this->preBindCoreComponent();
-        //运行
-        return $core->run();
+        //加载核心类 & 运行
+        container::getContainer()->bind('appCore', core\appCore::class, [$appPath])->run();
     }
 
     public function loadEnv()
