@@ -71,9 +71,9 @@ class debug implements debugInterface
         if ($isDebug) {
             //1.输出加载信息
             echo '<pre>';
-            print_r($this->getFiles(), 1);
+            print_r($this->getFiles());
             //2.输出sql信息
-            print_r($this->getSql(), 1);
+            print_r($this->getSql());
             echo '</pre>';
         }
         return true;
