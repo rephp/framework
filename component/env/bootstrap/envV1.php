@@ -6,12 +6,17 @@ use rephp\framework\component\container\container;
 use rephp\framework\component\env\interfaces\envInterface;
 
 /**
- *  dotenv的封装类
+ *  v1的env封装类
  * 依赖环境为：php 7.0
  * @package rephp\framework\component\env\bootstrap
  */
-final class dotEnv implements envInterface
+final class envV1 implements envInterface
 {
+    /**
+     * @var array env配置信息
+     */
+    private $config = [];
+
     /**
      * 获取env配置信息
      * @param string $name    env配置项名字
@@ -22,11 +27,11 @@ final class dotEnv implements envInterface
     {
         $params = explode('.', $name);
         if (empty($params)) {
-            return $_ENV;
+            return $this->config;
         }
         //获取配置结果
         $params = (array)$params;
-        $env = $_ENV;
+        $env = $this->config;
         foreach ($params as $val) {
             if (isset($env[$val])) {
                 $env = $env[$val];
@@ -46,13 +51,13 @@ final class dotEnv implements envInterface
 
     /**
      * 加载配置文件
-     * @param  string $filePath 配置文件路径
+     * @param  string $fileName env文件完整路径
      * @return boolean
      * @throws \Exception
      */
-    public function loadFile($filePath)
+    public function loadFile($fileName)
     {
-        return \Dotenv\Dotenv::createImmutable(dirname($filePath))->load();;
+        $this->config = (array)parse_ini_file($fileName, true);
     }
 
 }

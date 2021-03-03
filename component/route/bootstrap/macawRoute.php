@@ -3,7 +3,7 @@
 namespace rephp\framework\component\route\bootstrap;
 
 use \NoahBuscher\Macaw\Macaw;
-use rephp\framework\component\route\interfaces\envInterface;
+use rephp\framework\component\route\interfaces\routeInterface;
 
 /**
  * macaw基础上衍生的中间路由层
@@ -14,7 +14,7 @@ use rephp\framework\component\route\interfaces\envInterface;
  * @method static options(string $env, Callable $callback)
  * @method static head(string $env, Callable $callback)
  */
-final class macawEnv implements envInterface
+final class macawRoute implements routeInterface
 {
 
     /**

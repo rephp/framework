@@ -3,6 +3,7 @@
 namespace rephp\framework\component\route;
 
 use rephp\framework\component\container\container;
+use rephp\framework\component\route\interfaces\routeInterface;
 
 /**
  * 路由层
@@ -13,7 +14,7 @@ use rephp\framework\component\container\container;
  * @method static options(string $env, Callable $callback)
  * @method static head(string $env, Callable $callback)
  */
-class route
+class route implements routeInterface
 {
     /**
      * @var 路由文件存放路径

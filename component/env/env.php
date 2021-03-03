@@ -37,13 +37,13 @@ class env implements envInterface
 
     /**
      * 加载配置文件
-     * @param  string $filePath 配置文件路径
+     * @param  string $fileName env文件绝对路径及名字
      * @return boolean
      * @throws \Exception
      */
-    public function loadFile($filePath)
+    public function loadFile($fileName)
     {
-        return container::getContainer()->get('coreEnv')->loadFile($filePath);
+        return container::getContainer()->get('coreEnv')->loadFile($fileName);
     }
 
     /**
