@@ -6,7 +6,7 @@ use rephp\component\config\interfaces\configInterface;
 
 /**
  * appCore接口
- * @package rephp\framework\components\interfaces
+ * @package rephp\components\interfaces
  */
 interface appCoreInterface
 {

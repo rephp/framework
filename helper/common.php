@@ -1,6 +1,6 @@
 <?php
 
-use rephp\framework\component\container\container;
+use rephp\component\container\container;
 
 /**
  * 便捷打印输出

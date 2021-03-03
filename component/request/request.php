@@ -6,7 +6,7 @@ use rephp\component\request\interfaces\requestInterface;
 
 /**
  * 请求类
- * @package rephp\framework\component\request
+ * @package rephp\component\request
  */
 class request implements requestInterface
 {

@@ -7,7 +7,7 @@ use rephp\component\container\container;
 
 /**
  * 配置管理类
- * @package rephp\framework\component\config
+ * @package rephp\component\config
  * //增加监听walk事件
  * event::add('walk', function(){
  *     echo "I am walking...n";

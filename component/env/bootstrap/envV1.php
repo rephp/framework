@@ -8,7 +8,7 @@ use rephp\component\env\interfaces\envInterface;
 /**
  *  v1的env封装类
  * 依赖环境为：php 7.0
- * @package rephp\framework\component\env\bootstrap
+ * @package rephp\component\env\bootstrap
  */
 final class envV1 implements envInterface
 {

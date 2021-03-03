@@ -7,7 +7,7 @@ use rephp\component\env\interfaces\envInterface;
 
 /**
  * env类
- * @package rephp\framework\component\env
+ * @package rephp\component\env
  */
 class env implements envInterface
 {

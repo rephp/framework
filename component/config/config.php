@@ -71,7 +71,7 @@ class config implements configInterface
     /**
      * 获取核心配置对象
      * @return object
-     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     * @throws \rephp\component\container\exceptions\notFoundException
      */
     public function getCoreConfig()
     {

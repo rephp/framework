@@ -55,7 +55,7 @@ final class macawRoute implements routeInterface
      * @param string $name   方法名
      * @param array  $params 参数
      * @return mixed
-     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     * @throws \rephp\component\container\exceptions\notFoundException
      */
     public function __call($name, $params)
     {
@@ -67,7 +67,7 @@ final class macawRoute implements routeInterface
      * @param string $name   方法名
      * @param array  $params 参数
      * @return mixed
-     * @throws \rephp\framework\component\container\exceptions\notFoundException
+     * @throws \rephp\component\container\exceptions\notFoundException
      */
     public static function __callStatic($name, $params)
     {

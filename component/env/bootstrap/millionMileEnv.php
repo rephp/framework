@@ -8,7 +8,7 @@ use rephp\component\env\interfaces\envInterface;
 /**
  *  millionMile的env类
  * 依赖环境为：php 7.1
- * @package rephp\framework\component\env\bootstrap
+ * @package rephp\component\env\bootstrap
  */
 final class millionMileEnv implements envInterface
 {

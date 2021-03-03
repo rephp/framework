@@ -5,7 +5,7 @@ use rephp\component\debug\interfaces\debugInterface;
 
 /**
  * debug  V1 版本
- * @package rephp\framework\component\debug\bootstrap
+ * @package rephp\component\debug\bootstrap
  */
 final class debugV1 implements debugInterface
 {
