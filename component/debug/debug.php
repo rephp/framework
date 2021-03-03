@@ -44,4 +44,39 @@ class debug implements debugInterface
         return container::getContainer()->get('coreDebug')->setOpenDebug();
     }
 
+    /**
+     * 获取php加载的文件
+     * @return string[]
+     */
+    public function getFiles()
+    {
+        return get_included_files();
+    }
+
+    /**
+     * 获取执行的sql命令
+     * @return string[]
+     */
+    public function getSql()
+    {
+        return [];
+    }
+
+    /**
+     * 输出调试信息
+     */
+    public function debug()
+    {
+        $isDebug = config('config.debug.is_debug', false);
+        if ($isDebug) {
+            //1.输出加载信息
+            echo '<pre>';
+            print_r($this->getFiles(), 1);
+            //2.输出sql信息
+            print_r($this->getSql(), 1);
+            echo '</pre>';
+        }
+        return true;
+    }
+
 }
