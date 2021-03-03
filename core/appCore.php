@@ -44,7 +44,7 @@ class appCore implements appCoreInterface
         container::getContainer()->bind('debug', debug::class);
         //加载路由
         $routePath = ROOT_PATH . 'route/';
-        container::getContainer()->bind('route', route::class)->run($routePath);
+        container::getContainer()->bind('route', route::class)->start($routePath);
     }
 
 

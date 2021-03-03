@@ -3,7 +3,6 @@
 namespace rephp\framework\component\route;
 
 use rephp\framework\component\container\container;
-use rephp\framework\component\route\interfaces\routeInterface;
 
 /**
  * 路由层
@@ -14,7 +13,7 @@ use rephp\framework\component\route\interfaces\routeInterface;
  * @method static options(string $env, Callable $callback)
  * @method static head(string $env, Callable $callback)
  */
-class route implements routeInterface
+class route
 {
     /**
      * @var 路由文件存放路径
@@ -30,7 +29,7 @@ class route implements routeInterface
      * @param string $routePath
      * @return bool
      */
-    public function run($routePath)
+    public function start($routePath)
     {
         //1.分析url
         $params     = $this->getUrlRouteInfo();
