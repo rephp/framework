@@ -144,7 +144,8 @@ class route
      */
     public static function __callStatic($name, $params)
     {
-        $obj = container::getContainer()->get('coreRoute');
-        return get_class($obj)::__callStatic($name, $params);
+        $obj   = container::getContainer()->get('coreRoute');
+        $class = get_class($obj);
+        return $class::__callStatic($name, $params);
     }
 }
