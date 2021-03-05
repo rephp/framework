@@ -6,6 +6,13 @@ namespace rephp\component\event\interfaces;
  */
 interface eventInterface
 {
+
+    /**
+     * 获取当前所有的事件名字
+     * @return array
+     */
+    public function getAllEventName();
+
     /**
      * 添加事件行为
      * 支持一个事件多个回调

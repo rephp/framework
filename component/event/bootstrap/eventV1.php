@@ -52,6 +52,22 @@ final class eventV1 implements eventInterface
     public static $events = [];
 
     /**
+     * 获取当前所有的事件名字
+     * @return array
+     */
+    public function getAllEventName()
+    {
+        $res = [];
+        if(is_array(self::$events)){
+            foreach(self::$events as $eventName=>$callback){
+                $res[] = $eventName;
+            }
+        }
+
+        return $res;
+    }
+
+    /**
      * 添加事件行为
      * 支持一个事件多个回调
      * @param string  $eventName 事件名字

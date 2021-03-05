@@ -10,12 +10,12 @@ interface debugInterface
      * 开启debug模式配置
      * @return bool
      */
-    public function setOpenDebug();
+    public function openDebug();
 
     /**
      * 关闭debug模式配置
      * @return bool
      */
-    public function setCloseDebug();
+    public function closeDebug();
 
 }

@@ -48,6 +48,16 @@ class event implements eventInterface
 {
 
     /**
+     * 获取当前所有的事件名字
+     * @return array
+     */
+    public function getAllEventName()
+    {
+        $class = container::getContainer()->get('coreEvent');
+        return $class::getAllEventName();
+    }
+
+    /**
      * 添加事件行为
      * 支持一个事件多个回调
      * @param string  $eventName 事件名字

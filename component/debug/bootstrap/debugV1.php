@@ -15,7 +15,7 @@ final class debugV1 implements debugInterface
      * todo:扩展sql及文件加载展示
      * @return bool
      */
-    public function setOpenDebug()
+    public function openDebug()
     {
         error_reporting(E_ALL & ~E_NOTICE);
         ini_set('display_errors', 'Off');
@@ -34,7 +34,7 @@ final class debugV1 implements debugInterface
      * 关闭debug模式配置
      * @return bool
      */
-    public function setCloseDebug()
+    public function closeDebug()
     {
         error_reporting(0);
         ini_set('display_errors', 'Off');
