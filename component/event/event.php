@@ -51,7 +51,7 @@ class event implements eventInterface
      * 获取当前所有的事件名字
      * @return array
      */
-    public function getAllEventName()
+    public static function getAllEventName()
     {
         $class = container::getContainer()->get('coreEvent');
         return $class::getAllEventName();

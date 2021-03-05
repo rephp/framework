@@ -29,10 +29,10 @@ class debug implements debugInterface
     public function openDebug()
     {
         if(class_exists('\\rephp\\debugbar\\debugbar')){
-            container::getContainer()->bind('debugbar', \rephp\debugbar\debugbar);
+            container::getContainer()->bind('debugbar', '\\rephp\\debugbar\\debugbar');
         }
 
-        return container::getContainer()->get('coreDebug')->setOpenDebug();
+        return container::getContainer()->get('coreDebug')->openDebug();
     }
 
     /**
@@ -41,7 +41,7 @@ class debug implements debugInterface
      */
     public function closeDebug()
     {
-        return container::getContainer()->get('coreDebug')->setOpenDebug();
+        return container::getContainer()->get('coreDebug')->closeDebug();
     }
 
 
