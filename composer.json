@@ -15,7 +15,9 @@
     "php": ">=5.4.0",
     "psr/container": "^1.0",
     "filp/whoops": "^2.9",
-    "catfan/medoo": "^1.7"
+    "catfan/medoo": "^1.7",
+    "rephp/debugbar": "^1.0",
+    "noahbuscher/macaw": "dev-master"
   },
   "require-dev": {
     "millionmile/get_env": "^1.0"
