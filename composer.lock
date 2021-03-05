@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f258211650b105fa6e2c13575c79ba1",
+    "content-hash": "373544bacc53b6d95941ac07d99a2429",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -142,20 +142,30 @@
             "time": "2021-01-24T12:00:00+00:00"
         },
         {
-            "name": "millionmile/get_env",
-            "version": "v1.0.0",
+            "name": "noahbuscher/macaw",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://gitee.com/millionmile/get_env.git",
-                "reference": "5a1c3e1a8fd98d741668f0ce8fec310952de9c7c"
+                "url": "https://github.com/noahbuscher/macaw.git",
+                "reference": "ade32370a3d09f1fa498de254411d1b6b7be1877"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/noahbuscher/macaw/zipball/ade32370a3d09f1fa498de254411d1b6b7be1877",
+                "reference": "ade32370a3d09f1fa498de254411d1b6b7be1877",
+                "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "guzzle/guzzle": "~3.9",
+                "phpunit/phpunit": "^4.8-stable"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "MillionMile\\GetEnv\\": "src/"
+                    "NoahBuscher\\Macaw\\": "./"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -164,11 +174,23 @@
             ],
             "authors": [
                 {
-                    "name": "萬里",
-                    "email": "810185932@qq.com"
+                    "name": "Noah Buscher",
+                    "email": "me@noahbuscher.com",
+                    "homepage": "http://noahbuscher.com/"
                 }
             ],
-            "time": "2020-10-15T08:29:26+00:00"
+            "description": "Simple PHP router class.",
+            "homepage": "https://github.com/noahbuscher/Macaw",
+            "keywords": [
+                "php",
+                "php-router",
+                "router"
+            ],
+            "support": {
+                "issues": "https://github.com/noahbuscher/macaw/issues",
+                "source": "https://github.com/noahbuscher/macaw/tree/master"
+            },
+            "time": "2019-01-14T14:49:59+00:00"
         },
         {
             "name": "psr/container",
@@ -272,15 +294,89 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.3"
             },
             "time": "2020-03-23T09:12:05+00:00"
+        },
+        {
+            "name": "rephp/rephp-debugbar",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rephp/rephp-debugbar.git",
+                "reference": "29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870",
+                "reference": "29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rephp\\debugbar\\": ".\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "sam.shi",
+                    "email": "32320811@qq.com"
+                }
+            ],
+            "description": "rephp debugbar",
+            "support": {
+                "issues": "https://github.com/rephp/rephp-debugbar/issues",
+                "source": "https://github.com/rephp/rephp-debugbar/tree/1.0.2"
+            },
+            "time": "2021-03-05T09:44:52+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "millionmile/get_env",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitee.com/millionmile/get_env.git",
+                "reference": "5a1c3e1a8fd98d741668f0ce8fec310952de9c7c"
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MillionMile\\GetEnv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "萬里",
+                    "email": "810185932@qq.com"
+                }
+            ],
+            "time": "2020-10-15T08:29:26+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "noahbuscher/macaw": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.4.0"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }
