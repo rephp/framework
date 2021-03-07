@@ -31,7 +31,7 @@ final class envV1 implements envInterface
         }
         //获取配置结果
         $params = (array)$params;
-        $env = $this->config;
+        $env    = $this->config;
         foreach ($params as $val) {
             if (isset($env[$val])) {
                 $env = $env[$val];
@@ -51,13 +51,20 @@ final class envV1 implements envInterface
 
     /**
      * 加载配置文件
-     * @param  string $fileName env文件完整路径
+     * @param string $fileName env文件完整路径
      * @return boolean
      * @throws \Exception
      */
     public function loadFile($fileName)
     {
-        $this->config = (array)parse_ini_file($fileName, true);
+        $res       = false;
+        $fileExist = file_exists($fileName);
+        if ($fileExist) {
+            $this->config = (array)parse_ini_file($fileName, true);
+            $res          = true;
+        }
+
+        return $res;
     }
 
 }
