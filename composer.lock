@@ -292,16 +292,16 @@
         },
         {
             "name": "rephp/rephp-debugbar",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rephp/rephp-debugbar.git",
-                "reference": "c9a1cf9eef8e3ceb14a87a42829c814e9f663236"
+                "reference": "3eed62f31765656dba6cf2aa28e9e227423e155e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/c9a1cf9eef8e3ceb14a87a42829c814e9f663236",
-                "reference": "c9a1cf9eef8e3ceb14a87a42829c814e9f663236",
+                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/3eed62f31765656dba6cf2aa28e9e227423e155e",
+                "reference": "3eed62f31765656dba6cf2aa28e9e227423e155e",
                 "shasum": ""
             },
             "require": {
@@ -326,9 +326,9 @@
             "description": "rephp debugbar",
             "support": {
                 "issues": "https://github.com/rephp/rephp-debugbar/issues",
-                "source": "https://github.com/rephp/rephp-debugbar/tree/1.1.0"
+                "source": "https://github.com/rephp/rephp-debugbar/tree/1.1.1"
             },
-            "time": "2021-04-02T03:57:12+00:00"
+            "time": "2021-04-02T09:51:17+00:00"
         }
     ],
     "packages-dev": [
