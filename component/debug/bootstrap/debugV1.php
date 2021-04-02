@@ -41,7 +41,7 @@ final class debugV1 implements debugInterface
         ini_set('log_errors', 'On');
         ini_set('log_errors_max_len', 1024);
         //日志位置
-        $logPath = $this->config->get('config.debug.log_path', ROOT_PATH . 'runtime/log/');
+        $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
         in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
         $logFileName = $logPath . date('Y/m/d', time()) . '.log';
         is_dir(dirname($logFileName)) || mkdir(dirname($logFileName), 0777, true);
