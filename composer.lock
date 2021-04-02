@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "373544bacc53b6d95941ac07d99a2429",
+    "content-hash": "7e183079da89d10887d8eb8ab9074279",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -72,16 +72,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.9.2",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536"
+                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/d501fd2658d55491a2295ff600ae5978eaad7403",
+                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.2"
+                "source": "https://github.com/filp/whoops/tree/2.12.0"
             },
             "funding": [
                 {
@@ -139,7 +139,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-24T12:00:00+00:00"
+            "time": "2021-03-30T12:00:00+00:00"
         },
         {
             "name": "noahbuscher/macaw",
@@ -292,16 +292,16 @@
         },
         {
             "name": "rephp/rephp-debugbar",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rephp/rephp-debugbar.git",
-                "reference": "29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870"
+                "reference": "c9a1cf9eef8e3ceb14a87a42829c814e9f663236"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870",
-                "reference": "29cb1b9ba8c52f3fa4b5aa3c50a69a4f183ae870",
+                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/c9a1cf9eef8e3ceb14a87a42829c814e9f663236",
+                "reference": "c9a1cf9eef8e3ceb14a87a42829c814e9f663236",
                 "shasum": ""
             },
             "require": {
@@ -310,7 +310,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "rephp\\debugbar\\": ".\\"
+                    "rephp\\debugbar\\": ".\\src\\"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -326,9 +326,9 @@
             "description": "rephp debugbar",
             "support": {
                 "issues": "https://github.com/rephp/rephp-debugbar/issues",
-                "source": "https://github.com/rephp/rephp-debugbar/tree/1.0.2"
+                "source": "https://github.com/rephp/rephp-debugbar/tree/1.1.0"
             },
-            "time": "2021-03-05T09:44:52+00:00"
+            "time": "2021-04-02T03:57:12+00:00"
         }
     ],
     "packages-dev": [
@@ -370,7 +370,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=7.2.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
