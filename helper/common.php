@@ -34,3 +34,12 @@ function config($params, $default=null)
     return container::getContainer()->get('config')->get($params, $default);
 }
 
+/**
+ * 判断字符串是否为正确的邮箱格式
+ * @param  string $email  需要判断的邮箱地址字符串
+ * @return boolean(其实正确是返回邮箱地址，不正确时返回false,我们可以认为它是boolean)
+ */
+function isEmail($email)
+{
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
