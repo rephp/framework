@@ -7,5 +7,5 @@ namespace rephp\ext;
  */
 abstract class model
 {
-
+    use \rephp\traits\publicTrait;
 }

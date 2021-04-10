@@ -16,7 +16,7 @@ abstract class controller
      */
     public $forward     = '';
 
-    use \traits\publicTrait;
+    use \rephp\traits\publicTrait;
 
 
     /**

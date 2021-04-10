@@ -7,5 +7,5 @@ namespace rephp\ext;
  */
 abstract class logic
 {
-    use \traits\publicTrait;
+    use \rephp\traits\publicTrait;
 }

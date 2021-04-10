@@ -1,5 +1,5 @@
 <?php
-namespace traits;
+namespace rephp\traits;
 
 trait publicTrait
 {
