@@ -99,17 +99,15 @@ class view
      */
     public static function load($fileName, $loadType='template')
     {
-        //组织视图层路径
-        $template = self::$template;
-        empty($template) && $template = config('template', WEB_MODULE);
         //加载视图变量到布局,组合布局地址
-        $fullFileName = MODULE_PATH.'view/'.$template.'/'.$loadType.'/'.$fileName;
+        $fullFileName = MODULE_PATH.'view/'.$loadType.'/'.$fileName;
         //如果还不存在则直接抛出错误
-        file_exists($fullFileName)   || rephpException::show('视图文件:'.$fullFileName.'不存在');
+        if(!file_exists($fullFileName)){
+            throw new \Exception('视图文件:'.$fullFileName.'不存在');
+        }
         //加载数据
         extract(self::$vars, EXTR_REFS);
         $res = include($fullFileName);
-        $res && debug::addFile($fullFileName);
     }
 
 }
