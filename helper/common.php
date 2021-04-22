@@ -46,6 +46,7 @@ function isEmail($email)
 
 /**
  * 生成url
+ * @example makeUrl('http://www.test.com/ddd/index.php?id=55&ite=ddd', ['test' => 'xxx', 'YYY'], 'http://www.baidu.com');
  * @param string $url    url地址，如/test/tedd/?id=5,也可以带域名
  * @param array  $params 附加参数如['cate_id'=>5, 'type'=>'test']
  * @param string $domain 要替换的主域名
