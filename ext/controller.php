@@ -57,7 +57,7 @@ abstract class controller
         $className = get_called_class();
         !empty($module) || $module = $this->parseModule($className);
         //如果不是以http开头的，则自动调用重写类,保证是http开头的，避免死循环重定向
-        strstr($url, 'http:') || $url = rewrite::url($url, $module);
+        strstr($url, 'http:') || $url = makeUrl($url, $module);
         header('Location:'.$url);
         exit(0);
     }
