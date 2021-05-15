@@ -1,11 +1,11 @@
 <?php
-namespace rephp\ext;
+namespace rephp\core;
 
 /**
- * model抽象类
+ * logic逻辑层抽象类
  * @package rephp\ext
  */
-abstract class model
+abstract class logic
 {
     use \rephp\traits\publicTrait;
 }

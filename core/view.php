@@ -1,5 +1,7 @@
 <?php
-namespace rephp\ext;
+namespace rephp\core;
+
+use rephp\component\container\container;
 
 /**
  * 视图核心类
@@ -22,13 +24,13 @@ class view
 
     /**
      * 将数据或对象推送到视图层
-     * @param string $param
+     * @param string $name
      * @param mixd $value
      * @return boolean
      */
-    public static function set($param, $value='')
+    public static function set($name, $value='')
     {
-        return self::$vars[$param] = $value;
+        return self::$vars[$name] = $value;
     }
 
 
@@ -42,7 +44,8 @@ class view
      */
     public static function display($layout='', $forward='')
     {
-        $isJson = request::param('_json');
+        $request = container::getContainer()->get('request');
+        $isJson = $request->get('_json');
         if(!empty($isJson)){
             exit(json_encode(self::$vars));
         }
@@ -73,10 +76,16 @@ class view
      */
     public static function loadTemplate($forward='')
     {
+        $request   = container::getContainer()->get('request');
+        $routeInfo = $request->getRouteInfo();
+        $module     = $routeInfo['module'];
+        $controller = $routeInfo['controller'];
+        $action     = $routeInfo['action'];
         //获取主视图文件名字
-        empty($forward)  && $forward = self::$forward;
-        $forward = empty(self::$forward) ? self::$forward  = request::param('con').'/'.request::param('act') : self::$forward;
-        strpos($forward, '/')===false && $forward = request::param('con').'/'.$forward;
+        if(empty($forward)){
+            $forward = empty(self::$forward) ? $controller.'/'.$action : self::$forward;
+        }
+        strpos($forward, '/')===false && $forward = $controller.'/'.$forward;
         substr($forward, -4)== '.php' || $forward  .= '.php';
         self::load($forward , 'template');
     }
@@ -99,8 +108,11 @@ class view
      */
     public static function load($fileName, $loadType='template')
     {
+        $request    = container::getContainer()->get('request');
+        $routeInfo  = $request->getRouteInfo();
+        $module     = $routeInfo['module'];
         //加载视图变量到布局,组合布局地址
-        $fullFileName = MODULE_PATH.'view/'.$loadType.'/'.$fileName;
+        $fullFileName = $module.'view/'.$loadType.'/'.$fileName;
         //如果还不存在则直接抛出错误
         if(!file_exists($fullFileName)){
             throw new \Exception('视图文件:'.$fullFileName.'不存在');

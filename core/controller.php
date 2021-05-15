@@ -1,5 +1,5 @@
 <?php
-namespace rephp\ext;
+namespace rephp\core;
 
 /**
  * controller抽象类
@@ -41,7 +41,7 @@ abstract class controller
     {
         //当前调用的类(具体控制器名字,含命名空间)
         $className = get_called_class();
-        $module = $this->parseModule($className);
+        //$module = $this->parseModule($className);
         //解析module名字
         return view::display($this->layout, $this->forward, $this->template);
     }
@@ -52,12 +52,11 @@ abstract class controller
      * @param  string $module 模块名如admin或者为空代表前台
      * @return void
      */
-    public function redirect($url, $module='')
+    public function redirect($url)
     {
         $className = get_called_class();
-        !empty($module) || $module = $this->parseModule($className);
         //如果不是以http开头的，则自动调用重写类,保证是http开头的，避免死循环重定向
-        strstr($url, 'http:') || $url = makeUrl($url, $module);
+        strstr($url, 'http:') || $url = makeUrl($url);
         header('Location:'.$url);
         exit(0);
     }
