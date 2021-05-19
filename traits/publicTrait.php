@@ -28,9 +28,9 @@ trait publicTrait
     public function logic($className, $params = [])
     {
         $module = $this->getModuleName();
-        (strpos($className, '\\') === false) && $className = '\\app\\' . $module . '\\logic\\' . $className;
+        (strpos($className, '\\') === false) && $className = '\\app\\modules\\' . $module . '\\logic\\' . $className;
         $fullName = $className . 'Logic';
-        class_exists($fullName) || $fullName = str_replace('\\app\\' . $module . '\\logic\\', '\\app\\common\\logic\\', $fullName);
+        class_exists($fullName) || $fullName = str_replace('\\app\\modules\\' . $module . '\\logic\\', '\\app\\common\\logic\\', $fullName);
         return container::getContainer()->bind($fullName, $fullName, $params);
     }
 
@@ -43,9 +43,9 @@ trait publicTrait
     public function model($className, $params = [])
     {
         $module = $this->getModuleName();
-        (strpos($className, '\\') === false) && $className = '\\app\\' . $module . '\\model\\' . $className;
+        (strpos($className, '\\') === false) && $className = '\\app\\modules\\' . $module . '\\model\\' . $className;
         $fullName = $className . 'Model';
-        class_exists($fullName) || $fullName =  str_replace('\\app\\' . $module . '\\model\\', '\\app\\common\\model\\', $fullName);
+        class_exists($fullName) || $fullName =  str_replace('\\app\\modules\\' . $module . '\\model\\', '\\app\\common\\model\\', $fullName);
         return container::getContainer()->bind($fullName, $fullName, $params);
     }
 
