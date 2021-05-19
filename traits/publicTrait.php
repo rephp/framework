@@ -30,6 +30,7 @@ trait publicTrait
         $module = $this->getModuleName();
         (strpos($className, '\\') === false) && $className = '\\app\\' . $module . '\\logic\\' . $className;
         $fullName = $className . 'Logic';
+        class_exists($fullName) || $fullName = str_replace('\\app\\' . $module . '\\logic\\', '\\app\\common\\logic\\', $fullName);
         return container::getContainer()->bind($fullName, $fullName, $params);
     }
 
@@ -44,6 +45,7 @@ trait publicTrait
         $module = $this->getModuleName();
         (strpos($className, '\\') === false) && $className = '\\app\\' . $module . '\\model\\' . $className;
         $fullName = $className . 'Model';
+        class_exists($fullName) || $fullName =  str_replace('\\app\\' . $module . '\\model\\', '\\app\\common\\model\\', $fullName);
         return container::getContainer()->bind($fullName, $fullName, $params);
     }
 
@@ -55,8 +57,9 @@ trait publicTrait
      */
     public function lib($className, $params = [])
     {
-        (strpos($className, '\\') === false) && $className = '\\rephp\\lib\\tool\\' . $className;
-        return container::getContainer()->bind($className, $className, $params);
+        $fullName = (strpos($className, '\\') === false) ? '\\rephp\\lib\\tool\\' . $className : $className;
+        class_exists($fullName) || $fullName =  str_replace('\\rephp\\lib\\tool\\', '\\app\\lib\\', $fullName);
+        return container::getContainer()->bind($fullName, $fullName, $params);
     }
 
 }

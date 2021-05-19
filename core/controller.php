@@ -27,7 +27,6 @@ abstract class controller
      */
     public function set($param, $value='')
     {
-        //解析module名字
         return view::set($param, $value);
     }
 
@@ -39,10 +38,6 @@ abstract class controller
      */
     public function display()
     {
-        //当前调用的类(具体控制器名字,含命名空间)
-        $className = get_called_class();
-        //$module = $this->parseModule($className);
-        //解析module名字
         return view::display($this->layout, $this->forward, $this->template);
     }
 
@@ -59,16 +54,6 @@ abstract class controller
         strstr($url, 'http:') || $url = makeUrl($url);
         header('Location:'.$url);
         exit(0);
-    }
-
-    /**
-     * 从含有命名空间的controller类名里分析module
-     * @param  string  $className  有命名空间的controller类名
-     * @return string
-     */
-    private function parseModule($className)
-    {
-        return $className;
     }
 
 }
