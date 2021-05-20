@@ -22,11 +22,11 @@ abstract class model
         $calldClassName = get_called_class();
         $module = $this->getModuleName();
 
-        $pos = strpos($calldClassName, '\\app\\common\\');
+        $pos = strpos($calldClassName, 'app\\common\\');
         if($pos === false){
-            $className = str_replace('\\app\\modules\\' . $module . '\\model\\', '\\app\\common\\model\\', $calldClassName);
+            $className = str_replace('app\\modules\\' . $module . '\\model\\', 'app\\common\\model\\', $calldClassName);
         }else{
-            $className = str_replace('\\app\\common\\model\\', '\\app\\modules\\' . $module . '\\model\\', $calldClassName);
+            $className = str_replace('app\\common\\model\\', 'app\\modules\\' . $module . '\\model\\', $calldClassName);
         }
         if(!class_exists($className)){
             throw new \Exception('model not exist:' . $calldClassName, 404);

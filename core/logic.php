@@ -22,11 +22,11 @@ abstract class logic
         $calldClassName = get_called_class();
         $module = $this->getModuleName();
 
-        $pos = strpos($calldClassName, '\\app\\common\\');
+        $pos = strpos($calldClassName, 'app\\common\\');
         if($pos === false){
-            $className = str_replace('\\app\\modules\\' . $module . '\\logic\\', '\\app\\common\\logic\\', $calldClassName);
+            $className = str_replace('app\\modules\\' . $module . '\\logic\\', 'app\\common\\logic\\', $calldClassName);
         }else{
-            $className = str_replace('\\app\\common\\logic\\', '\\app\\modules\\' . $module . '\\logic\\', $calldClassName);
+            $className = str_replace('app\\common\\logic\\', 'app\\modules\\' . $module . '\\logic\\', $calldClassName);
         }
         if(!class_exists($className)){
             throw new \Exception( 'logic not exist:' . $calldClassName, 404);
