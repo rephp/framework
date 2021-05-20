@@ -29,10 +29,10 @@ abstract class model
             $className = str_replace('\\app\\common\\model\\', '\\app\\modules\\' . $module . '\\model\\', $calldClassName);
         }
         if(!class_exists($className)){
-            throw new \Exception(404, 'model not exists:' . $calldClassName);
+            throw new \Exception('model not exists:' . $calldClassName, 404);
         }
         if(!method_exists($className, $methodName)){
-            throw new \Exception(404, 'Class: '.$calldClassName. ' not exist method:'.$methodName);
+            throw new \Exception('Class: '.$calldClassName. ' not exist method:'.$methodName, 404);
         }
 
         return container::getContainer()->call($className, $methodName, $arguments);

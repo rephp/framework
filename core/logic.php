@@ -29,10 +29,10 @@ abstract class logic
             $className = str_replace('\\app\\common\\logic\\', '\\app\\modules\\' . $module . '\\logic\\', $calldClassName);
         }
         if(!class_exists($className)){
-            throw new \Exception(404, 'logic not exists:' . $calldClassName);
+            throw new \Exception('logic not exists:' . $calldClassName, 404);
         }
         if(!method_exists($className, $methodName)){
-            throw new \Exception(404, 'Class: '.$calldClassName. ' not exist method:'.$methodName);
+            throw new \Exception('Class: '.$calldClassName. ' not exist method:'.$methodName, 404);
         }
 
         return container::getContainer()->call($className, $methodName, $arguments);
