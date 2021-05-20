@@ -112,7 +112,7 @@ class view
         $routeInfo  = $request->getRouteInfo();
         $module     = $routeInfo['module'];
         //加载视图变量到布局,组合布局地址
-        $fullFileName = $module.'view/'.$loadType.'/'.$fileName;
+        $fullFileName = APP_PATH.'modules/'.$module.'/view/'.$loadType.'/'.$fileName;
         file_exists($fullFileName) || $fullFileName = APP_PATH.'common/view/'.$loadType.'/'.$fileName;
         //如果还不存在则直接抛出错误
         if(!file_exists($fullFileName)){
