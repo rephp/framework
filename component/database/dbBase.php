@@ -17,6 +17,17 @@ abstract class dbBase
      */
     protected static $db;
 
+    /**
+     * 获取表名
+     * @param string $table 表名
+     * @return string
+     */
+    protected function getTableName($table)
+    {
+        $table = empty($table) ? $this->table : $table;
+
+        return $table;
+    }
 
     /**
      * 过滤字段名，防止sql注入

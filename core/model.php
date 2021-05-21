@@ -2,12 +2,13 @@
 namespace rephp\core;
 
 use rephp\component\container\container;
+use rephp\component\database\database;
 
 /**
  * model抽象类
  * @package rephp\ext
  */
-abstract class model
+abstract class model extends database
 {
     use \rephp\traits\publicTrait;
 
