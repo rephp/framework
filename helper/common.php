@@ -85,3 +85,40 @@ function makeUrl($url, $params = [], $domain='')
 
     return $baseUrl . '/' . $fileName;
 }
+
+/**
+ * 获取html内容中的所有图片路径
+ * @param  string $html  要匹配的html内容
+ * @return string[]
+ */
+function getImagelist($html)
+{
+    $match_str = '/<img.+src=(.+)(\>|\'.*\>|\".*\>|\s+\/>)/imUs';
+    preg_match_all ($match_str, $html, $out, PREG_PATTERN_ORDER);
+    $result = str_replace(['"', '\''], '', $out[1]);
+
+    return array_unique($result);
+}
+
+/**
+ * 将一组url批量替换domain
+ * @param array  $urlList  一维数组，url列表
+ * @param string $newDomain 新域名
+ * @return array
+ */
+function replaceDomain($urlList=[], $newDomain='')
+{
+    //移除域名最末尾巴/
+    substr($newDomain, -1)=='/' && $newDomain = substr($newDomain, 0, -1);
+    foreach($urlList as $index=>$url){
+        $tempArr = parse_url($url);
+        if(empty($tempArr['host'])){
+            substr($url, 0, 1)=='/' && $url = substr($url, 1);
+            $urlList[$index] = $newDomain.'/'.$url;
+        }else{
+            $urlList[$index] = str_replace($tempArr['scheme'].'://'.$tempArr['host'], $newDomain, $url);
+        }
+    }
+
+    return $urlList;
+}
