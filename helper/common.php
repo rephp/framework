@@ -101,24 +101,30 @@ function getImagelist($html)
 }
 
 /**
- * 将一组url批量替换domain
- * @param array  $urlList  一维数组，url列表
- * @param string $newDomain 新域名
- * @return array
+ * 将html内容中的所有图片路径替换domain
+ * @param  string  $html      要替换图片域名的html内容
+ * @param  string  $newDomain 新域名
+ * @return string
  */
-function replaceDomain($urlList=[], $newDomain='')
+function replaceDomain($html, $newDomain='')
 {
     //移除域名最末尾巴/
     substr($newDomain, -1)=='/' && $newDomain = substr($newDomain, 0, -1);
-    foreach($urlList as $index=>$url){
+    $urlList = getimages($html);
+    foreach($urlList as $index=>$oldUrl){
+        if(empty($oldUrl)){
+            continue;
+        }
+        $url = $oldUrl;
         $tempArr = parse_url($url);
         if(empty($tempArr['host'])){
             substr($url, 0, 1)=='/' && $url = substr($url, 1);
-            $urlList[$index] = $newDomain.'/'.$url;
+            $url = $newDomain.'/'.$url;
         }else{
-            $urlList[$index] = str_replace($tempArr['scheme'].'://'.$tempArr['host'], $newDomain, $url);
+            $url  = str_replace($tempArr['scheme'].'://'.$tempArr['host'], $newDomain, $url);
         }
+        $html = str_replace($oldUrl, $url, $html);
     }
 
-    return $urlList;
+    return $html;
 }
