@@ -2,15 +2,22 @@
 namespace rephp\core;
 
 use rephp\component\container\container;
-use rephp\component\database\database;
+use rephp\redb\redb;
+
 
 /**
  * model抽象类
  * @package rephp\ext
  */
-abstract class model extends database
+abstract class model extends redb
 {
     use \rephp\traits\publicTrait;
+
+    public static function db(array $configList = [])
+    {
+        empty($configList) && $configList = config('database');
+        return self::getClient($configList);
+    }
 
     /**
      * 调用私有或者不存在的类方法时触发

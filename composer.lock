@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e183079da89d10887d8eb8ab9074279",
+    "content-hash": "6457a4e12b198f13f319e9ca5e452b72",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -291,6 +291,46 @@
             "time": "2020-03-23T09:12:05+00:00"
         },
         {
+            "name": "rephp/redb",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rephp/redb.git",
+                "reference": "897ebfb34428f15fc3d7702dc7777e66a881bc52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rephp/redb/zipball/897ebfb34428f15fc3d7702dc7777e66a881bc52",
+                "reference": "897ebfb34428f15fc3d7702dc7777e66a881bc52",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rephp\\redb\\": ".\\src\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "sam.shi",
+                    "email": "32320811@qq.com"
+                }
+            ],
+            "description": "redb是一款php的mysql数据库操作类库",
+            "support": {
+                "issues": "https://github.com/rephp/redb/issues",
+                "source": "https://github.com/rephp/redb/tree/1.0.0"
+            },
+            "time": "2021-09-13T07:45:29+00:00"
+        },
+        {
             "name": "rephp/rephp-debugbar",
             "version": "1.1.5",
             "source": {
@@ -369,9 +409,7 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=7.2.0"
-    },
+    "platform": [],
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }
