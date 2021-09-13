@@ -13,6 +13,20 @@ abstract class model extends redb
 {
     use \rephp\traits\publicTrait;
 
+    /**
+     * 初始化模型
+     */
+    public function __construct()
+    {
+        $configList = config('database');
+        parent::__construct($configList);
+    }
+
+    /**
+     * 静态方法获取动态对象
+     * @param array $configList
+     * @return redb
+     */
     public static function db(array $configList = [])
     {
         empty($configList) && $configList = config('database');
