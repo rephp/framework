@@ -16,9 +16,9 @@ abstract class model extends redb
     /**
      * 初始化模型
      */
-    public function __construct(array $configList=[])
+    public function __construct($configList=[])
     {
-        empty($configList) || $configList = config('database');
+        empty($configList) && $configList = config('database');
         //获取数据库配置
         $db = $this->getDb();
         if (!isset($configList[$db])) {
@@ -32,7 +32,7 @@ abstract class model extends redb
      * @param array $configList
      * @return redb
      */
-    public static function db(array $configList = [])
+    public static function db($configList = [])
     {
         return self::getClient($configList);
     }
