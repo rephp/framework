@@ -19,7 +19,12 @@ abstract class model extends redb
     public function __construct()
     {
         $configList = config('database');
-        parent::__construct($configList);
+        //获取数据库配置
+        $db = $this->getDb();
+        if (!isset($configList[$db])) {
+            throw new \Exception('当前模型db配置错误，请检查数据库配置项的key', 1404);
+        }
+        parent::__construct($configList[$db]);
     }
 
     /**
@@ -27,10 +32,9 @@ abstract class model extends redb
      * @param array $configList
      * @return redb
      */
-    public static function db(array $configList = [])
+    public static function db()
     {
-        empty($configList) && $configList = config('database');
-        return self::getClient($configList);
+        return self::getClient();
     }
 
     /**
