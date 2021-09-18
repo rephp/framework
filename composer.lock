@@ -292,16 +292,16 @@
         },
         {
             "name": "rephp/redb",
-            "version": "1.0.9",
+            "version": "1.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rephp/redb.git",
-                "reference": "fcd1328c25fe07717a90cbcd3a40490e83c9dabd"
+                "reference": "f4ad87e22a2189b874aa0a581a049180968a1252"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rephp/redb/zipball/fcd1328c25fe07717a90cbcd3a40490e83c9dabd",
-                "reference": "fcd1328c25fe07717a90cbcd3a40490e83c9dabd",
+                "url": "https://api.github.com/repos/rephp/redb/zipball/f4ad87e22a2189b874aa0a581a049180968a1252",
+                "reference": "f4ad87e22a2189b874aa0a581a049180968a1252",
                 "shasum": ""
             },
             "require": {
@@ -310,8 +310,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "rephp\\redb\\": ".\\src\\",
-                    "demo\\": ".\\demo\\"
+                    "rephp\\redb\\": ".\\src\\"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -327,9 +326,9 @@
             "description": "redb是一款php的mysql数据库操作类库",
             "support": {
                 "issues": "https://github.com/rephp/redb/issues",
-                "source": "https://github.com/rephp/redb/tree/1.0.9"
+                "source": "https://github.com/rephp/redb/tree/1.1.10"
             },
-            "time": "2021-09-15T11:36:13+00:00"
+            "time": "2021-09-18T04:02:55+00:00"
         },
         {
             "name": "rephp/rephp-debugbar",

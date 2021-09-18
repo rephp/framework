@@ -34,7 +34,7 @@ abstract class model extends redb
      */
     public static function db($configList = [])
     {
-        return self::getClient($configList);
+        return parent::db($configList);
     }
 
     /**
