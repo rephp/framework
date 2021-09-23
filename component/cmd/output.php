@@ -3,6 +3,12 @@ namespace rephp\component\cmd;
 
 /**
  * 控制台格式化输出
+ * echo output::find()
+ *         ->title('这是一个测试', 1)
+ *         ->success('测试缩进', 0, 1)->info('info类型语句')->tab(1)->br()
+ *         ->success('success类型语句:create-permission', 0, 1)->warning('warning类型语句', 1)
+ *         ->error('error类型语句', 1)
+ *         ->get();
  */
 class output
 {
@@ -40,7 +46,12 @@ class output
      * 要输出的内容
      * @var string
      */
-    protected $content = '';
+    protected $content = [];
+    /**
+     * 每列填充宽度
+     * @var int
+     */
+    protected $padWidth = 0;
 
     /**
      * 获取实例化自身对象
@@ -53,83 +64,107 @@ class output
 
     /**
      * 普通消息(黑色白底)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function info($msg, $isBr = false)
+    public function info($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->infoFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->infoFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
     }
 
     /**
      * 标题消息(黑色白底加粗)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function title($msg, $isBr = false)
+    public function title($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->titleFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->titleFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
     }
 
     /**
      * 通知消息(棕色白底)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function notice($msg, $isBr = false)
+    public function notice($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->noticeFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->noticeFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
     }
 
     /**
      * 警告消息(红色白底)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function warning($msg, $isBr = false)
+    public function warning($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->warningFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->warningFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
     }
 
     /**
      * 成功消息(绿色白底)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function success($msg, $isBr = false)
+    public function success($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->successFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->successFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
     }
 
     /**
      * 错误消息(白色红底)
-     * @param string  $msg  消息内容
-     * @param boolean $isBr 是否换行
+     * @param string  $msg        消息内容
+     * @param boolean $isBr       是否换行
+     * @param boolean $isPadWidth 是否填充宽度
      * @return $this
      */
-    public function error($msg, $isBr = false)
+    public function error($msg, $isBr = false, $isPadWidth = false)
     {
-        $this->content .= sprintf($this->errorFormat, $msg);
+        $isPadWidth && $this->updatePadWidth($msg);
+        $this->content[] = ['msg'=>sprintf($this->errorFormat, $msg), 'is_pad'=>$isPadWidth];
         return $isBr ? $this->br() : $this;
+    }
+
+    /**
+     * 更新填充字段长度
+     * @param string $msg 消息内容
+     * @return string
+     */
+    protected function updatePadWidth($msg)
+    {
+        $length = mb_strlen($msg) + 20;
+        ($this->padWidth < $length) && $this->padWidth = $length;
+        return $this;
     }
 
     /**
      * 拼接tab空字符
      * @return $this
      */
-    public function tab()
+    public function tab($num=4)
     {
-        $this->content .= '    ';
+        $this->content[] = ['msg'=>str_repeat(' ', $num), 'is_pad'=>false];
         return $this;
     }
 
@@ -139,7 +174,7 @@ class output
      */
     public function br()
     {
-        $this->content .= "\n";
+        $this->content[] = ['msg'=>"\n", 'is_pad'=>false];
         return $this;
     }
 
@@ -149,7 +184,12 @@ class output
      */
     public function get()
     {
-        return $this->br()->content;
+        $content = '';
+        foreach($this->content as $item){
+            $content .= empty($item['is_pad']) ? $item['msg'] : str_pad($item['msg'], $this->padWidth, $pad = ' ', STR_PAD_RIGHT);
+        }
+
+        return $content;
     }
 
 }
