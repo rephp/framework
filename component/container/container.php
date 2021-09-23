@@ -31,7 +31,7 @@ class container implements ContainerInterface, rephpContainerInterfaces
      */
     public static function getContainer()
     {
-        is_object(self::$container) || self::$container = new self();
+        is_object(self::$container) || self::$container = new static();
         return self::$container;
     }
 
