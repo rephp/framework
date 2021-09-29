@@ -4,7 +4,6 @@
   "keywords": ["php framework", "framework", "rephp"],
   "license": "MIT",
   "minimum-stability": "stable",
-  "license": "proprietary",
   "authors": [
     {
       "name": "sam.shi",
@@ -17,7 +16,8 @@
     "catfan/medoo": "^1.7",
     "noahbuscher/macaw": "dev-master",
     "rephp/rephp-debugbar": "^1.0",
-    "rephp/redb": "^1.0"
+    "rephp/redb": "^1.0",
+    "rephp/cmd-output": "^1.0"
   },
   "require-dev": {
     "millionmile/get_env": "^1.0"

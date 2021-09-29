@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6457a4e12b198f13f319e9ca5e452b72",
+    "content-hash": "e42a950ea77a29adf6015acbefdb85af",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -289,6 +289,48 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "rephp/cmd-output",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rephp/cmd-output.git",
+                "reference": "45886816f307559fdb6b34644e6ee57b5f792ad9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rephp/cmd-output/zipball/45886816f307559fdb6b34644e6ee57b5f792ad9",
+                "reference": "45886816f307559fdb6b34644e6ee57b5f792ad9",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rephp\\output\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sam.shi",
+                    "email": "8464005@qq.com"
+                }
+            ],
+            "description": "可以比较优雅地在命令行模式下输出内容到console中",
+            "keywords": [
+                "output",
+                "php command output",
+                "php console output"
+            ],
+            "support": {
+                "issues": "https://github.com/rephp/cmd-output/issues",
+                "source": "https://github.com/rephp/cmd-output/tree/1.0.0"
+            },
+            "time": "2021-09-29T10:12:18+00:00"
         },
         {
             "name": "rephp/redb",
