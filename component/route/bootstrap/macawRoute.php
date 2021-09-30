@@ -23,10 +23,10 @@ final class macawRoute implements routeInterface
      * @param string $module     模块名
      * @param string $controller 控制器名字
      * @param string $action     方法名
-     * @param string $method     请求方式
+     * @param array $routeConfig  路由预定义配置
      * @return boolean
      */
-    public function run($routeUri, $module, $controller, $action, $method = 'get')
+    public function run($routeUri, $module, $controller, $action, $routeConfig = [])
     {
         //开启halt匹配模式
         Macaw::haltOnMatch(true);
@@ -37,7 +37,8 @@ final class macawRoute implements routeInterface
         //3.动态生成路由字符串
         $ruleStr   = $routeUri . '(:all)';
         $objectStr = 'app\\modules\\' . $module . '\\controller\\' . $controller . 'Controller@' . $action . 'Action';
-
+        empty($routeConfig['class'])  || $objectStr = $routeConfig['class'];
+        $method    = $routeConfig['method'];
         //4.挂载路由
         Macaw::$method($ruleStr, $objectStr);
         //5.兼容404

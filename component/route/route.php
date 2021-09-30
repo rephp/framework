@@ -36,15 +36,10 @@ class route
         $module     = $params['module'];
         $controller = $params['controller'];
         $action     = $params['action'];
-        //2.根据现有路由，获得路由配置表配置的方法。如没设置则默认为get方法才可以请求当前路由。
-        //todo:路由表以后缓存到内存中
-        //优先加载自定义路由
-        file_exists($routePath . 'env.php') && require $routePath . 'env.php';
-        //默认加载机制start
-        //3.获取路由自定义类型
-        $method = $this->getRouteMethod($module, $controller, $action, $routePath);
+        //2.获取路由自定义类型
+        $routeConfig = $this->getRouteConfig($module, $controller, $action, $routePath);
 
-        //4.计算路由地址
+        //3.计算路由地址
         $module2     = strtolower($module);
         $controller2 = strtolower($controller);
         $action2     = strtolower($action);
@@ -59,7 +54,7 @@ class route
         }
 
         //5.挂载路由
-        return container::getContainer()->get('coreRoute')->run($routeUri, $module, $controller, $action, $method);
+        return container::getContainer()->get('coreRoute')->run($routeUri, $module, $controller, $action, $routeConfig);
     }
 
     /**
@@ -70,18 +65,14 @@ class route
      * @param string $routePath  路由目录
      * @return mixed|string
      */
-    public function getRouteMethod($module, $controller, $action, $routePath)
+    public function getRouteConfig($module, $controller, $action, $routePath)
     {
-        $module     = strtolower($module);
-        $controller = strtolower($controller);
-        $action     = strtolower($action);
-        file_exists($routePath . 'config.php') && $routeMap = require $routePath . 'config.php';
-        if(file_exists($routePath . 'route.php')){
-            require $routePath . 'route.php';
-        }
-        if(defined('CLI_URI') && file_exists($routePath . 'console.php')){
-            require $routePath . 'console.php';
-        }
+        $module              = strtolower($module);
+        $controller          = strtolower($controller);
+        $action              = strtolower($action);
+        $isCli               = defined('CLI_URI');
+        $routeConfigFileName = $routePath . ($isCli ? 'console' : 'web') . '.php';
+        file_exists($routeConfigFileName) && $routeMap = require $routeConfigFileName;
         $routeMap = (array)$routeMap;
         $routeMap = array_change_key_case($routeMap, CASE_LOWER);
 
@@ -106,16 +97,18 @@ class route
             $baseUriArr[] = '/';
         }
 
-        $method = '';
+        $routeConfig = ['method' => 'any', 'class' => ''];
         foreach ($baseUriArr as $baseUri) {
             if (key_exists($baseUri, $routeMap)) {
-                $method = $routeMap[$baseUri];
+                $routeConfig = $routeMap[$baseUri];
                 break;
             }
         }
-        in_array($method, $this->allowMethod) || $method = 'any';
+        isset($routeConfig['method']) || $routeConfig['method'] = 'any';
+        isset($routeConfig['class']) || $routeConfig['class'] = '';
+        in_array($routeConfig['method'], $this->allowMethod) || $routeConfig['method'] = 'any';
 
-        return $method;
+        return $routeConfig;
     }
 
     /**
