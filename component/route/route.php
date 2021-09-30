@@ -104,9 +104,14 @@ class route
                 break;
             }
         }
-        isset($routeConfig['method']) || $routeConfig['method'] = 'any';
+        //整理校验
         isset($routeConfig['class']) || $routeConfig['class'] = '';
-        in_array($routeConfig['method'], $this->allowMethod) || $routeConfig['method'] = 'any';
+        if($isCli){
+            $routeConfig['method'] = 'get';
+        }else{
+            isset($routeConfig['method']) || $routeConfig['method'] = 'any';
+            in_array($routeConfig['method'], $this->allowMethod) || $routeConfig['method'] = 'any';
+        }
 
         return $routeConfig;
     }
