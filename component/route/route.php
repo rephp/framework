@@ -79,6 +79,9 @@ class route
         if(file_exists($routePath . 'route.php')){
             require $routePath . 'route.php';
         }
+        if(defined('CLI_URI') && file_exists($routePath . 'console.php')){
+            require $routePath . 'console.php';
+        }
         $routeMap = (array)$routeMap;
         $routeMap = array_change_key_case($routeMap, CASE_LOWER);
 
