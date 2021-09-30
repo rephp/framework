@@ -76,6 +76,9 @@ class route
         $controller = strtolower($controller);
         $action     = strtolower($action);
         file_exists($routePath . 'config.php') && $routeMap = require $routePath . 'config.php';
+        if(file_exists($routePath . 'route.php')){
+            require $routePath . 'route.php';
+        }
         $routeMap = (array)$routeMap;
         $routeMap = array_change_key_case($routeMap, CASE_LOWER);
 
