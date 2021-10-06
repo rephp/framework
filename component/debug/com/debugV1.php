@@ -1,11 +1,11 @@
 <?php
-namespace rephp\component\debug\bootstrap;
+namespace rephp\component\debug\com;
 
 use rephp\component\debug\interfaces\debugInterface;
 
 /**
  * debug  V1 版本
- * @package rephp\component\debug\bootstrap
+ * @package rephp\component\debug\com
  */
 final class debugV1 implements debugInterface
 {

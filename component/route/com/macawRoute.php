@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\component\route\bootstrap;
+namespace rephp\component\route\com;
 
 use \NoahBuscher\Macaw\Macaw;
 use rephp\component\route\interfaces\routeInterface;

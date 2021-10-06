@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\component\env\bootstrap;
+namespace rephp\component\env\com;
 
 use MillionMile\GetEnv\Env;
 use rephp\component\env\interfaces\envInterface;
@@ -8,7 +8,7 @@ use rephp\component\env\interfaces\envInterface;
 /**
  *  millionMile的env类
  * 依赖环境为：php 7.1
- * @package rephp\component\env\bootstrap
+ * @package rephp\component\env\com
  */
 final class millionMileEnv implements envInterface
 {

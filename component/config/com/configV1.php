@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\component\config\bootstrap;
+namespace rephp\component\config\com;
 
 use rephp\component\config\interfaces\configInterface;
 use rephp\component\container\container;

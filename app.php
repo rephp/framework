@@ -14,14 +14,14 @@ use rephp\component\container\container;
 class app
 {
     /**
-     * @var string 配置驱动类
+     * @var string 配置实例类
      */
-    private $configBootstrap = component\config\bootstrap\configV1::class;
+    private $configCom = component\config\com\configV1::class;
 
     /**
-     * @var string env驱动类
+     * @var string env实例类
      */
-    private $envBootstrap = component\env\bootstrap\envV1::class;
+    private $envCom = component\env\com\envV1::class;
 
     /**
      * 初始化默认绑定的对象
@@ -30,9 +30,9 @@ class app
     private $rephpConfig = [
         'reponse'     => component\response\response::class,
         'request'     => component\request\request::class,
-        'coreRoute'   => component\route\bootstrap\macawRoute::class,
-        'coreEvent'   => component\event\bootstrap\eventV1::class,
-        'coreDebug'   => component\debug\bootstrap\debugV1::class,
+        'coreRoute'   => component\route\com\macawRoute::class,
+        'coreEvent'   => component\event\com\eventV1::class,
+        'coreDebug'   => component\debug\com\debugV1::class,
     ];
 
     /**
@@ -58,7 +58,7 @@ class app
      */
     private function loadEnv($envPath)
     {
-        container::getContainer()->bind('coreEnv', $this->envBootstrap);
+        container::getContainer()->bind('coreEnv', $this->envCom);
         container::getContainer()->bind('env', component\env\env::class, [$envPath]);
         return true;
     }
@@ -70,7 +70,7 @@ class app
      */
     private function loadConfig($configPath)
     {
-        container::getContainer()->bind('coreConfig', $this->configBootstrap);
+        container::getContainer()->bind('coreConfig', $this->configCom);
         container::getContainer()->bind('config', component\config\config::class, [$configPath]);
         return true;
     }

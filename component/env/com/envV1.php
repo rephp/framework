@@ -1,6 +1,6 @@
 <?php
 
-namespace rephp\component\env\bootstrap;
+namespace rephp\component\env\com;
 
 use rephp\component\container\container;
 use rephp\component\env\interfaces\envInterface;
@@ -8,7 +8,7 @@ use rephp\component\env\interfaces\envInterface;
 /**
  *  v1的env封装类
  * 依赖环境为：php 7.0
- * @package rephp\component\env\bootstrap
+ * @package rephp\component\env\com
  */
 final class envV1 implements envInterface
 {

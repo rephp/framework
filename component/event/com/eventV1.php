@@ -1,5 +1,5 @@
 <?php
-namespace rephp\component\event\bootstrap;
+namespace rephp\component\event\com;
 
 use rephp\component\event\interfaces\eventInterface;
 
