@@ -72,21 +72,21 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.14.3",
+            "version": "2.14.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "89584ce67dd32307f1063cc43846674f4679feda"
+                "reference": "f056f1fe935d9ed86e698905a957334029899895"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/89584ce67dd32307f1063cc43846674f4679feda",
-                "reference": "89584ce67dd32307f1063cc43846674f4679feda",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/f056f1fe935d9ed86e698905a957334029899895",
+                "reference": "f056f1fe935d9ed86e698905a957334029899895",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9 || ^7.0 || ^8.0",
-                "psr/log": "^1.0.1"
+                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9 || ^1.0",
@@ -131,7 +131,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.14.3"
+                "source": "https://github.com/filp/whoops/tree/2.14.4"
             },
             "funding": [
                 {
@@ -139,7 +139,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-19T12:00:00+00:00"
+            "time": "2021-10-03T12:00:00+00:00"
         },
         {
             "name": "noahbuscher/macaw",
@@ -292,16 +292,16 @@
         },
         {
             "name": "rephp/cmd-output",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rephp/cmd-output.git",
-                "reference": "45886816f307559fdb6b34644e6ee57b5f792ad9"
+                "reference": "a4df82476dfe7349e1cc6f6757c79f1774a22694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rephp/cmd-output/zipball/45886816f307559fdb6b34644e6ee57b5f792ad9",
-                "reference": "45886816f307559fdb6b34644e6ee57b5f792ad9",
+                "url": "https://api.github.com/repos/rephp/cmd-output/zipball/a4df82476dfe7349e1cc6f6757c79f1774a22694",
+                "reference": "a4df82476dfe7349e1cc6f6757c79f1774a22694",
                 "shasum": ""
             },
             "type": "library",
@@ -328,9 +328,9 @@
             ],
             "support": {
                 "issues": "https://github.com/rephp/cmd-output/issues",
-                "source": "https://github.com/rephp/cmd-output/tree/1.0.0"
+                "source": "https://github.com/rephp/cmd-output/tree/1.0.1"
             },
-            "time": "2021-09-29T10:12:18+00:00"
+            "time": "2021-09-29T12:28:27+00:00"
         },
         {
             "name": "rephp/redb",
@@ -374,16 +374,16 @@
         },
         {
             "name": "rephp/rephp-debugbar",
-            "version": "1.1.6",
+            "version": "1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rephp/rephp-debugbar.git",
-                "reference": "3220508153b206cf1b12372fa853e6b7ec60022a"
+                "reference": "c4193c5d0c5d5165da658dc98ade845574e5440b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/3220508153b206cf1b12372fa853e6b7ec60022a",
-                "reference": "3220508153b206cf1b12372fa853e6b7ec60022a",
+                "url": "https://api.github.com/repos/rephp/rephp-debugbar/zipball/c4193c5d0c5d5165da658dc98ade845574e5440b",
+                "reference": "c4193c5d0c5d5165da658dc98ade845574e5440b",
                 "shasum": ""
             },
             "require": {
@@ -408,9 +408,9 @@
             "description": "rephp debugbar",
             "support": {
                 "issues": "https://github.com/rephp/rephp-debugbar/issues",
-                "source": "https://github.com/rephp/rephp-debugbar/tree/1.1.6"
+                "source": "https://github.com/rephp/rephp-debugbar/tree/1.1.8"
             },
-            "time": "2021-09-25T08:09:43+00:00"
+            "time": "2021-10-06T08:02:15+00:00"
         }
     ],
     "packages-dev": [
