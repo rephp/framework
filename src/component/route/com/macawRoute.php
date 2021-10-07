@@ -19,11 +19,11 @@ final class macawRoute implements routeInterface
 
     /**
      * 根据当前url动态生成路由
-     * @param string $routeUri   基本uri，如{$modeule}/{$controller}/{$action}
-     * @param string $module     模块名
-     * @param string $controller 控制器名字
-     * @param string $action     方法名
-     * @param array $routeConfig  路由预定义配置
+     * @param string $routeUri    基本uri，如{$modeule}/{$controller}/{$action}
+     * @param string $module      模块名
+     * @param string $controller  控制器名字
+     * @param string $action      方法名
+     * @param array  $routeConfig 路由预定义配置
      * @return boolean
      */
     public function run($routeUri, $module, $controller, $action, $routeConfig = [])
@@ -35,10 +35,12 @@ final class macawRoute implements routeInterface
             throw new \Exception('系统错误，请联系管理员');
         }
         //3.动态生成路由字符串
-        $ruleStr   = $routeUri . '(:all)';
-        $objectStr = 'app\\modules\\' . $module . '\\controller\\' . $controller . 'Controller@' . $action . 'Action';
-        empty($routeConfig['class'])  || $objectStr = $routeConfig['class'];
-        $method    = $routeConfig['method'];
+        $ruleStr    = $routeUri . '(:all)';
+        $isCli      = defined('CLI_URI');
+        $moduleName = $isCli ? 'console' : 'modules';
+        $objectStr  = 'app\\'.$moduleName.'\\' . $module . '\\controller\\' . $controller . 'Controller@' . $action . 'Action';
+        empty($routeConfig['class']) || $objectStr = $routeConfig['class'];
+        $method = $routeConfig['method'];
         //4.挂载路由
         Macaw::$method($ruleStr, $objectStr);
         //5.兼容404

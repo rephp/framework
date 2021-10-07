@@ -11,7 +11,7 @@ class cmd
      */
     public function __construct()
     {
-        require './bootstraps/console.php';
+        require 'bootstraps/console.php';
         return $this;
     }
 
