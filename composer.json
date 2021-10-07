@@ -24,10 +24,10 @@
   },
   "autoload": {
     "psr-4": {
-      "rephp\\": "./"
+      "rephp\\": "./src/"
     },
     "files": [
-      "helper/common.php"
+      "./src/helper/common.php"
     ]
   }
 }
