@@ -74,6 +74,12 @@ class route
         $routeConfigFileName = $routePath . ($isCli ? 'console' : 'web') . '.php';
         file_exists($routeConfigFileName) && $routeMap = require $routeConfigFileName;
         $routeMap = (array)$routeMap;
+        //追加内置命令行路由
+        if($isCli){
+            $cliSystemRouteList = container::getContainer()->get('config')->get('console.cli_system_route_list');
+            $cliSystemRouteList = empty($cliSystemRouteList) ? [] : (array)$cliSystemRouteList;
+            $routeMap           = array_merge($routeMap, $cliSystemRouteList);
+        }
         $routeMap = array_change_key_case($routeMap, CASE_LOWER);
 
         //1.完整匹配
