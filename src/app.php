@@ -33,6 +33,7 @@ class app
         'coreRoute'   => component\route\com\macawRoute::class,
         'coreEvent'   => component\event\com\eventV1::class,
         'coreDebug'   => component\debug\com\debugV1::class,
+        'cmd'         => component\cmd\cmd::class,
     ];
 
     /**

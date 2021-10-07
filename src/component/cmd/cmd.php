@@ -6,13 +6,12 @@ use rephp\component\container\container;
 class cmd
 {
     /**
-     * 设置路由
+     * 启动
      * @return $this
      */
-    public function setRoute()
+    public function __construct()
     {
-        $cliSystemRouteList = require './route/console.php';
-        container::getContainer()->get('config')->set('console', 'cli_system_route_list', $cliSystemRouteList);
+        require './bootstraps/console.php';
         return $this;
     }
 
