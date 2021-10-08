@@ -1,7 +1,7 @@
 <?php
 namespace rephp\component\cmd\com;
 
-class help
+class commandList
 {
 
     public function run()
