@@ -64,4 +64,17 @@ abstract class model extends redb
         return container::getContainer()->call($className, $methodName, $arguments);
     }
 
+    /**
+     * 销毁之前先追加sql信息
+     */
+    public function __destruct()
+    {
+        $sqlList = $this->getLog();
+        $isCover = true;
+        foreach($sqlList as $index=>$item){
+            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time'], $isCover);
+            $isCover = false;
+        }
+    }
+
 }
