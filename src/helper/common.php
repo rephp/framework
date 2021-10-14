@@ -35,6 +35,39 @@ function config($params, $default=null)
 }
 
 /**
+ * 获取当前请求的参数
+ * @param string $name    变量名
+ * @param mixed  $default 默认值
+ * @return mixed
+ */
+function param($name = '', $default = null)
+{
+    return container::getContainer()->get('request')->param($name, $default);
+}
+
+/**
+ * 获取GET参数
+ * @param string $name    变量名
+ * @param mixed  $default 默认值
+ * @return mixed
+ */
+function get($name = '', $default = null)
+{
+    return container::getContainer()->get('request')->get($name, $default);
+}
+
+/**
+ * 获取POST参数
+ * @param string $name    变量名
+ * @param mixed  $default 默认值
+ * @return mixed
+ */
+function post($name = '', $default = null)
+{
+    return container::getContainer()->get('request')->post($name, $default);
+}
+
+/**
  * 判断字符串是否为正确的邮箱格式
  * @param  string $email  需要判断的邮箱地址字符串
  * @return boolean(其实正确是返回邮箱地址，不正确时返回false,我们可以认为它是boolean)
