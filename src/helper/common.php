@@ -18,7 +18,7 @@ function dump(...$params)
  * @param string $default 默认值
  * @return mixed
  */
-function env($name, $default='')
+function env($name, $default = '')
 {
     return container::getContainer()->get('env')->get($name, $default);
 }
@@ -29,7 +29,7 @@ function env($name, $default='')
  * @param string $default 默认值
  * @return mixed
  */
-function config($params, $default=null)
+function config($params, $default = null)
 {
     return container::getContainer()->get('config')->get($params, $default);
 }
@@ -69,7 +69,7 @@ function post($name = '', $default = null)
 
 /**
  * 判断字符串是否为正确的邮箱格式
- * @param  string $email  需要判断的邮箱地址字符串
+ * @param string $email 需要判断的邮箱地址字符串
  * @return boolean(其实正确是返回邮箱地址，不正确时返回false,我们可以认为它是boolean)
  */
 function isEmail($email)
@@ -79,22 +79,23 @@ function isEmail($email)
 
 /**
  * 生成url
- * @example makeUrl('http://www.test.com/ddd/index.php?id=55&ite=ddd', ['test' => 'xxx', 'YYY'], 'http://www.baidu.com');
  * @param string $url    url地址，如/test/tedd/?id=5,也可以带域名
  * @param array  $params 附加参数如['cate_id'=>5, 'type'=>'test']
  * @param string $domain 要替换的主域名
  * @return string
+ * @example makeUrl('http://www.test.com/ddd/index.php?id=55&ite=ddd', ['test' => 'xxx', 'YYY'],
+ *                       'http://www.baidu.com');
  */
-function makeUrl($url, $params = [], $domain='')
+function makeUrl($url, $params = [], $domain = '')
 {
     //计算要替换的主域名
-    if(!empty($domain)){
-        substr($domain, -1)=='/' ||  $domain .= '/';
+    if (!empty($domain)) {
+        substr($domain, -1) == '/' || $domain .= '/';
         //解析原域名
         $parseUrlResult = parse_url($url);
-        substr($parseUrlResult['path'], 0, 1)=='/' && $parseUrlResult['path'] = substr($parseUrlResult['path'], 1);
-        $url = $domain.$parseUrlResult['path'];
-        empty($parseUrlResult['query']) || $url .= '?'.$parseUrlResult['query'];
+        substr($parseUrlResult['path'], 0, 1) == '/' && $parseUrlResult['path'] = substr($parseUrlResult['path'], 1);
+        $url = $domain . $parseUrlResult['path'];
+        empty($parseUrlResult['query']) || $url .= '?' . $parseUrlResult['query'];
     }
 
     //获取baseurl,不含主文件名（如test.php）
@@ -121,13 +122,13 @@ function makeUrl($url, $params = [], $domain='')
 
 /**
  * 获取html内容中的所有图片路径
- * @param  string $html  要匹配的html内容
+ * @param string $html 要匹配的html内容
  * @return string[]
  */
 function getImagelist($html)
 {
     $match_str = '/<img.+src=(.+)(\>|\'.*\>|\".*\>|\s+\/>)/imUs';
-    preg_match_all ($match_str, $html, $out, PREG_PATTERN_ORDER);
+    preg_match_all($match_str, $html, $out, PREG_PATTERN_ORDER);
     $result = str_replace(['"', '\''], '', $out[1]);
 
     return array_unique($result);
@@ -135,29 +136,45 @@ function getImagelist($html)
 
 /**
  * 将html内容中的所有图片路径替换domain
- * @param  string  $html      要替换图片域名的html内容
- * @param  string  $newDomain 新域名
+ * @param string $html      要替换图片域名的html内容
+ * @param string $newDomain 新域名
  * @return string
  */
-function replaceDomain($html, $newDomain='')
+function replaceDomain($html, $newDomain = '')
 {
     //移除域名最末尾巴/
-    substr($newDomain, -1)=='/' && $newDomain = substr($newDomain, 0, -1);
+    substr($newDomain, -1) == '/' && $newDomain = substr($newDomain, 0, -1);
     $urlList = getimages($html);
-    foreach($urlList as $index=>$oldUrl){
-        if(empty($oldUrl)){
+    foreach ($urlList as $index => $oldUrl) {
+        if (empty($oldUrl)) {
             continue;
         }
-        $url = $oldUrl;
+        $url     = $oldUrl;
         $tempArr = parse_url($url);
-        if(empty($tempArr['host'])){
-            substr($url, 0, 1)=='/' && $url = substr($url, 1);
-            $url = $newDomain.'/'.$url;
-        }else{
-            $url  = str_replace($tempArr['scheme'].'://'.$tempArr['host'], $newDomain, $url);
+        if (empty($tempArr['host'])) {
+            substr($url, 0, 1) == '/' && $url = substr($url, 1);
+            $url = $newDomain . '/' . $url;
+        } else {
+            $url = str_replace($tempArr['scheme'] . '://' . $tempArr['host'], $newDomain, $url);
         }
         $html = str_replace($oldUrl, $url, $html);
     }
 
     return $html;
+}
+
+/**
+ * 过滤最右侧指定字符
+ * @param string $sourceStr 源字符串
+ * @param string $filterFix 要过滤的最右侧字符串
+ * @return false|string
+ */
+function replaceRightStr($sourceStr, $filterFix = '')
+{
+    if (empty($filterFix)) {
+        return $sourceStr;
+    }
+    $cuteStr = substr($sourceStr, -strlen($filterFix));
+    ($filterFix == $cuteStr) && $sourceStr = substr($sourceStr, 0, -strlen($filterFix));
+    return $sourceStr;
 }
