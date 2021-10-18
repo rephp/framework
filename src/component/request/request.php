@@ -52,6 +52,11 @@ class request implements requestInterface
     public $action = '';
 
     /**
+     * @var array 视图真正路由信息
+     */
+    public $viewRouteInfo = [];
+
+    /**
      * 初始化reqeust
      */
     public function __construct()
@@ -148,18 +153,18 @@ class request implements requestInterface
 
     /**
      * 解析url参数及信息
-     * @throws \ErrorException
      * @return boolean
+     * @throws \ErrorException
      */
     public function parseUrl()
     {
-        $uri        = defined('CLI_URI') ? CLI_URI : parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $checkStr   = substr($uri,0,1);
-        in_array($checkStr, ['/', '\\']) || $uri = '/'.$uri;
+        $uri      = defined('CLI_URI') ? CLI_URI : parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $checkStr = substr($uri, 0, 1);
+        in_array($checkStr, ['/', '\\']) || $uri = '/' . $uri;
         //判断basename
-        $baseName   = basename($uri);
-        $staticFix  = config('web.page_fix', '.html');
-        $currentFix = strtolower(strrchr($baseName, '.'));
+        $baseName     = basename($uri);
+        $staticFix    = config('web.page_fix', '.html');
+        $currentFix   = strtolower(strrchr($baseName, '.'));
         $isStaticMode = ($currentFix == $staticFix) ? true : false;
         $isStaticMode && $uri = dirname($uri);
         $arr        = explode('/', $uri);
@@ -233,6 +238,27 @@ class request implements requestInterface
             'controller' => $this->controller,
             'action'     => $this->action,
         ];
+    }
+
+    /**
+     * 设置视图真正使用的路由信息
+     * @param array  $realRouteInfo 视图真正使用的路由信息
+     * @return void
+     */
+    public function setViewRouteInfo($realRouteInfo)
+    {
+        $this->viewRouteInfo = $realRouteInfo;
+    }
+
+    /**
+     * 获取视图真正路由信息
+     */
+    public function getViewRouteInfo()
+    {
+        $info = $this->viewRouteInfo;
+        empty($info) || $info = $this->getRouteInfo();
+
+        return $info;
     }
 
 }

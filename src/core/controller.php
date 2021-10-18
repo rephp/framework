@@ -1,6 +1,8 @@
 <?php
 namespace rephp\core;
 
+use rephp\component\container\container;
+
 /**
  * controller抽象类
  * @package rephp\ext
@@ -38,7 +40,30 @@ abstract class controller
      */
     public function display()
     {
-        return view::display($this->layout, $this->forward, $this->template);
+        $className = get_called_class();
+        //计算模块
+        $isCli = defined('CLI_URI');
+        if($isCli){
+            preg_match_all("/\\\\console\\\\(.*)\\\\/iU", $className, $result);
+        }else{
+            preg_match_all("/\\\\modules\\\\(.*)\\\\controller/i", $className, $result);
+        }
+        $module = $result[1][0];
+
+        //计算控制器
+        $controller = basename($className);
+        $controller = str_replace(strrchr($controller, 'Controller'),'', $controller);
+        //计算方法名
+        $dbt       = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        $action    = isset($dbt[1]['function']) ? $dbt[1]['function'] : null;
+
+        $realRouteInfo = [
+            'module'     => $module,
+            'controller' => $controller,
+            'action'     => $action,
+        ];
+
+        return view::display($this->layout, $this->forward, $this->template, $realRouteInfo);
     }
 
     /**
@@ -49,7 +74,6 @@ abstract class controller
      */
     public function redirect($url)
     {
-        $className = get_called_class();
         //如果不是以http开头的，则自动调用重写类,保证是http开头的，避免死循环重定向
         strstr($url, 'http:') || $url = makeUrl($url);
         header('Location:'.$url);
