@@ -120,7 +120,7 @@ class view
         file_exists($fullFileName) || $fullFileName = APP_PATH . 'common/view/' . $loadType . '/' . $fileName;
         //如果还不存在则直接抛出错误
         if (!file_exists($fullFileName)) {
-            throw new \Exception('视图文件:' . $module . 'view/' . $loadType . '/' . $fileName . '不存在');
+            throw new \Exception('视图文件:' . fullFileName . '不存在');
         }
         //加载数据
         extract(self::$vars, EXTR_REFS);
