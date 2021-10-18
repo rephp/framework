@@ -52,7 +52,7 @@ abstract class controller
         $module = $result[1][0];
 
         //计算控制器
-        $controller = basename($className);
+        $controller = str_replace('\\', '', strrchr($className, '\\controller\\'));
         $controller = replaceRightStr($controller, 'Controller');
         //计算方法名
         $dbt    = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
