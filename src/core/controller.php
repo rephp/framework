@@ -63,7 +63,7 @@ abstract class controller
             'action'     => $action,
         ];
 
-        return view::display($this->layout, $this->forward, $this->template, $realRouteInfo);
+        return view::display($this->layout, $this->forward, $realRouteInfo);
     }
 
     /**

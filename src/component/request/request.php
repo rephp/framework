@@ -256,7 +256,7 @@ class request implements requestInterface
     public function getViewRouteInfo()
     {
         $info = $this->viewRouteInfo;
-        empty($info) || $info = $this->getRouteInfo();
+        empty($info) && $info = $this->getRouteInfo();
 
         return $info;
     }
