@@ -84,13 +84,14 @@ abstract class model extends redb
         //执行日志处理
         foreach($sqlList as $index=>$item){
             empty($logFileName) || file_put_contents($logFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$item['time'].' | SQL:'.$item['sql']."\n-\n");
-            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time']);
+            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time'], 'common');
         }
         //错误日志处理
         $errorLogList = $this->getErrorLog();
         foreach($errorLogList as $index=>$item){
             empty($errorLogFileName) || file_put_contents($errorLogFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$item['time'].' | SQL:'.$item['sql'].' | 错误:'.$item['error']."\n-\n");
-            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time']);
+            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time'], 'error');
+            container::getContainer()->get('debugbar')->error($item['error']);
         }
     }
 
