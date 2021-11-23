@@ -41,10 +41,10 @@ final class debugV1 implements debugInterface
         ini_set('log_errors', 'On');
         ini_set('log_errors_max_len', 1024);
         //日志位置
-        $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
-        in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
-        $logFileName = $logPath . date('Y/m/d', time()) . '.log';
-        is_dir(dirname($logFileName)) || mkdir(dirname($logFileName), 0777, true);
+        $logFileName = createLogPath('php');
+        if(empty($logFileName)){
+            throw new \Exception('创建日志目录失败');
+        }
         ini_set('error_log', $logFileName);
 
         return true;

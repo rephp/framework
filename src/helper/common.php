@@ -178,3 +178,18 @@ function replaceRightStr($sourceStr, $filterFix = '')
     ($filterFix == $cuteStr) && $sourceStr = substr($sourceStr, 0, -strlen($filterFix));
     return $sourceStr;
 }
+
+/**
+ * 创建日志目录返回文件名
+ * @param string $logType  日志类型
+ * @return bool|string
+ */
+function createLogPath($logType='php')
+{
+    $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
+    in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
+    $logFileName = $logPath . $logType . date('Y/m/d', time()) . '.log';
+    $res = is_dir(dirname($logFileName)) ? true : mkdir(dirname($logFileName), 0777, true);
+
+    return $res ? $logFileName : false;
+}
