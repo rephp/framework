@@ -34,7 +34,23 @@ abstract class model extends redb
      */
     public static function db($configList = [])
     {
-        return parent::db($configList);
+        return new static($configList);
+    }
+
+    /**
+     * 获取多条数据+条件筛选下的总记录数
+     * @return array
+     */
+    public function fetch()
+    {
+        $orm   = $this->getOrmModel();
+        $list  = $this->all();
+		self::doSqlLog();
+        $count = $this->setOrmModel($orm)->count();
+        return [
+            'list'  => $list,
+            'count' => $count,
+        ];
     }
 
     /**
@@ -64,12 +80,21 @@ abstract class model extends redb
         return container::getContainer()->call($className, $methodName, $arguments);
     }
 
-    /**
-     * 销毁之前先追加sql信息
+   /**
+     * 处理SQL日志
+     * @throws \Exception
      */
     public function __destruct()
     {
-        $sqlList = $this->getLog();
+        self::doSqlLog();
+    }
+
+    /**
+     * 处理SQL日志
+     * @throws \Exception
+     */
+    protected function doSqlLog()
+    {
         $isDebug = config('config.debug.is_debug', false);
         if($isDebug){
             $logFileName = createLogPath('mysql');
@@ -81,17 +106,21 @@ abstract class model extends redb
                 throw new \Exception('创建错误日志目录失败');
             }
         }
-        //执行日志处理
-        foreach($sqlList as $index=>$item){
-            empty($logFileName) || file_put_contents($logFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$item['time'].' | SQL:'.$item['sql']."\n-\n");
-            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time'], 'common');
-        }
         //错误日志处理
-        $errorLogList = $this->getErrorLog();
-        foreach($errorLogList as $index=>$item){
-            empty($errorLogFileName) || file_put_contents($errorLogFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$item['time'].' | SQL:'.$item['sql'].' | 错误:'.$item['error']."\n-\n");
-            container::getContainer()->get('debugbar')->sql($item['sql'], $item['time'], 'error');
-            container::getContainer()->get('debugbar')->error($item['error']);
+        $errorLogInfo = $this->getLastErrorLog();
+        if(!empty($errorLogInfo)){
+            empty($errorLogFileName) || file_put_contents($errorLogFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$errorLogInfo['time'].' | SQL:'.$errorLogInfo['sql'].' | 错误:'.$errorLogInfo['error']."\n-\n");
+            container::getContainer()->get('debugbar')->sql($errorLogInfo['sql'], $errorLogInfo['time'], 'error');
+            container::getContainer()->get('debugbar')->error($errorLogInfo['error']);
+            //一次执行，只能产生一条sql，故如果这里报错则不用运行下面正确sql
+            return false;
+        }
+
+        $sqlInfo = $this->getLastLog();
+        //执行日志处理
+        if(!empty($sqlInfo)){
+            empty($logFileName) || file_put_contents($logFileName, '当前时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$sqlInfo['time'].' | SQL:'.$sqlInfo['sql']."\n-\n");
+            container::getContainer()->get('debugbar')->sql($sqlInfo['sql'], $sqlInfo['time'], 'common');
         }
     }
 

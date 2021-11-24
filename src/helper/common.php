@@ -188,7 +188,7 @@ function createLogPath($logType='php')
 {
     $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
     in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
-    $logFileName = $logPath . $logType . date('Y/m/d', time()) . '.log';
+    $logFileName = $logPath . $logType . '/' . date('Y/m/d', time()) . '.log';
     $res = is_dir(dirname($logFileName)) ? true : mkdir(dirname($logFileName), 0777, true);
 
     return $res ? $logFileName : false;
