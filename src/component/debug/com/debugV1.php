@@ -38,16 +38,31 @@ final class debugV1 implements debugInterface
     {
         error_reporting(0);
         ini_set('display_errors', 'Off');
-        ini_set('log_errors', 'On');
-        ini_set('log_errors_max_len', 1024);
+        return set_exception_handler([__CLASS__, 'setExceptionHandler']);
+    }
+
+    /**
+     * 接管错误日志写入日志文件
+     * @param $e
+     * @throws \Exception
+     */
+    public static function setExceptionHandler($e)
+    {
         //日志位置
         $logFileName = createLogPath('php');
         if(empty($logFileName)){
             throw new \Exception('创建日志目录失败');
         }
-        ini_set('error_log', $logFileName);
+        $prefix = 'Exception:'."\n";
+        if ($e instanceof Error){
+            $prefix = 'Error:'."\n";
+        }
+        $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
+        $logContent .= '    信息:'.$e->getMessage()."\n";
+        $logContent .= '    文件:'.$e->getFile()."\n";
+        $logContent .= '    行号:'.$e->getLine()."\n--\n";
 
-        return true;
+        file_put_contents($logFileName, $logContent, 8);
     }
 
 }
