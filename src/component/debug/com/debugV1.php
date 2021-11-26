@@ -54,14 +54,14 @@ final class debugV1 implements debugInterface
             throw new \Exception('创建日志目录失败');
         }
         $prefix = 'Exception:'."\n";
-        if ($e instanceof Error){
+        if ($e instanceof \Error){
             $prefix = 'Error:'."\n";
         }
         $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
         $logContent .= '    信息:'.$e->getMessage()."\n";
         $logContent .= '    文件:'.$e->getFile()."\n";
         $logContent .= '    行号:'.$e->getLine()."\n";
-        if ($e instanceof Error) {
+        if ($e instanceof \Error) {
             $logContent .= '    追踪:' . print_r($e->getTrace(), true) . "\n";
         }
         $logContent .= "--\n";
