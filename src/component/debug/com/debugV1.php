@@ -60,7 +60,11 @@ final class debugV1 implements debugInterface
         $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
         $logContent .= '    信息:'.$e->getMessage()."\n";
         $logContent .= '    文件:'.$e->getFile()."\n";
-        $logContent .= '    行号:'.$e->getLine()."\n--\n";
+        $logContent .= '    行号:'.$e->getLine()."\n";
+        if ($e instanceof Error) {
+            $logContent .= '    追踪:' . print_r($e->getTrace(), true) . "\n";
+        }
+        $logContent .= "--\n";
 
         file_put_contents($logFileName, $logContent, 8);
     }
