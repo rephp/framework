@@ -51,7 +51,7 @@ final class debugV1 implements debugInterface
         //日志位置
         $logFileName = getLogFileName('php');
         if(empty($logFileName)){
-            throw new \Exception('创建日志目录失败');
+            throw new \Exception('创建PHP日志目录失败');
         }
         $prefix = 'Exception:'."\n";
         if ($e instanceof \Error){
