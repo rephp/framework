@@ -80,7 +80,7 @@ abstract class model extends redb
         return container::getContainer()->call($className, $methodName, $arguments);
     }
 
-   /**
+    /**
      * 处理SQL日志
      * @throws \Exception
      */
@@ -95,33 +95,57 @@ abstract class model extends redb
      */
     protected function doSqlLog()
     {
-        $isDebug = config('config.debug.is_debug', false);
-        if($isDebug){
-            $logFileName = createLogPath('mysql');
-            if(empty($logFileName)){
-                throw new \Exception('创建日志目录失败');
-            }
-            $errorLogFileName = createLogPath('mysql_error');
-            if(empty($errorLogFileName)){
-                throw new \Exception('创建错误日志目录失败');
-            }
-        }
-        //错误日志处理
-        $errorLogInfo = $this->getLastErrorLog();
-        if(!empty($errorLogInfo)){
-            empty($errorLogFileName) || file_put_contents($errorLogFileName, '时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$errorLogInfo['time'].' | SQL:'.$errorLogInfo['sql'].' | 错误:'.print_r($errorLogInfo['error'], true)."\n-\n", 8);
-            container::getContainer()->get('debugbar')->sql($errorLogInfo['sql'], $errorLogInfo['time'], 'error');
-            container::getContainer()->get('debugbar')->error($errorLogInfo['error']);
-            //一次执行，只能产生一条sql，故如果这里报错则不用运行下面正确sql
-            return false;
+        $sqlInfo = $this->getLastErrorLog();
+        empty($sqlInfo) && $sqlInfo = $this->getLastLog();
+        if(!empty($sqlInfo)){
+            $this->setSqlToDebugbar($sqlInfo);
+            $this->saveSqlLog($sqlInfo);
         }
 
-        $sqlInfo = $this->getLastLog();
-        //执行日志处理
-        if(!empty($sqlInfo)){
-            empty($logFileName) || file_put_contents($logFileName, '时间:'.date('Y-m-d H:i:s', time()).' | 运行时间:'.$sqlInfo['time'].' | SQL:'.$sqlInfo['sql']."\n-\n", 8);
-            container::getContainer()->get('debugbar')->sql($sqlInfo['sql'], $sqlInfo['time'], 'common');
+        return true;
+    }
+
+    /**
+     * 将sql信息加载到debugbar
+     * @param array $sqlInfo sql执行信息
+     * @return bool
+     */
+    protected function setSqlToDebugbar($sqlInfo)
+    {
+        $isDebug = config('config.debug.is_debug', false);
+        if(!$isDebug){
+            return false;
         }
+        $type = empty($sqlInfo['error']) ? 'common' : 'error';
+        container::getContainer()->get('debugbar')->sql($sqlInfo['sql'], $sqlInfo['time'], $type);
+        empty($sqlInfo['error']) || container::getContainer()->get('debugbar')->error($sqlInfo['error']);
+
+        return true;
+    }
+
+    /**
+     * 保存sql日志
+     * @param  array $sqlInfo sql执行信息
+     * @return false|int
+     * @throws \Exception
+     */
+    protected function saveSqlLog($sqlInfo)
+    {
+        $isSaveSql = config('config.debug.is_save_sql', false);
+        if(!$isSaveSql){
+            return false;
+        }
+        $logFileName = getLogFileName('mysql');
+        if(empty($logFileName)){
+            throw new \Exception('创建SQL日志目录失败');
+        }
+        $logContent  = '时间:'.date('Y-m-d H:i:s', time())."\n";
+        $logContent .= '耗时:'.$sqlInfo['time'].'秒'."\n";
+        $logContent .= 'SQL:'.$sqlInfo['sql']."\n";
+        isset($sqlInfo['error']) && $logContent .= '错误:'.print_r($sqlInfo['error'], true)."\n";
+        $logContent .= '---'."\n";
+
+        return file_put_contents($logFileName, $logContent, FILE_APPEND);
     }
 
 }

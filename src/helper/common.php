@@ -184,7 +184,7 @@ function replaceRightStr($sourceStr, $filterFix = '')
  * @param string $logType  日志类型
  * @return bool|string
  */
-function createLogPath($logType='php')
+function getLogFileName($logType='php')
 {
     $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
     in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';

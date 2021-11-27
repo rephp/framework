@@ -49,7 +49,7 @@ final class debugV1 implements debugInterface
     public static function setExceptionHandler($e)
     {
         //日志位置
-        $logFileName = createLogPath('php');
+        $logFileName = getLogFileName('php');
         if(empty($logFileName)){
             throw new \Exception('创建日志目录失败');
         }
