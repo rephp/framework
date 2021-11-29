@@ -142,7 +142,10 @@ abstract class model extends redb
         $logContent  = '时间:'.date('Y-m-d H:i:s', time())."\n";
         $logContent .= '耗时:'.$sqlInfo['time'].'秒'."\n";
         $logContent .= 'SQL:'.$sqlInfo['sql']."\n";
-        isset($sqlInfo['error']) && $logContent .= '错误:'.print_r($sqlInfo['error'], true)."\n";
+        if(isset($sqlInfo['error'])){
+            $logContent .= '错误编号:'.$sqlInfo['error']['code']."\n";
+            $logContent .= '错误信息:'.$sqlInfo['error']['msg']."\n";
+        }
         $logContent .= '---'."\n";
 
         return file_put_contents($logFileName, $logContent, FILE_APPEND);
