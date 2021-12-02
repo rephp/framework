@@ -193,3 +193,12 @@ function getLogFileName($logType='php')
 
     return $res ? $logFileName : false;
 }
+
+/**
+ * 多个连续空格只保留一个
+ * @param string $string 待转换的字符串
+ * @return string
+ */
+function spaceUnique($string){
+    return preg_replace("/\s(?=\s)/", "\\1", $string);
+}
