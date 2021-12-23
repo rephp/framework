@@ -17,5 +17,4 @@ interface debugInterface
      * @return bool
      */
     public function closeDebug();
-
 }

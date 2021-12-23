@@ -130,7 +130,6 @@ class container implements ContainerInterface, rephpContainerInterfaces
         } catch (Exception $e) {
             throw new containerException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
-
     }
 
     /**

@@ -4,7 +4,6 @@ namespace rephp\core;
 use rephp\component\container\container;
 use rephp\redb\redb;
 
-
 /**
  * model抽象类
  * @package rephp\ext
@@ -16,7 +15,7 @@ abstract class model extends redb
     /**
      * 初始化模型
      */
-    public function __construct($configList=[])
+    public function __construct($configList = [])
     {
         empty($configList) && $configList = config('database');
         //获取数据库配置
@@ -45,7 +44,7 @@ abstract class model extends redb
     {
         $orm   = $this->getOrmModel();
         $list  = $this->all();
-		self::doSqlLog();
+        self::doSqlLog();
         $count = $this->setOrmModel($orm)->count();
         return [
             'list'  => $list,
@@ -65,15 +64,15 @@ abstract class model extends redb
         $module = $this->getModuleName();
 
         $pos = strpos($calldClassName, 'app\\common\\');
-        if($pos === false){
+        if ($pos === false) {
             $className = str_replace('app\\modules\\' . $module . '\\model\\', 'app\\common\\model\\', $calldClassName);
-        }else{
+        } else {
             $className = str_replace('app\\common\\model\\', 'app\\modules\\' . $module . '\\model\\', $calldClassName);
         }
-        if(!class_exists($className)){
+        if (!class_exists($className)) {
             throw new \Exception('model not exist:' . $calldClassName, 404);
         }
-        if(!method_exists($className, $methodName)){
+        if (!method_exists($className, $methodName)) {
             throw new \Exception('method not exist:'.$calldClassName. '->'.$methodName, 404);
         }
 
@@ -97,7 +96,7 @@ abstract class model extends redb
     {
         $sqlInfo = $this->getLastErrorLog();
         empty($sqlInfo) && $sqlInfo = $this->getLastLog();
-        if(!empty($sqlInfo)){
+        if (!empty($sqlInfo)) {
             $this->setSqlToDebugbar($sqlInfo);
             $this->saveSqlLog($sqlInfo);
         }
@@ -113,7 +112,7 @@ abstract class model extends redb
     protected function setSqlToDebugbar($sqlInfo)
     {
         $isDebug = config('config.debug.is_debug', false);
-        if(!$isDebug){
+        if (!$isDebug) {
             return false;
         }
         $type = empty($sqlInfo['error']) ? 'common' : 'error';
@@ -132,17 +131,17 @@ abstract class model extends redb
     protected function saveSqlLog($sqlInfo)
     {
         $isSaveSql = config('config.debug.is_save_sql', false);
-        if(!$isSaveSql){
+        if (!$isSaveSql) {
             return false;
         }
         $logFileName = getLogFileName('mysql');
-        if(empty($logFileName)){
+        if (empty($logFileName)) {
             throw new \Exception('创建SQL日志目录失败');
         }
         $logContent  = '时间:'.date('Y-m-d H:i:s', time())."\n";
         $logContent .= '耗时:'.$sqlInfo['time'].'秒'."\n";
         $logContent .= 'SQL:'.$sqlInfo['sql']."\n";
-        if(isset($sqlInfo['error'])){
+        if (isset($sqlInfo['error'])) {
             $logContent .= '错误编号:'.$sqlInfo['error']['code']."\n";
             $logContent .= '错误信息:'.$sqlInfo['error']['msg']."\n";
         }
@@ -150,5 +149,4 @@ abstract class model extends redb
 
         return file_put_contents($logFileName, $logContent, FILE_APPEND);
     }
-
 }

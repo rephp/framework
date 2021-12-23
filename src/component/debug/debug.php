@@ -16,7 +16,7 @@ class debug implements debugInterface
      */
     public function __construct()
     {
-        if(class_exists('\\rephp\\debugbar\\debugbar')){
+        if (class_exists('\\rephp\\debugbar\\debugbar')) {
             container::getContainer()->bind('debugbar', '\\rephp\\debugbar\\debugbar');
         }
         $isDebug = config('config.debug.is_debug', false);
@@ -55,5 +55,4 @@ class debug implements debugInterface
         }
         return true;
     }
-
 }

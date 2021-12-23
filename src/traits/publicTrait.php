@@ -61,5 +61,4 @@ trait publicTrait
         class_exists($fullName) || $fullName =  str_replace('\\rephp\\lib\\tool\\', '\\app\\lib\\', $fullName);
         return container::getContainer()->bind($fullName, $fullName, $params);
     }
-
 }

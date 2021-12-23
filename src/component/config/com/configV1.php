@@ -106,5 +106,4 @@ final class configV1 implements configInterface
 
         return $result;
     }
-
 }

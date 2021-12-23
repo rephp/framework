@@ -36,5 +36,4 @@ interface routeInterface
      * @throws \rephp\component\container\exceptions\notFoundException
      */
     public static function __callStatic($name, $params);
-
 }

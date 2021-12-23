@@ -14,5 +14,4 @@ class cmd
         require 'bootstraps/console.php';
         return $this;
     }
-
 }

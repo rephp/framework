@@ -184,7 +184,7 @@ function replaceRightStr($sourceStr, $filterFix = '')
  * @param string $logType  日志类型
  * @return bool|string
  */
-function getLogFileName($logType='php')
+function getLogFileName($logType = 'php')
 {
     $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
     in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
@@ -199,6 +199,7 @@ function getLogFileName($logType='php')
  * @param string $string 待转换的字符串
  * @return string
  */
-function spaceUnique($string){
+function spaceUnique($string)
+{
     return preg_replace("/\s(?=\s)/", "\\1", $string);
 }

@@ -260,5 +260,4 @@ class request implements requestInterface
 
         return $info;
     }
-
 }

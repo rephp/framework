@@ -24,5 +24,4 @@ interface configInterface
      * @return boolean
      */
     public function set($baseName, $name, $value = '');
-
 }

@@ -20,7 +20,7 @@ final class debugV1 implements debugInterface
         error_reporting(E_ALL & ~E_NOTICE);
         ini_set('display_errors', 'Off');
         $isCli = defined('CLI_URI');
-        if($isCli){
+        if ($isCli) {
             return true;
         }
         $whoops = new \Whoops\Run();
@@ -50,11 +50,11 @@ final class debugV1 implements debugInterface
     {
         //日志位置
         $logFileName = getLogFileName('php');
-        if(empty($logFileName)){
+        if (empty($logFileName)) {
             throw new \Exception('创建PHP日志目录失败');
         }
         $prefix = 'Exception:'."\n";
-        if ($e instanceof \Error){
+        if ($e instanceof \Error) {
             $prefix = 'Error:'."\n";
         }
         $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
@@ -64,7 +64,7 @@ final class debugV1 implements debugInterface
         if ($e instanceof \Error) {
             $logContent .= '    追踪:'."\n";
             $traceList = $e->getTrace();
-            foreach($traceList as $traceInfo){
+            foreach ($traceList as $traceInfo) {
                 $file  = empty($traceInfo['file']) ? '' : $traceInfo['file'];
                 empty($file) && $file = empty($traceInfo['class']) ? '' : $traceInfo['class'];
                 $logContent .= '        '.$file.'['.$traceInfo['line'].'] => function:'.$traceInfo['function']."\n";
@@ -74,5 +74,4 @@ final class debugV1 implements debugInterface
 
         file_put_contents($logFileName, $logContent, 8);
     }
-
 }

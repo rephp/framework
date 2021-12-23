@@ -81,5 +81,4 @@ abstract class controller
         header('Location:' . $url);
         exit(0);
     }
-
 }

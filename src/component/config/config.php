@@ -100,5 +100,4 @@ class config implements configInterface
     {
         return $this->getCoreConfig()->set($baseName, $name, $value);
     }
-
 }

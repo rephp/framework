@@ -44,7 +44,7 @@ class view
      * @param array  $realRouteInfo  真正路由信息
      * @return string
      */
-    public static function display($layout = '', $forward = '', $realRouteInfo=[])
+    public static function display($layout = '', $forward = '', $realRouteInfo = [])
     {
         $request = container::getContainer()->get('request');
         $isJson  = $request->get('_json');
@@ -126,5 +126,4 @@ class view
         extract(self::$vars, EXTR_REFS);
         include($fullFileName);
     }
-
 }

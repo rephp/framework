@@ -76,5 +76,4 @@ final class macawRoute implements routeInterface
     {
         return Macaw::__callstatic($name, $params);
     }
-
 }

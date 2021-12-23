@@ -93,5 +93,4 @@ class event implements eventInterface
         $class = container::getContainer()->get('coreEvent');
         return $class::trigger(...$params);
     }
-
 }

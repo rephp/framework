@@ -23,19 +23,18 @@ abstract class logic
         $module = $this->getModuleName();
 
         $pos = strpos($calldClassName, 'app\\common\\');
-        if($pos === false){
+        if ($pos === false) {
             $className = str_replace('app\\modules\\' . $module . '\\logic\\', 'app\\common\\logic\\', $calldClassName);
-        }else{
+        } else {
             $className = str_replace('app\\common\\logic\\', 'app\\modules\\' . $module . '\\logic\\', $calldClassName);
         }
-        if(!class_exists($className)){
-            throw new \Exception( 'logic not exist:' . $calldClassName, 404);
+        if (!class_exists($className)) {
+            throw new \Exception('logic not exist:' . $calldClassName, 404);
         }
-        if(!method_exists($className, $methodName)){
-            throw new \Exception( 'method not exist: '.$calldClassName. '->'.$methodName, 404);
+        if (!method_exists($className, $methodName)) {
+            throw new \Exception('method not exist: '.$calldClassName. '->'.$methodName, 404);
         }
 
         return container::getContainer()->call($className, $methodName, $arguments);
     }
-
 }

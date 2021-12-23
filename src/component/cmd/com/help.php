@@ -49,11 +49,11 @@ class help
         foreach ($cliSystemRouteList as $command => $item) {
             $newCommand = empty($newCliRouteList[$item['class']]) ? $command : $newCliRouteList[$item['class']] . ', ' . $command;
             empty($item['desc']) && $item['desc'] = '';
-			if(empty($item['class'])){
-				$newCliRouteList[] = ['command' => $newCommand, 'desc' => $item['desc']];
-			}else{
-				$newCliRouteList[$item['class']] = ['command' => $newCommand, 'desc' => $item['desc']];
-			}
+            if (empty($item['class'])) {
+                $newCliRouteList[] = ['command' => $newCommand, 'desc' => $item['desc']];
+            } else {
+                $newCliRouteList[$item['class']] = ['command' => $newCommand, 'desc' => $item['desc']];
+            }
         }
         foreach ($newCliRouteList as $item) {
             $output->tab()->success($item['command'], 1)->info($item['desc'], 1, 1);
@@ -76,11 +76,11 @@ class help
         foreach ($routeConfigList as $command => $item) {
             $newCommand = empty($routeConfigList[$item['class']]) ? $command : $routeConfigList[$item['class']] . ', ' . $command;
             empty($item['desc']) && $item['desc'] = '';
-			if(empty($item['class'])){
-				$newRouteList[] = ['command' => $newCommand, 'desc' => $item['desc']];
-			}else{
-				$newRouteList[$item['class']] = ['command' => $newCommand, 'desc' => $item['desc']];
-			}
+            if (empty($item['class'])) {
+                $newRouteList[] = ['command' => $newCommand, 'desc' => $item['desc']];
+            } else {
+                $newRouteList[$item['class']] = ['command' => $newCommand, 'desc' => $item['desc']];
+            }
         }
         foreach ($newRouteList as $item) {
             $output->tab()->success($item['command'], 1)->info($item['desc'], 1, 1);
@@ -90,5 +90,4 @@ class help
 
         return $output;
     }
-
 }

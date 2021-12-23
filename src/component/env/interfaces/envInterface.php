@@ -14,7 +14,7 @@ interface envInterface
      * @param string $default 默认值
      * @return mixed
      */
-    public function get($name, $default='');
+    public function get($name, $default = '');
 
     /**
      * 加载配置文件
@@ -23,5 +23,4 @@ interface envInterface
      * @throws \Exception
      */
     public function loadFile($fileName);
-
 }

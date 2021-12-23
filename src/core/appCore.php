@@ -94,5 +94,4 @@ class appCore implements appCoreInterface
     {
         return self::$appPath;
     }
-
 }

@@ -83,12 +83,10 @@ class app
      */
     private function preBindCoreComponent()
     {
-        foreach($this->rephpConfig as $bindName=>$class){
+        foreach ($this->rephpConfig as $bindName => $class) {
             container::getContainer()->bind($bindName, $class);
         }
 
         return true;
     }
-
-
 }

@@ -58,8 +58,8 @@ final class eventV1 implements eventInterface
     public static function getAllEventName()
     {
         $res = [];
-        if(is_array(self::$events)){
-            foreach(self::$events as $eventName=>$callback){
+        if (is_array(self::$events)) {
+            foreach (self::$events as $eventName => $callback) {
                 $res[] = $eventName;
             }
         }
@@ -120,5 +120,4 @@ final class eventV1 implements eventInterface
 
         return true;
     }
-
 }

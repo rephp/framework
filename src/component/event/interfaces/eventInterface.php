@@ -1,5 +1,6 @@
 <?php
 namespace rephp\component\event\interfaces;
+
 /**
  * 事件接口
  * @package rephp\component\event\interfaces
@@ -37,5 +38,4 @@ interface eventInterface
      * @return bool
      */
     public static function trigger(...$params);
-
 }

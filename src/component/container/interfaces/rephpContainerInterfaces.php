@@ -1,6 +1,7 @@
 <?php
 
 namespace rephp\component\container\interfaces;
+
 /**
  * Interface rephpContainerInterfaces
  * @package rephp\component\container
@@ -29,7 +30,7 @@ interface rephpContainerInterfaces
      * @param boolean $rebind     是否强制绑定
      * @return mixed
      */
-    public function bind($name, $className, $userParams , $rebind );
+    public function bind($name, $className, $userParams, $rebind);
 
     /**
      * 执行类的方法
@@ -39,5 +40,4 @@ interface rephpContainerInterfaces
      * @return [type]             [description]
      */
     public function call($className, $methodName, $params);
-
 }

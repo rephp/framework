@@ -28,5 +28,4 @@ interface appCoreInterface
      * @return string
      */
     public function getAppPath();
-
 }

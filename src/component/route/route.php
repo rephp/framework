@@ -75,7 +75,7 @@ class route
         file_exists($routeConfigFileName) && $routeMap = require $routeConfigFileName;
         $routeMap = (array)$routeMap;
         //追加内置命令行路由
-        if($isCli){
+        if ($isCli) {
             $cliSystemRouteList = container::getContainer()->get('config')->get('console.cli_system_route_list');
             $cliSystemRouteList = empty($cliSystemRouteList) ? [] : (array)$cliSystemRouteList;
             $routeMap           = array_merge($routeMap, $cliSystemRouteList);
@@ -112,9 +112,9 @@ class route
         }
         //整理校验
         isset($routeConfig['class']) || $routeConfig['class'] = '';
-        if($isCli){
+        if ($isCli) {
             $routeConfig['method'] = 'get';
-        }else{
+        } else {
             isset($routeConfig['method']) || $routeConfig['method'] = 'any';
             in_array($routeConfig['method'], $this->allowMethod) || $routeConfig['method'] = 'any';
         }
