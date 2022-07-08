@@ -13,6 +13,25 @@ function dump(...$params)
 }
 
 /**
+ * 获取容器内指定对象
+ * @param string $name 实例名称
+ * @param string $class  类绝对地址
+ * @param array   $initClassParams 自定义参数（类对象参数除外的普通参数）
+ * @param boolean $rebind     是否强制绑定
+ * @return mixed
+ */
+function getCom($name, $class='', $initClassParams=[], $rebind = false)
+{
+    if(empty($name)){
+        return false;
+    }
+    if(empty($class)){
+        return container::getContainer()->has($name) ? container::getContainer()->get($name) : false;
+    }
+    return container::getContainer()->bind($name, $class, $initClassParams, $rebind);
+}
+
+/**
  * 获取env配置信息
  * @param string $name    env配置项名字
  * @param string $default 默认值
