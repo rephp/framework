@@ -19,7 +19,7 @@ abstract class model extends redb
     {
         empty($configList) && $configList = config('database');
         //获取数据库配置
-        $db = $this->getDb();
+        $db = self::getDb();
         if (!isset($configList[$db])) {
             throw new \Exception('当前模型db配置错误，请检查数据库配置项的key', 1404);
         }
