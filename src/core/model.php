@@ -37,6 +37,55 @@ abstract class model extends redb
     }
 
     /**
+     * 开启事务-快捷方式
+     * @return \rephp\redb\query\cmd
+     */
+    public static function startTrans()
+    {
+        return self::db()->getCmd()->startTrans();
+    }
+
+    /**
+     * 事务提交-快捷方式
+     * @return \rephp\redb\query\cmd
+     */
+    public static function commit()
+    {
+        return self::db()->getCmd()->commit();
+    }
+
+    /**
+     * 事务回滚-快捷方式
+     * @return \rephp\redb\query\cmd
+     */
+    public static function rollBack()
+    {
+        return self::db()->getCmd()->rollBack();
+    }
+
+
+    /**
+     * 插入数据
+     * @param array $insertData array
+     * @return int
+     */
+    public static function insert($insertData)
+    {
+        return self::db()->insert($insertData);
+    }
+
+    /**
+     * 更新数据
+     * @param array $where      查询条件
+     * @param array $updateData 更新数据
+     * @return bool
+     */
+    public static function update($where, $updateData)
+    {
+        return self::db()->where($where)->data($updateData)->update();
+    }
+
+    /**
      * 获取多条数据+条件筛选下的总记录数
      * @return array
      */
