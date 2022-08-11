@@ -44,6 +44,16 @@ abstract class controller
     }
 
     /**
+     * 输出json结果
+     * @param int    $code  状态编码
+     * @param string $msg   结果提示语
+     */
+    public function result($code=200, $msg='success')
+    {
+        $this->json(['code' => $code, 'msg' => $msg]);
+    }
+
+    /**
      * 加载视图
      * @param string $viewPath       视图文件路径，仅限当前模版内。如index/index.php
      * @param string $layoutFileName 布局文件名 如
