@@ -34,6 +34,16 @@ abstract class controller
     }
 
     /**
+     * 输出json
+     * @param mixed $data  要输出的数据
+     * @return void
+     */
+    public function json($data)
+    {
+        exit(json_encode( $data, 448 ));
+    }
+
+    /**
      * 加载视图
      * @param string $viewPath       视图文件路径，仅限当前模版内。如index/index.php
      * @param string $layoutFileName 布局文件名 如
