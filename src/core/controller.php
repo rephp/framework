@@ -35,22 +35,23 @@ abstract class controller
 
     /**
      * 输出json
-     * @param mixed $data  要输出的数据
+     * @param mixed $data 要输出的数据
      * @return void
      */
     public function json($data)
     {
-        exit(json_encode( $data, 448 ));
+        exit(json_encode($data, 448));
     }
 
     /**
      * 输出json结果
-     * @param int    $code  状态编码
-     * @param string $msg   结果提示语
+     * @param int    $code    状态编码
+     * @param string $msg     结果提示语
+     * @param array  $extData 扩展数据
      */
-    public function result($code=200, $msg='success')
+    public function result($code = 200, $msg = 'success', $extData = [])
     {
-        $this->json(['code' => $code, 'msg' => $msg]);
+        $this->json(['code' => $code, 'msg' => $msg, 'data' => $extData]);
     }
 
     /**
