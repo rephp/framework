@@ -14,18 +14,18 @@ function dump(...$params)
 
 /**
  * 获取容器内指定对象
- * @param string $name 实例名称
- * @param string $class  类绝对地址
+ * @param string  $name            实例名称
+ * @param string  $class           类绝对地址
  * @param array   $initClassParams 自定义参数（类对象参数除外的普通参数）
- * @param boolean $rebind     是否强制绑定
+ * @param boolean $rebind          是否强制绑定
  * @return mixed
  */
-function getCom($name, $class='', $initClassParams=[], $rebind = false)
+function getCom($name, $class = '', $initClassParams = [], $rebind = false)
 {
-    if(empty($name)){
+    if (empty($name)) {
         return false;
     }
-    if(empty($class)){
+    if (empty($class)) {
         return container::getContainer()->has($name) ? container::getContainer()->get($name) : false;
     }
     return container::getContainer()->bind($name, $class, $initClassParams, $rebind);
@@ -200,7 +200,7 @@ function replaceRightStr($sourceStr, $filterFix = '')
 
 /**
  * 创建日志目录返回文件名
- * @param string $logType  日志类型
+ * @param string $logType 日志类型
  * @return bool|string
  */
 function getLogFileName($logType = 'php')
@@ -208,7 +208,7 @@ function getLogFileName($logType = 'php')
     $logPath = config('config.debug.log_path', ROOT_PATH . 'runtime/log/');
     in_array(substr($logPath, -1), ['/', '\\']) || $logPath .= '/';
     $logFileName = $logPath . $logType . '/' . date('Y/m/d', time()) . '.log';
-    $res = is_dir(dirname($logFileName)) ? true : mkdir(dirname($logFileName), 0777, true);
+    $res         = is_dir(dirname($logFileName)) ? true : mkdir(dirname($logFileName), 0777, true);
 
     return $res ? $logFileName : false;
 }
