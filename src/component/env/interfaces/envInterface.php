@@ -7,7 +7,6 @@ namespace rephp\component\env\interfaces;
  */
 interface envInterface
 {
-
     /**
      * 获取env配置信息
      * @param string $name    env配置项名字

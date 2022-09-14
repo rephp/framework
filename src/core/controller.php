@@ -10,6 +10,7 @@ use rephp\component\container\container;
  */
 abstract class controller
 {
+    use \rephp\traits\publicTrait;
     /**
      * @var string 布局名字
      */
@@ -18,8 +19,6 @@ abstract class controller
      * @var string 视图模板名字
      */
     public $forward = '';
-
-    use \rephp\traits\publicTrait;
 
 
     /**

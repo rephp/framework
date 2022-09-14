@@ -6,7 +6,6 @@ use rephp\component\container\container;
 
 trait publicTrait
 {
-
     /**
      * 获取模块名
      * @return mixed

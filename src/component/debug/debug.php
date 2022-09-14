@@ -42,7 +42,7 @@ class debug implements debugInterface
     {
         return container::getContainer()->get('coreDebug')->closeDebug();
     }
-    
+
     /**
      * 输出调试信息
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace rephp\component\debug\interfaces;
 
 /**

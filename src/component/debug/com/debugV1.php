@@ -1,4 +1,5 @@
 <?php
+
 namespace rephp\component\debug\com;
 
 use rephp\component\debug\interfaces\debugInterface;
@@ -9,7 +10,6 @@ use rephp\component\debug\interfaces\debugInterface;
  */
 final class debugV1 implements debugInterface
 {
-
     /**
      * 开启debug模式配置
      * todo:扩展sql及文件加载展示

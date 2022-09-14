@@ -141,7 +141,6 @@ class route
      */
     public function __call($name, $params)
     {
-
         return container::getContainer()->get('coreRoute')->__call($name, $params);
     }
 

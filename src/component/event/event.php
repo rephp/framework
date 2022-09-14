@@ -46,7 +46,6 @@ use rephp\component\container\container;
  */
 class event implements eventInterface
 {
-
     /**
      * 获取当前所有的事件名字
      * @return array

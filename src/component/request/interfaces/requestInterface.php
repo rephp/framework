@@ -7,6 +7,4 @@ namespace rephp\component\request\interfaces;
  */
 interface requestInterface
 {
-
-
 }

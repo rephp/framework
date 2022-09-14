@@ -3,12 +3,11 @@
 namespace rephp\component\container\exceptions;
 
 use Psr\Container\ContainerExceptionInterface;
-use \Error;
+use Error;
 
 /**
  * Class containerException
  */
 class containerException extends Error implements ContainerExceptionInterface
 {
-
 }

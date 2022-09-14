@@ -1,8 +1,9 @@
 <?php
+
 namespace rephp\component\container\exceptions;
 
 use Psr\Container\NotFoundExceptionInterface;
-use \Exception;
+use Exception;
 
 /**
  * Class notFoundException
@@ -10,5 +11,4 @@ use \Exception;
  */
 class notFoundException extends Exception implements NotFoundExceptionInterface
 {
-
 }

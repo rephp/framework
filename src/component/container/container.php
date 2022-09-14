@@ -2,9 +2,9 @@
 
 namespace rephp\component\container;
 
-use \Error;
-use \Exception;
-use \ReflectionClass;
+use Error;
+use Exception;
+use ReflectionClass;
 use Psr\Container\ContainerInterface;
 use rephp\component\container\exceptions\notFoundException;
 use rephp\component\container\exceptions\containerException;

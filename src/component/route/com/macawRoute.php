@@ -2,7 +2,7 @@
 
 namespace rephp\component\route\com;
 
-use \NoahBuscher\Macaw\Macaw;
+use NoahBuscher\Macaw\Macaw;
 use rephp\component\route\interfaces\routeInterface;
 
 /**
@@ -16,7 +16,6 @@ use rephp\component\route\interfaces\routeInterface;
  */
 final class macawRoute implements routeInterface
 {
-
     /**
      * 根据当前url动态生成路由
      * @param string $routeUri    基本uri，如{$modeule}/{$controller}/{$action}

@@ -7,7 +7,6 @@ namespace rephp\component\route\interfaces;
  */
 interface routeInterface
 {
-
     /**
      * 根据当前url动态生成路由
      * @param string $routeUri   基本uri，如{$modeule}/{$controller}/{$action}

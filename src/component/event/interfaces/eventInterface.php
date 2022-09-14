@@ -1,4 +1,5 @@
 <?php
+
 namespace rephp\component\event\interfaces;
 
 /**
@@ -7,7 +8,6 @@ namespace rephp\component\event\interfaces;
  */
 interface eventInterface
 {
-
     /**
      * 获取当前所有的事件名字
      * @return array

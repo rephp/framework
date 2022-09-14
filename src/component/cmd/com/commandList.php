@@ -1,9 +1,9 @@
 <?php
+
 namespace rephp\component\cmd\com;
 
 class commandList
 {
-
     /**
      * 执行入口
      */
