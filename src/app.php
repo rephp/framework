@@ -43,13 +43,45 @@ class app
      */
     public function run($appPath)
     {
-        //1.预加载资源环境
-        $this->loadEnv(dirname($appPath).'/');
-        $this->loadConfig(dirname($appPath).'/config/');
-        //2.预先绑定具体组件
-        $this->preBindCoreComponent();
-        //3.加载核心类 & 运行
-        container::getContainer()->bind('appCore', core\appCore::class, [$appPath])->run();
+        try{
+            //1.预加载资源环境
+            $this->loadEnv(dirname($appPath).'/');
+            $this->loadConfig(dirname($appPath).'/config/');
+            //2.预先绑定具体组件
+            $this->preBindCoreComponent();
+            //3.加载核心类 & 运行
+            container::getContainer()->bind('appCore', core\appCore::class, [$appPath])->run();
+        }catch (\Exception $e){
+            $isDebug = config('config.debug.is_debug', false);
+            $isDebug && $this->throwInitExcetionWithoutDebug($e);
+        }
+    }
+
+    /**
+     * 系统初始化时，来不及加载debug组件时,异常时抛出错误
+     * @param \Exception $e  错误对象
+     */
+    private function throwInitExcetionWithoutDebug($e)
+    {
+        $prefix = 'Exception:'."\n";
+        if ($e instanceof \Error) {
+            $prefix = 'Error:'."\n";
+        }
+        $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
+        $logContent .= '    信息:'.$e->getMessage()."\n";
+        $logContent .= '    文件:'.$e->getFile()."\n";
+        $logContent .= '    行号:'.$e->getLine()."\n";
+        if ($e instanceof \Error) {
+            $logContent .= '    追踪:'."\n";
+            $traceList = $e->getTrace();
+            foreach ($traceList as $traceInfo) {
+                $file  = empty($traceInfo['file']) ? '' : $traceInfo['file'];
+                empty($file) && $file = empty($traceInfo['class']) ? '' : $traceInfo['class'];
+                $logContent .= '        '.$file.'['.$traceInfo['line'].'] => function:'.$traceInfo['function']."\n";
+            }
+        }
+        $logContent .= "--\n";
+        exit($logContent);
     }
 
     /**
