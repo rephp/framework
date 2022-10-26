@@ -3,7 +3,6 @@
 namespace rephp\core;
 
 use rephp\component\container\container;
-use rephp\component\debug\debug;
 use rephp\component\event\event;
 use rephp\component\route\route;
 use rephp\core\interfaces\appCoreInterface;
@@ -41,8 +40,6 @@ class appCore implements appCoreInterface
      */
     public function run()
     {
-        //加载debug
-        container::getContainer()->bind('debug', debug::class);
         //加载event
         container::getContainer()->bind('event', event::class);
         //加载路由

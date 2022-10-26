@@ -6,6 +6,7 @@
 namespace rephp;
 
 use rephp\component\container\container;
+use rephp\component\debug\debug;
 
 /**
  * app核心类
@@ -52,7 +53,11 @@ class app
             //3.加载核心类 & 运行
             container::getContainer()->bind('appCore', core\appCore::class, [$appPath])->run();
         } catch (\Exception $e) {
-            $this->throwInitExcetionWithoutDebugComponent($e);
+            try{
+                container::getContainer()->bind('debug', debug::class);
+            }catch (\Exception $e){
+                $this->throwInitExcetionWithoutDebugComponent($e);
+            }
         }
     }
 
