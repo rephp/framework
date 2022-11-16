@@ -12,17 +12,17 @@ final class debugV1 implements debugInterface
 {
     /**
      * 开启debug模式配置
-     * todo:扩展sql及文件加载展示
      * @return bool
      */
     public function openDebug()
     {
         error_reporting(E_ALL & ~E_NOTICE);
-        ini_set('display_errors', 'Off');
         $isCli = defined('CLI_URI');
         if ($isCli) {
+            ini_set('display_errors', 'On');
             return true;
         }
+        ini_set('display_errors', 'Off');
         $whoops = new \Whoops\Run();
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
         $whoops->register();
