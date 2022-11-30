@@ -214,6 +214,25 @@ function getLogFileName($logType = 'php')
 }
 
 /**
+ * 将图片转换为base64内容呈现
+ * @param string  $imgSrc  图片存放路径
+ * @return string
+ */
+function getImageBase64Data($imgSrc)
+{
+    // 获取图像并转换为字符串
+    $img = file_get_contents($imgSrc);
+    // 取得图片的大小，类型等
+    $img_info = getimagesize($imgSrc);
+    // 将图像字符串数据编码为base64
+    $file_content = base64_encode($img);
+    // 显示输出
+    $img_base64 = 'data:' . $img_info['mime'] . ';base64,' . $file_content;//合成图片的base64编码
+    
+    return $img_base64;
+}
+
+/**
  * 多个连续空格只保留一个
  * @param string $string 待转换的字符串
  * @return string
