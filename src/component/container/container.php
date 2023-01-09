@@ -27,7 +27,7 @@ class container implements ContainerInterface, rephpContainerInterfaces
 
     /**
      * 获取容器本身实例
-     * @return mixed
+     * @return container
      */
     public static function getContainer()
     {

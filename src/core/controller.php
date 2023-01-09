@@ -11,6 +11,7 @@ use rephp\component\container\container;
 abstract class controller
 {
     use \rephp\traits\publicTrait;
+
     /**
      * @var string 布局名字
      */
@@ -100,5 +101,20 @@ abstract class controller
         strstr($url, 'http:') || $url = makeUrl($url);
         header('Location:' . $url);
         exit(0);
+    }
+
+    /**
+     * 按路由直接调用方法
+     * @param string $route  路由完整地址
+     * @param array  $params 传参
+     * @return mixed
+     */
+    public function callAction($route, $params = [])
+    {
+        $tempRouteArr = explode('@', $route);
+        if(empty($tempRouteArr[0]) || empty($tempRouteArr[1])){
+            return false;
+        }
+        return container::getContainer()->bind($tempRouteArr[0], $tempRouteArr[0], $params, $rebind=true);
     }
 }
