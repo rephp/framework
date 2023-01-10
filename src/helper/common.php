@@ -228,7 +228,7 @@ function getImageBase64Data($imgSrc)
     $file_content = base64_encode($img);
     // 显示输出
     $img_base64 = 'data:' . $img_info['mime'] . ';base64,' . $file_content;//合成图片的base64编码
-    
+
     return $img_base64;
 }
 

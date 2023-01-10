@@ -112,7 +112,7 @@ abstract class controller
     public function callAction($route, $params = [])
     {
         $tempRouteArr = explode('@', $route);
-        if(empty($tempRouteArr[0]) || empty($tempRouteArr[1])){
+        if (empty($tempRouteArr[0]) || empty($tempRouteArr[1])) {
             return false;
         }
         return container::getContainer()->bind($tempRouteArr[0], $tempRouteArr[0], $params, $rebind=true);

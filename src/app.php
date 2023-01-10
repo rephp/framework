@@ -14,7 +14,6 @@ use rephp\component\debug\debug;
  */
 class app
 {
-  
     /**
      * 运行
      * @param string $appPath app路径
@@ -22,26 +21,26 @@ class app
      */
     public function run($appPath)
     {
-		//定义路径常量
-		$this->definePath($appPath);
-		//加载驱动
+        //定义路径常量
+        $this->definePath($appPath);
+        //加载驱动
         require_once 'bootstrap/app.php';
         //初始化时区
         $this->setTimeZone();
         //挂载路由
         container::getContainer()->get('route')->start(ROOT_PATH . 'route/');
     }
-	
-	/**
+
+    /**
      * 定义路径常量
      * 系统常量责任人就绪
-	 * @param string $appPath app路径 
+     * @param string $appPath app路径
      * @return void
      */
     public function definePath($appPath)
     {
         define('APP_PATH', $appPath);
-		define('ROOT_PATH', dirname($appPath).'/');
+        define('ROOT_PATH', dirname($appPath) . '/');
     }
 
     /**
@@ -53,5 +52,4 @@ class app
         $timeZone = config('config.time_zone', 'PRC');
         date_default_timezone_set($timeZone);
     }
-	
 }

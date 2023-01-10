@@ -110,7 +110,7 @@ class request implements requestInterface
      */
     public function param($name = '', $default = null)
     {
-        if(empty($name)){
+        if (empty($name)) {
             return array_merge($this->get, $this->post);
         }
         $tempRes = '_null_';
@@ -127,7 +127,7 @@ class request implements requestInterface
      */
     public function get($name = '', $default = null)
     {
-        if(empty($name)){
+        if (empty($name)) {
             return $this->get;
         }
         return isset($this->get[$name]) ? $this->get[$name] : $default;
@@ -141,7 +141,7 @@ class request implements requestInterface
      */
     public function post($name = '', $default = null)
     {
-        if(empty($name)){
+        if (empty($name)) {
             return $this->post;
         }
         return isset($this->post[$name]) ? $this->post[$name] : $default;

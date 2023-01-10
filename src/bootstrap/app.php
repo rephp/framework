@@ -1,4 +1,5 @@
 <?php
+
 namespace rephp\bootstrap;
 
 use rephp\component\container\container;
