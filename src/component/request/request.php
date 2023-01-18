@@ -50,18 +50,27 @@ class request implements requestInterface
      * @var string 方法名
      */
     public $action = '';
-
+    /**
+     * @var array 请求方式
+     */
+    public $method = 'get';
     /**
      * @var array 视图真正路由信息
      */
     public $viewRouteInfo = [];
+    /**
+     * @var string[] 路由允许请求的方法
+     */
+    private $allowMethod = ['get', 'post', 'put', 'delete', 'options', 'head'];
 
     /**
      * 初始化reqeust
      */
     public function __construct()
     {
-        //设置头信息
+        $method = empty($_SERVER['REQUEST_METHOD']) ? 'get' : strtolower(trim($_SERVER['REQUEST_METHOD']));
+        in_array($method, $this->allowMethod) || $method = 'get';
+        $this->method  = $method;
         $this->headers = $this->getHeader();
         $this->get     = $this->parseDynamicParams();
         $this->server  = $_SERVER;
@@ -181,7 +190,7 @@ class request implements requestInterface
         $controller = empty($arr[2]) ? 'index' : $this->filterRoute($arr[2]);
         $action     = empty($arr[3]) ? 'index' : $this->filterRoute($arr[3]);
         //设置路由信息
-        $this->setRouteInfo($module, $controller, $action);
+        $this->setRouteInfo($module, $controller, $action, '');
         //解析静态参数
         $isStaticMode && $this->parseStaticParams($baseName);
 
@@ -228,12 +237,17 @@ class request implements requestInterface
      * @param string $module     模块名
      * @param string $controller 控制器名
      * @param string $action     方法名
+     * @param string $method     请求方式，不传值则不修改.可选值为: get,post,put,delete,options,head
      */
-    public function setRouteInfo($module = 'index', $controller = 'index', $action = 'index')
+    public function setRouteInfo($module = 'index', $controller = 'index', $action = 'index', $method = '')
     {
         $this->module     = $module;
         $this->controller = $controller;
         $this->action     = $action;
+        if (!empty($method)) {
+            $method = strtolower(trim($method));
+            in_array($method, $this->allowMethod) || $this->method = $method;
+        }
     }
 
     /**
@@ -246,12 +260,13 @@ class request implements requestInterface
             'module'     => $this->module,
             'controller' => $this->controller,
             'action'     => $this->action,
+            'method'     => $this->method,
         ];
     }
 
     /**
      * 设置视图真正使用的路由信息
-     * @param array  $realRouteInfo 视图真正使用的路由信息
+     * @param array $realRouteInfo 视图真正使用的路由信息
      * @return void
      */
     public function setViewRouteInfo($realRouteInfo)
