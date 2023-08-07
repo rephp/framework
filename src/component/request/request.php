@@ -227,7 +227,7 @@ class request implements requestInterface
     {
         $uri = defined('CLI_URI') ? CLI_URI : $_SERVER['REQUEST_URI'];
         $str = parse_url($uri, PHP_URL_QUERY);
-        parse_str($str, $params);
+        empty($str) ? $params = [] : parse_str($str, $params);
 
         return $params;
     }
