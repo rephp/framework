@@ -156,11 +156,12 @@ class container implements ContainerInterface, rephpContainerInterfaces
         // 判断参数类型
         foreach ($params as $key => $param) {
             //如果参数是类对象，则可以获取
-            if ($paramClass = $param->getClass()) {
-                $paramClassName = $paramClass->getName();
+            $isHasType = $param->hasType();
+            if($isHasType){
+                $paramClassName = $param->getType()->getName();
                 //如果容器中已经绑定此对象则复用，如果不存在则重新绑定
                 $paramArr[] = $this->bind($paramClassName, $paramClassName);
-            } else {
+            }else{
                 $paramArr[] = array_shift($userParams);
             }
         }
