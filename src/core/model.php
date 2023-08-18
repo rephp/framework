@@ -110,6 +110,7 @@ abstract class model extends redb
         } else {
             $className = str_replace('app\\common\\model\\', 'app\\modules\\' . $module . '\\model\\', $calldClassName);
         }
+		class_exists($className) || $className = $calldClassName;
         if (!class_exists($className)) {
             throw new \Exception('model not exist:' . $calldClassName, 404);
         }
