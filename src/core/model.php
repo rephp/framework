@@ -34,6 +34,7 @@ abstract class model extends redb
      */
     public static function db($configList = [])
     {
+		empty($configList) && $configList = config('database');
         return new static($configList);
     }
 
