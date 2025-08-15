@@ -57,7 +57,8 @@ final class debugV1 implements debugInterface
         if ($e instanceof \Error) {
             $prefix = 'Error:'."\n";
         }
-        $logContent  = $prefix.'    编号:'.$e->getCode()."\n";
+        $logContent  = $prefix.'    时间:'.date('Y-m-d H:i:s')."\n";
+        $logContent .= '    编号:'.$e->getCode()."\n";
         $logContent .= '    信息:'.$e->getMessage()."\n";
         $logContent .= '    文件:'.$e->getFile()."\n";
         $logContent .= '    行号:'.$e->getLine()."\n";
